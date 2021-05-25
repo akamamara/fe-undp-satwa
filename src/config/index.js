@@ -1,83 +1,114 @@
-import isMobile from 'utils/isMobile';
+import isMobile from "utils/isMobile";
 
 /* set your data here */
-const email = 'super-email-of-the-auther@gmail.com';
-const domain = 'your-project-domain.com'
+const email = "danimnh4@gmail.com";
+const domain = "UNDP Identifikasi Satwa";
 /* ***************** */
 
-const repository = 'https://github.com/suren-atoyan/react-pwa';
+const repository = "https://github.com/suren-atoyan/react-pwa";
 
 const messages = {
   app: {
     crash: {
-      title: 'Oooops... Sorry, I guess, something went wrong. You can:',
+      title: "Oooops... Sorry, I guess, something went wrong. You can:",
       options: {
         email: `contact with author by this email - ${email}`,
-        reset: 'Press here to reset the application',
+        reset: "Press here to reset the application",
       },
     },
   },
   loader: {
-    fail: 'Hmmmmm, there is something wrong with this component loading process... Maybe trying later would be the best idea',
+    fail: "Hmmmmm, there is something wrong with this component loading process... Maybe trying later would be the best idea",
   },
   images: {
-    failed: 'something went wrong during image loading :(',
+    failed: "something went wrong during image loading :(",
   },
-  404: 'Hey bro? What are you looking for?',
+  404: "Hey bro? What are you looking for?",
 };
 
 const copyright = {
-  title: 'copyright © ',
+  title: "copyright © ",
   link: domain,
 };
 
 const themes = {
   light: {
     palette: {
-      type: 'light',
+      type: "light",
       background: {
-        default: '#fafafa',
-        paper: '#fff',
+        default: "#fafafa",
+        paper: "#fff",
       },
       primary: {
-        light: '#7986cb',
-        main: '#3f51b5',
-        dark: '#303f9f',
-        contrastText: '#fff',
+        light: "#7986cb",
+        main: "#3f51b5",
+        dark: "#303f9f",
+        contrastText: "#fff",
       },
     },
   },
 
   dark: {
     palette: {
-      type: 'dark',
+      type: "dark",
       background: {
-        default: '#111',
-        paper: '#171717',
+        default: "#056D3B",
+        paper: "#171717",
       },
       primary: {
-        light: '#7986cb',
-        main: '#333',
-        dark: '#303f9f',
-        contrastText: '#fff',
+        light: "#7986cb",
+        main: "#333",
+        dark: "#303f9f",
+        contrastText: "#fff",
       },
     },
   },
+
+  yellow: {
+    palette: {
+      type: "dark",
+      background: {
+        default: "#FFC000",
+        paper: "#171717",
+      },
+      primary: {
+        light: "#7986cb",
+        main: "#3f51b5",
+        dark: "#303f9f",
+        contrastText: "#fff",
+      },
+    },
+  },
+  // yellow: {
+  //   palette: {
+  //     type: "yellow",
+  //     background: {
+  //       default: "#FFC000",
+  //       paper: "#fff",
+  //     },
+  //     primary: {
+  //       light: "#7986cb",
+  //       main: "#333",
+  //       dark: "#303f9f",
+  //       contrastText: "#fff",
+  //     },
+  //   },
+  // },
 };
 
-const cancelationMessage = 'operation is manually canceled';
+const cancelationMessage = "operation is manually canceled";
 
-const dateFormat = 'MMMM DD, YYYY';
+const dateFormat = "MMMM DD, YYYY";
 
-const title = 'React PWA';
+const title = "UNDP Identifikasi Satwa";
 
-const themePair = ['dark', 'light'];
+const themePair = ["dark", "light", "yellow"];
 
 const notifications = {
   options: {
     anchorOrigin: {
-      vertical: 'bottom',
-      horizontal: 'left',
+      vertical: "bottom",
+      horizontal: "left",
     },
     autoHideDuration: 3000,
   },
@@ -90,7 +121,7 @@ const loader = {
   minimumLoading: 700, // but if it appears, it will stay for at least 700 milliseconds
 };
 
-const giphy404 = 'https://giphy.com/embed/8L0Pky6C83SzkzU55a';
+const giphy404 = "https://giphy.com/embed/8L0Pky6C83SzkzU55a";
 
 export {
   messages,

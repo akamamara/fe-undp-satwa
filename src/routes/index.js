@@ -1,33 +1,33 @@
-import asyncComponentLoader from 'utils/asyncComponentLoader';
+import asyncComponentLoader from "utils/asyncComponentLoader";
 
 const routes = [
   {
     exact: true,
-    component: asyncComponentLoader(() => import('pages/Welcome')),
-    path: '/',
+    component: asyncComponentLoader(() => import("pages/Welcome")),
+    path: "/identification",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import('pages/Page1')),
-    path: '/page-1',
+    component: asyncComponentLoader(() => import("pages/IdentificationPage")),
+    path: "/identification/:animalType",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import('pages/Page2')),
-    path: '/page-2',
+    component: asyncComponentLoader(() => import("pages/CandidatesPage")),
+    path: "/candidates",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import('pages/Page3')),
-    path: '/page-3',
+    component: asyncComponentLoader(() => import("pages/LoginPage")),
+    path: "/",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import('pages/Page4')),
-    path: '/page-4',
+    component: asyncComponentLoader(() => import("pages/Page4")),
+    path: "/page-4",
   },
   {
-    component: asyncComponentLoader(() => import('components/NotFound')),
+    component: asyncComponentLoader(() => import("components/NotFound")),
   },
 ];
 

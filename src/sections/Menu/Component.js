@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
 
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import List from '@material-ui/core/List';
-import MenuItem from '@material-ui/core/MenuItem';
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ListItemText from "@material-ui/core/ListItemText";
+import List from "@material-ui/core/List";
+import MenuItem from "@material-ui/core/MenuItem";
 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink } from "react-router-dom";
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from "@material-ui/core/styles";
 
 import {
   FaHome as WelcomeIcon,
@@ -17,20 +17,22 @@ import {
   FaReact as ReactIcon,
   FaGithub as GithubIcon,
   FaBug as BugIcon,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 
-import isMobile from 'utils/isMobile';
+import isMobile from "utils/isMobile";
 
-import useStyles from './styles';
+import useStyles from "./styles";
 
-const StyledMenuItem = withStyles({ root: { width: '100%' } })(props => <MenuItem {...props} />);
+const StyledMenuItem = withStyles({ root: { width: "100%" } })((props) => (
+  <MenuItem {...props} />
+));
 
 function Menu({ isOpen, onClose, onOpen }) {
   const classes = useStyles({
     isOpen,
     isMobile,
   });
- 
+
   return (
     <SwipeableDrawer
       anchor="left"
@@ -48,13 +50,21 @@ function Menu({ isOpen, onClose, onOpen }) {
           </ListItemIcon>
           <ListItemText primary="Welcome" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={onClose} component={RouterLink} to="/page-1">
+        <StyledMenuItem
+          onClick={onClose}
+          component={RouterLink}
+          to="/identification"
+        >
           <ListItemIcon>
             <JSIcon />
           </ListItemIcon>
           <ListItemText primary="Page 1" />
         </StyledMenuItem>
-        <StyledMenuItem onClick={onClose} component={RouterLink} to="/page-2">
+        <StyledMenuItem
+          onClick={onClose}
+          component={RouterLink}
+          to="/candidates"
+        >
           <ListItemIcon>
             <ReactIcon />
           </ListItemIcon>
