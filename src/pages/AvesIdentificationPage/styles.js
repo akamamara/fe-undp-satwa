@@ -19,9 +19,9 @@ const useStyles = makeStyles(() => ({
     textTransform: "capitalize",
   },
   subtitle: {
-    // fontWeight: "bold",
-    // fontStyle: "italic",
+    marginBottom: "-10px",
     textTransform: "capitalize",
+    color: "white",
   },
   cardContainer: {
     // width: "100%",
@@ -36,8 +36,8 @@ const useStyles = makeStyles(() => ({
     marginTop: "-100px",
   },
   placeholder: {
-    maxWidth: "100%",
-    height: "auto",
+    height: "50px",
+    alignSelf: "center",
   },
   card: {
     height: "110px",
