@@ -8,13 +8,20 @@ const routes = [
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import("pages/IdentificationPage")),
-    path: "/identification/:animalType",
+    component: asyncComponentLoader(() =>
+      import("pages/AvesIdentificationPage")
+    ),
+    path: "/identification/aves",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import("pages/CandidatesPage")),
-    path: "/candidates",
+    component: asyncComponentLoader(() => import("pages/AvesCandidatesPage")),
+    path: "/identification/aves/:params",
+  },
+  {
+    exact: true,
+    component: asyncComponentLoader(() => import("pages/AvesResultPage")),
+    path: "/identification/aves/:aves_id",
   },
   {
     exact: true,

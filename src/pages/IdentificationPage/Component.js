@@ -1,17 +1,20 @@
-import React from "react";
-// import { Link as RouterLink } from "react-router-dom";
+import React, { useEffect } from "react";
+import ReactJson from "react-json-view";
+import { Link as RouterLink } from "react-router-dom";
 
 import {
   Grid,
+  Button,
   Typography,
   Container,
-  // Card,
-  // CardContent,
-  // CardActionArea,
+  Card,
+  CardActionArea,
+  CardContent,
   // Backdrop,
   // CircularProgress,
 } from "@material-ui/core";
 
+import GetAvesResult from "../../utils/apis/GetAvesResult";
 // import useTheme from "store/theme";
 
 import Meta from "components/Meta";
@@ -28,33 +31,66 @@ function IdentificationPage(props) {
 
   function getInitialValue() {
     if (animalType === "aves") {
-      const avesInitialvalue = {
-        jenis_burung_ID: "0",
-        bentuk_paruh_ID: "0",
-        warna_ID: "0",
-        ukuran_tubuh_ID: "0",
-        tipe_cakar_ID: "0",
-      };
-      return avesInitialvalue;
+      const avesInitialvalue = [
+        { jenis_burung_ID: "0" },
+        { bentuk_paruh_ID: "0" },
+        { warna_ID: "0" },
+        { ukuran_tubuh_ID: "0" },
+        { tipe_cakar_ID: "0" },
+      ];
+      const aves2Initialvalue = [
+        ["jenis_burung_ID", "0"],
+        ["bentuk_paruh_ID", "0"],
+        ["warna_ID", "0"],
+        ["ukuran_tubuh_ID", "0"],
+        ["tipe_cakar_ID", "0"],
+      ];
+      return aves2Initialvalue;
     }
 
     // if (animalType === "mammals")
   }
-
+  //testing
   // function renderInitialValue(initialValue) {}
 
   let initialValue = getInitialValue();
-  console.log(initialValue);
+  // console.log(initialValue);
 
+  const [avesValue, setAvesValue] = React.useState([
+    { jenis_burung_ID: "2" },
+    { bentuk_paruh_ID: "1" },
+    { warna_ID: "1" },
+    { ukuran_tubuh_ID: "1" },
+    { tipe_cakar_ID: "5" },
+  ]);
+
+  function translateRaw(rawString) {
+    let str = rawString[0];
+    console.log(str);
+    let newStr = str.replace("_", " ").replace("_ID", "");
+    // console.log(newstr); // Twas the night before Christmas...
+    return newStr;
+  }
+
+  const [avesResult, setAvesResult] = React.useState([]);
+  useEffect(() => {
+    console.log(localStorage.getItem("result"));
+  }, []);
   return (
     <>
       <Meta title="Page 1" description="Page 1" />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container>
           <Grid item>
-            <Typography variant="h5" className={classes.main}>
-              Identifikasi {animalType}
-            </Typography>
+            {avesResult.length === 0 ? (
+              <Typography variant="h5" className={classes.main}>
+                Identifikasi {animalType}
+              </Typography>
+            ) : (
+              <Typography variant="h5" className={classes.main}>
+                Kandidat {animalType}
+              </Typography>
+            )}
           </Grid>
 
           <img
@@ -63,8 +99,113 @@ function IdentificationPage(props) {
             alt="Aves"
           />
         </Grid>
+        {avesResult.length === 0 ? (
+          <>
+            <Grid
+              container
+              style={{ width: "340px" }}
+              justify="center"
+              spacing={2}
+            >
+              {avesValue.map((value) => {
+                return (
+                  <Grid item xs={6} key={Object.keys(value)}>
+                    <Card>
+                      <CardActionArea
+                        onClick={() => console.log(Object.keys(value))}
+                      >
+                        <CardContent>
+                          <img
+                            className={classes.placeholder}
+                            src={
+                              process.env.PUBLIC_URL + "/images/placeholder.png"
+                            }
+                            alt="Aves"
+                          />
+                          <Typography className={classes.subtitle}>
+                            {translateRaw(Object.keys(value))}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                );
+              })}
+            </Grid>
+            <Button
+              onClick={() => {
+                // console.log(avesValue);
+                GetAvesResult(avesValue).then((result) => {
+                  // setAvesResult(result);
+                  // localStorage.setItem("result", result);
+                  console.log(result);
+                });
+              }}
+              variant="contained"
+            >
+              Telusuri
+            </Button>
+          </>
+        ) : (
+          <>
+            <Grid
+              container
+              style={{ width: "340px" }}
+              justify="center"
+              spacing={2}
+            >
+              {avesResult.map((value) => {
+                return (
+                  <Grid item xs={6} key={value.aves_ID}>
+                    <Card>
+                      <CardActionArea
+                        component={RouterLink}
+                        to={"/aves_candidates/" + value.aves_ID}
+                      >
+                        <CardContent>
+                          <img
+                            className={classes.placeholder}
+                            src={
+                              process.env.PUBLIC_URL + "/images/placeholder.png"
+                            }
+                            alt="Aves"
+                          />
+                          <Typography className={classes.subtitle}>
+                            {value.aves_ID}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  </Grid>
+                );
+              })}
+            </Grid>
+            <Grid container direction="row">
+              <Button
+                onClick={() => {
+                  setAvesResult([]);
+                }}
+                variant="contained"
+              >
+                Kembali
+              </Button>
+              <Button
+                onClick={() => {
+                  console.log(avesValue);
+                  GetAvesResult(avesValue).then((result) =>
+                    // setAvesResult(result)
+                    console.log(result)
+                  );
+                }}
+                variant="contained"
+              >
+                Telusuri
+              </Button>
+            </Grid>
+          </>
+        )}
 
-        <Grid container></Grid>
+        <ReactJson src={avesResult} />
       </Container>
     </>
   );
