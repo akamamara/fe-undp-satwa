@@ -1,11 +1,15 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(() => ({
   root: {
-    display: 'flex',
-    'justify-content': 'center',
-    'align-items': 'center',
-    height: '100%',
+    display: "flex",
+    flexDirection: "column",
+    "justify-content": "center",
+    "align-items": "center",
+    height: "100%",
+  },
+  titleImage: {
+    width: "200px",
   },
 }));
 

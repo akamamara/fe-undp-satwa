@@ -5,6 +5,7 @@ const fetchAvesQuestion = async (id) => {
     const resp = await axios.get("identifikasi/aves/" + id);
     // await console.log(resp);
     // await alert(resp.data.message);
+    console.log(resp);
     return resp.data.result;
   } catch (err) {
     alert(err.response.data.message);

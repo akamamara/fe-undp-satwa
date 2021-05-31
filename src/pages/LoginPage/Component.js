@@ -35,8 +35,11 @@ function LoginPage() {
 
   useEffect(() => {
     themeGoYellow();
-    if (localStorage.getItem("token") !== "")
+    if (localStorage.getItem("token") !== null) {
+      console.log(localStorage.getItem("token"));
       history.replace("/identification");
+    }
+
     // eslint-disable-next-line
   }, []);
   return (

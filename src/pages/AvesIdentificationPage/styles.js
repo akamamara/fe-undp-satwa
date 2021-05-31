@@ -8,10 +8,7 @@ const useStyles = makeStyles(() => ({
     "align-items": "center",
     height: "100%",
     marginTop: "100px",
-  },
-  titleContainer: {
-    width: "100%",
-    backgroundColor: "red",
+    overflow: "visible",
   },
   main: {
     fontWeight: "bold",
@@ -23,14 +20,6 @@ const useStyles = makeStyles(() => ({
     textTransform: "capitalize",
     color: "white",
   },
-  cardContainer: {
-    // width: "100%",
-    height: "110px",
-    overflow: "hidden",
-    marginTop: "20px",
-    textAlign: "left",
-    backgroundColor: "#056D3B",
-  },
   titleImage: {
     height: "170px",
     marginTop: "-100px",
@@ -41,6 +30,17 @@ const useStyles = makeStyles(() => ({
   },
   card: {
     height: "110px",
+  },
+  banner: {
+    width: "200px",
+  },
+  bannerImage: {
+    width: "270px",
+    borderLeft: "20px solid #FFC000",
+    // backgroundColor: "FFC000",
+  },
+  yellow: {
+    color: "#FFC000",
   },
 }));
 

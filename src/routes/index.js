@@ -13,11 +13,11 @@ const routes = [
     ),
     path: "/identification/aves",
   },
-  {
-    exact: true,
-    component: asyncComponentLoader(() => import("pages/AvesCandidatesPage")),
-    path: "/identification/aves/:params",
-  },
+  // {
+  //   exact: true,
+  //   component: asyncComponentLoader(() => import("pages/AvesCandidatesPage")),
+  //   path: "/identification/aves/:queryParams",
+  // },
   {
     exact: true,
     component: asyncComponentLoader(() => import("pages/AvesResultPage")),

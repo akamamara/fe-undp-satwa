@@ -19,7 +19,7 @@ import fetchAvesQuestion from "../../utils/apis/fetchAvesQuestion";
 
 import translateRaw from "../../utils/translateRaw";
 
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 function DialogConfirmation({
   questionProps,
@@ -27,15 +27,12 @@ function DialogConfirmation({
   onClose,
   onUpdateItem,
 }) {
-  const history = useHistory();
+  // const history = useHistory();
   const classes = useStyles();
   const [questionGrid, setQuestionGrid] = React.useState(6);
   const [questionFields, setQuestionFields] = React.useState([]);
   useEffect(() => {
     if (questionProps !== undefined) {
-      console.log("questionProps");
-
-      console.log(questionProps);
       if (isVisible === true) {
         fetchAvesQuestion(questionProps.id).then((result) => {
           // console.log(result);
@@ -52,6 +49,7 @@ function DialogConfirmation({
         });
       }
     }
+    // eslint-disable-next-line
   }, [questionProps]);
   return (
     <Container className={classes.root}>
@@ -67,7 +65,8 @@ function DialogConfirmation({
           alignItems="center"
           // spacing={1}
         >
-          {questionFields.map((value, index) => {
+          {/* ,index */}
+          {questionFields.map((value) => {
             // console.log(value);
             if (value.length < 4) {
               console.log("12");
