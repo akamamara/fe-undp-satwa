@@ -26,6 +26,7 @@ function DialogConfirmation({
   isVisible,
   onClose,
   onUpdateItem,
+  animalType,
 }) {
   // const history = useHistory();
   const classes = useStyles();
@@ -34,19 +35,25 @@ function DialogConfirmation({
   useEffect(() => {
     if (questionProps !== undefined) {
       if (isVisible === true) {
-        fetchAvesQuestion(questionProps.id).then((result) => {
-          // console.log(result);
-          if (result.length === undefined) {
-            console.log(result);
-          }
-          if (result.length <= 3) {
-            setQuestionGrid(12);
-          } else if (result.length <= 8) {
-            setQuestionGrid(6);
-          } else setQuestionGrid(4);
+        if (animalType === "aves") {
+          fetchAvesQuestion(questionProps.id).then((result) => {
+            // console.log(result);
+            if (result.length === undefined) {
+              console.log(result);
+            }
+            if (result.length <= 3) {
+              setQuestionGrid(12);
+            } else if (result.length <= 8) {
+              setQuestionGrid(6);
+            } else setQuestionGrid(4);
 
-          setQuestionFields(result);
-        });
+            setQuestionFields(result);
+          });
+        } else if (animalType === "herpetofauna") {
+          console.log("herpetofauna");
+        } else if (animalType === "mammals") {
+          console.log("mammals");
+        }
       }
     }
     // eslint-disable-next-line
