@@ -15,23 +15,28 @@ const routes = [
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import("pages/AvesCandidatesPage")),
-    path: "/identification/aves/:params",
+    component: asyncComponentLoader(() =>
+      import("pages/HerpetoIdentificationPage")
+    ),
+    path: "/identification/herpetofauna",
   },
   {
     exact: true,
-    component: asyncComponentLoader(() => import("pages/AvesResultPage")),
-    path: "/identification/aves/:aves_id",
+    component: asyncComponentLoader(() =>
+      import("pages/MammalsIdentificationPage")
+    ),
+    path: "/identification/mammals",
   },
+
+  // {
+  //   exact: true,
+  //   component: asyncComponentLoader(() => import("pages/AvesCandidatesPage")),
+  //   path: "/identification/aves/:queryParams",
+  // },
   {
     exact: true,
     component: asyncComponentLoader(() => import("pages/LoginPage")),
     path: "/",
-  },
-  {
-    exact: true,
-    component: asyncComponentLoader(() => import("pages/Page4")),
-    path: "/page-4",
   },
   {
     component: asyncComponentLoader(() => import("components/NotFound")),

@@ -1,16 +1,18 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   spacer: theme.mixins.toolbar,
   wrapper: {
     flexGrow: 1,
-    height: '100vh',
-    overflow: 'hidden',
-    position: 'relative',
+    height: "100vh",
+    overflow: "scroll",
+    position: "relative",
   },
   content: {
-    width: '100%',
-    height: `calc(100% - ${theme.mixins.toolbar + theme.spacing(1)}px)`,
+    display: "flex",
+    "flex-direction": "column",
+    "justify-content": "space-between",
+    marginTop: "20px",
   },
 }));
 

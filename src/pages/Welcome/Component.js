@@ -65,9 +65,9 @@ function Welcome() {
 
           <Card className={classes.cardContainer}>
             <CardActionArea
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={themeGoWhite}
+              component={RouterLink}
+              to="/identification/herpetofauna"
             >
               <img
                 className={classes.card}
@@ -78,9 +78,9 @@ function Welcome() {
           </Card>
           <Card className={classes.cardContainer}>
             <CardActionArea
-              onClick={() => {
-                console.log("click");
-              }}
+              onClick={themeGoWhite}
+              component={RouterLink}
+              to="/identification/mammals"
             >
               <img
                 className={classes.card}

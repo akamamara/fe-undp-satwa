@@ -15,6 +15,8 @@ import {
 } from "@material-ui/core";
 
 import GetAvesResult from "../../utils/apis/GetAvesResult";
+import translateRaw from "../../utils/translateRaw";
+
 // import useTheme from "store/theme";
 
 import Meta from "components/Meta";
@@ -29,33 +31,11 @@ function IdentificationPage(props) {
   //   themeActions.goGreen();
   // }
 
-  function getInitialValue() {
-    if (animalType === "aves") {
-      const avesInitialvalue = [
-        { jenis_burung_ID: "0" },
-        { bentuk_paruh_ID: "0" },
-        { warna_ID: "0" },
-        { ukuran_tubuh_ID: "0" },
-        { tipe_cakar_ID: "0" },
-      ];
-      const aves2Initialvalue = [
-        ["jenis_burung_ID", "0"],
-        ["bentuk_paruh_ID", "0"],
-        ["warna_ID", "0"],
-        ["ukuran_tubuh_ID", "0"],
-        ["tipe_cakar_ID", "0"],
-      ];
-      return aves2Initialvalue;
-    }
-
-    // if (animalType === "mammals")
-  }
   //testing
   // function renderInitialValue(initialValue) {}
 
-  let initialValue = getInitialValue();
   // console.log(initialValue);
-
+  // eslint-disable-next-line
   const [avesValue, setAvesValue] = React.useState([
     { jenis_burung_ID: "2" },
     { bentuk_paruh_ID: "1" },
@@ -63,14 +43,6 @@ function IdentificationPage(props) {
     { ukuran_tubuh_ID: "1" },
     { tipe_cakar_ID: "5" },
   ]);
-
-  function translateRaw(rawString) {
-    let str = rawString[0];
-    console.log(str);
-    let newStr = str.replace("_", " ").replace("_ID", "");
-    // console.log(newstr); // Twas the night before Christmas...
-    return newStr;
-  }
 
   const [avesResult, setAvesResult] = React.useState([]);
   useEffect(() => {

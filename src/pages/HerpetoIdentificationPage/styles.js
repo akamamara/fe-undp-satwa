@@ -3,13 +3,12 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
-    flexDirection: "column",
     "justify-content": "start",
     "align-items": "center",
-    height: "100%",
-    overflow: "visible",
+    flexDirection: "column",
   },
   main: {
+    width: "190px",
     fontWeight: "bold",
     color: "#056D3B",
     textTransform: "capitalize",
@@ -20,8 +19,8 @@ const useStyles = makeStyles(() => ({
     color: "white",
   },
   titleImage: {
-    height: "170px",
-    marginTop: "-100px",
+    height: "90px",
+    marginTop: "-30px",
   },
   placeholder: {
     height: "50px",

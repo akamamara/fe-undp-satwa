@@ -7,9 +7,11 @@ const useStyles = makeStyles(() => ({
     "justify-content": "start",
     "align-items": "center",
     height: "100%",
+    marginTop: "20px",
     overflow: "visible",
   },
   main: {
+    width: "190px",
     fontWeight: "bold",
     color: "#056D3B",
     textTransform: "capitalize",

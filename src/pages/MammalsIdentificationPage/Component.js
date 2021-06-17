@@ -11,8 +11,8 @@ import {
   CardContent,
 } from "@material-ui/core";
 
-import GetAvesResult from "../../utils/apis/GetAvesResult";
-import GetAvesDetail from "../../utils/apis/GetAvesDetail";
+import GetMammalsResult from "../../utils/apis/GetMammalsResult";
+import GetMammalsDetail from "../../utils/apis/GetMammalsDetail";
 import translateRaw from "../../utils/translateRaw";
 
 import DialogConfirmation from "../../sections/DialogConfirmation";
@@ -22,7 +22,7 @@ import Meta from "components/Meta";
 
 import useStyles from "./styles";
 
-function AvesIdentificationPage() {
+function MammalsIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
@@ -45,86 +45,148 @@ function AvesIdentificationPage() {
     setOpenPhoto(false);
   };
 
-  const [avesResult, setAvesResult] = React.useState([]);
+  const [mammalsResult, setMammalsResult] = React.useState([]);
   const initialState = [
     {
-      jenis_burung_ID: "0",
+      tipe_mammals_ID: "0",
       image: "/images/not_sure.png",
       id: "q1",
-      value: "Jenis Burung",
+      value: "Jenis Hewan",
     },
     {
-      bentuk_paruh_ID: "0",
+      alat_gerak_ID: "0",
       image: "/images/not_sure.png",
       id: "q2",
-      value: "Bentuk Paruh",
+      value: "Alat Gerak",
     },
     {
-      warna_ID: "0",
+      third_attribute_ID: "0",
       image: "/images/not_sure.png",
       id: "q3",
-      value: "Warna Dominan",
+      value: "Ciri Fisik Utama",
     },
     {
-      ukuran_tubuh_ID: "0",
+      jenis_kulit_ID: "0",
       image: "/images/not_sure.png",
       id: "q4",
+      value: "Jenis Kulit",
+    },
+    {
+      ukuran_tubuh_mammals_ID: "0",
+      image: "/images/not_sure.png",
+      id: "q5",
       value: "Ukuran Tubuh",
     },
     {
-      tipe_cakar_ID: "0",
+      bertanduk_bertaring_ID: "0",
       image: "/images/not_sure.png",
-      id: "q5",
-      value: "Tipe Cakar",
+      id: "q6",
+      value: "Bertanduk/Bertaring",
+    },
+    {
+      has_moncong: "0",
+      image: "/images/not_sure.png",
+      id: "q7",
+      value: "Mempunyai Moncong",
+    },
+    {
+      has_ekor: "0",
+      image: "/images/not_sure.png",
+      id: "q8",
+      value: "Mempunyai Ekor",
+    },
+    {
+      jumlah_kuku: "0",
+      image: "/images/not_sure.png",
+      id: "q9",
+      value: "Jumlah Kuku",
+    },
+    {
+      jumlah_cula: "0",
+      image: "/images/not_sure.png",
+      id: "q10",
+      value: "Jumlah Cula",
     },
   ];
-  const [avesValue, setAvesValue] = React.useState([
+  const [mammalsValue, setMammalsValue] = React.useState([
     {
-      jenis_burung_ID: "0",
+      tipe_mammals_ID: "0",
       image: "/images/not_sure.png",
       id: "q1",
-      value: "Jenis Burung",
+      value: "Jenis Hewan",
     },
     {
-      bentuk_paruh_ID: "0",
+      alat_gerak_ID: "0",
       image: "/images/not_sure.png",
       id: "q2",
-      value: "Bentuk Paruh",
+      value: "Alat Gerak",
     },
     {
-      warna_ID: "0",
+      third_attribute_ID: "0",
       image: "/images/not_sure.png",
       id: "q3",
-      value: "Warna Dominan",
+      value: "Ciri Fisik Utama",
     },
     {
-      ukuran_tubuh_ID: "0",
+      jenis_kulit_ID: "0",
       image: "/images/not_sure.png",
       id: "q4",
+      value: "Jenis Kulit",
+    },
+    {
+      ukuran_tubuh_mammals_ID: "0",
+      image: "/images/not_sure.png",
+      id: "q5",
       value: "Ukuran Tubuh",
     },
     {
-      tipe_cakar_ID: "0",
+      bertanduk_bertaring_ID: "0",
       image: "/images/not_sure.png",
-      id: "q5",
-      value: "Tipe Cakar",
+      id: "q6",
+      value: "Bertanduk/Bertaring",
+    },
+    {
+      has_moncong: "0",
+      image: "/images/not_sure.png",
+      id: "q7",
+      value: "Mempunyai Moncong",
+    },
+    {
+      has_ekor: "0",
+      image: "/images/not_sure.png",
+      id: "q8",
+      value: "Mempunyai Ekor",
+    },
+    {
+      jumlah_kuku: "0",
+      image: "/images/not_sure.png",
+      id: "q9",
+      value: "Jumlah Kuku",
+    },
+    {
+      jumlah_cula: "0",
+      image: "/images/not_sure.png",
+      id: "q10",
+      value: "Jumlah Cula",
     },
   ]);
 
-  const [avesCandidateId, setAvesCandidateId] = React.useState(0);
+  const [mammalsCandidateId, setMammalsCandidateId] = React.useState(0);
 
-  const [avesCandidateDetail, setAvesCandidateDetail] = React.useState([]);
+  const [mammalsCandidateDetail, setMammalsCandidateDetail] = React.useState(
+    []
+  );
 
-  const [avesStatus, setAvesStatus] = React.useState([{}, {}]);
+  const [mammalsStatus, setMammalsStatus] = React.useState([{}, {}]);
 
-  const [avesImages, setAvesImages] = React.useState([{}]);
+  const [mammalsImages, setMammalsImages] = React.useState([{}]);
 
-  const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
+  const [mammalsPlaceOrigin, setMammalsPlaceOrigin] = React.useState([]);
 
   function onUpdateItem(props) {
     console.log(props);
     console.log("index to change :" + questionIndex);
-    let tmpArrayDefault = avesValue.map((item, j) => {
+    let tmpArrayDefault = mammalsValue.map((item, j) => {
       if (questionIndex === j) {
         return props;
       } else {
@@ -133,24 +195,27 @@ function AvesIdentificationPage() {
     });
 
     console.log(tmpArrayDefault);
-    setAvesValue(tmpArrayDefault);
+    setMammalsValue(tmpArrayDefault);
   }
   useEffect(() => {
-    if (avesCandidateId !== 0) {
-      GetAvesDetail(avesCandidateId).then((result) => {
-        setAvesCandidateDetail(result.aves.animal);
-        setAvesStatus(result.status_aves);
-        setAvesImages(result.images);
-        setAvesPlaceOrigin(result.place_origin);
+    if (mammalsCandidateId !== 0) {
+      GetMammalsDetail(mammalsCandidateId).then((result) => {
+        setMammalsCandidateDetail(result.mammals.animal);
+        setMammalsStatus(result.status_mammals);
+        setMammalsImages(result.images);
+        setMammalsPlaceOrigin(result.place_origin);
       });
     }
-  }, [avesValue, avesCandidateId]);
+  }, [mammalsValue, mammalsCandidateId]);
   return (
     <>
-      <Meta title="Aves Identification" description="Aves Identification" />
+      <Meta
+        title="Mammals Identification"
+        description="Mammals Identification"
+      />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container style={{ width: "340px" }} justify="center" spacing={2}>
-          {avesCandidateId !== 0 ? (
+          {mammalsCandidateId !== 0 ? (
             <>
               <Grid container justify="center">
                 <Grid item>
@@ -159,23 +224,23 @@ function AvesIdentificationPage() {
                     src={
                       process.env.PUBLIC_URL + "/images/protected_wildlife.png"
                     }
-                    alt="Aves"
+                    alt="Mammals"
                   />
                 </Grid>
-                {avesImages.length === 0 ? (
+                {mammalsImages.length === 0 ? (
                   <img
                     className={classes.banner}
                     src={process.env.PUBLIC_URL + "/images/placeholder.png"}
-                    alt="Aves"
+                    alt="Mammals"
                   />
                 ) : (
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
-                      avesImages[0].images
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
+                      mammalsImages[0].images
                     }
-                    alt="Aves"
+                    alt="Mammals"
                     onClick={() => {
                       handleClickOpenPhoto();
                     }}
@@ -184,58 +249,62 @@ function AvesIdentificationPage() {
               </Grid>
 
               <Grid container justify="center">
-                {avesCandidateDetail !== undefined && (
-                  // <ReactJson src={avesCandidateId} />
+                {mammalsCandidateDetail !== undefined && (
+                  // <ReactJson src={mammalsCandidateId} />
                   <Typography>
                     <Box fontStyle="italic">
-                      {avesCandidateDetail.scientific_name}
+                      {mammalsCandidateDetail.scientific_name}
                     </Box>
                   </Typography>
                 )}
               </Grid>
               <Grid container justify="center">
-                {avesCandidateDetail !== undefined && (
+                {mammalsCandidateDetail !== undefined && (
                   <Grid container>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Status (IUCN/CITES)
                       </Typography>
-                      <Typography>IUCN : {avesStatus[0].iucn}</Typography>
-                      <Typography>CITES : {avesStatus[1].cites}</Typography>
+                      <Grid item>
+                        <Typography>IUCN : {mammalsStatus[0].iucn}</Typography>
+                        <Typography>
+                          CITES : {mammalsStatus[1].cites}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Type
                       </Typography>
-                      {avesPlaceOrigin.map((value) => {
+                      {mammalsPlaceOrigin.map((value) => {
                         return (
                           <Typography>{value.habitatType_name}</Typography>
                         );
                       })}
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Characteristics
                       </Typography>
-                      {avesPlaceOrigin.map((value) => {
+                      {mammalsPlaceOrigin.map((value) => {
                         return (
                           <Typography>{value.habitatType_character}</Typography>
                         );
                       })}
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Location/Distribution
                       </Typography>
                     </Grid>
-                    {/* <ReactJson src={avesPlaceOrigin} /> */}
+                    {/* <ReactJson src={mammalsPlaceOrigin} /> */}
                   </Grid>
                 )}
               </Grid>
               <Grid>
                 <Button
                   onClick={() => {
-                    setAvesCandidateId(0);
+                    setMammalsCandidateId(0);
                   }}
                   variant="contained"
                 >
@@ -243,37 +312,38 @@ function AvesIdentificationPage() {
                 </Button>
               </Grid>
             </>
-          ) : avesResult.length > 0 ? (
+          ) : mammalsResult.length > 0 ? (
             <>
               <Grid container justify="center">
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
-                    Kandidat Aves
+                    Kandidat Mammals
                   </Typography>
                 </Grid>
 
                 <img
                   className={classes.titleImage}
-                  src={process.env.PUBLIC_URL + "/images/aves-light.png"}
-                  alt="Aves"
+                  src={process.env.PUBLIC_URL + "/images/mammals-light.png"}
+                  alt="Mammals"
                 />
               </Grid>
-              {avesResult.map((value) => {
+              {mammalsResult.map((value) => {
                 return (
-                  <Grid item xs={6} key={value.aves_ID}>
+                  <Grid item xs={6} key={value.mammals_ID}>
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
-                          console.log(value.aves_ID);
-                          setAvesCandidateId(value.aves_ID);
-                          // history.push("/identification/aves/" + value.aves_ID);
+                          console.log(value);
+                          console.log(value.mammals_ID);
+                          setMammalsCandidateId(value.mammals_ID);
+                          // history.push("/identification/mammals/" + value.mammals_ID);
                         }}
                       >
                         <CardContent>
                           <img
                             className={classes.placeholder}
                             src={process.env.PUBLIC_URL + value.image}
-                            alt="Aves"
+                            alt="Mammals"
                           />
                           <Typography className={classes.subtitle}>
                             {value.scientific_name}
@@ -288,7 +358,7 @@ function AvesIdentificationPage() {
               <Grid container justify="center">
                 <Button
                   onClick={() => {
-                    setAvesResult([]);
+                    setMammalsResult([]);
                   }}
                   variant="contained"
                 >
@@ -298,21 +368,20 @@ function AvesIdentificationPage() {
             </>
           ) : (
             <>
-              {/* first page */}
               <Grid container>
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
-                    Identifikasi Aves
+                    Identifikasi Mammals
                   </Typography>
                 </Grid>
                 <img
                   className={classes.titleImage}
-                  src={process.env.PUBLIC_URL + "/images/aves-light.png"}
-                  alt="Aves"
+                  src={process.env.PUBLIC_URL + "/images/mammals-light.png"}
+                  alt="Mammals"
                 />
               </Grid>
 
-              {avesValue.map((value, index) => {
+              {mammalsValue.map((value, index) => {
                 return (
                   <Grid item xs={6} key={Object.keys(value)}>
                     <Card style={{ backgroundColor: "green" }}>
@@ -327,7 +396,7 @@ function AvesIdentificationPage() {
                           <img
                             className={classes.placeholder}
                             src={process.env.PUBLIC_URL + value.image}
-                            alt="Aves"
+                            alt="Mammals"
                           />
                           <Typography className={classes.subtitle}>
                             {value.value !== ""
@@ -343,7 +412,7 @@ function AvesIdentificationPage() {
               <Grid>
                 <Button
                   onClick={() => {
-                    setAvesValue(initialState);
+                    setMammalsValue(initialState);
                   }}
                   variant="contained"
                 >
@@ -352,26 +421,24 @@ function AvesIdentificationPage() {
                 <Button
                   onClick={() => {
                     let queryParams = "";
-                    let tmpQueryParams = avesValue;
+                    let tmpQueryParams = mammalsValue;
 
                     tmpQueryParams.forEach(
                       (object) =>
                         (queryParams +=
                           Object.values(object)[0].toString() + ".")
                     );
-                    if (queryParams === "0.0.0.0.0.")
+                    if (queryParams === "0.0.0.0.0.0.0.0.0.0.")
                       alert("Berikan 1 ciri-ciri");
                     else {
                       localStorage.setItem("query", queryParams);
-                      console.log(queryParams);
-                      GetAvesResult(queryParams)
-                        .then((result) => {
-                          console.log(result);
-                          if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
-                          } else setAvesResult(result);
-                        })
-                        .finally(console.log(avesResult));
+                      GetMammalsResult(queryParams).then((result) => {
+                        if (result.length === 0) {
+                          alert("Kandidat tidak ditemukan");
+                        } else {
+                          setMammalsResult(result);
+                        }
+                      });
                     }
                   }}
                   variant="contained"
@@ -386,14 +453,15 @@ function AvesIdentificationPage() {
             isVisible={open}
             onClose={handleClose}
             onUpdateItem={onUpdateItem}
-            questionProps={avesValue[questionIndex]}
-            animalType="aves"
+            questionProps={mammalsValue[questionIndex]}
+            animalType="mammals"
           />
+
           <DetailPhoto
             isVisible={openPhoto}
             onClose={handleClosePhoto}
-            photoProps={avesImages[0]}
-            animalType="aves"
+            photoProps={mammalsImages[0]}
+            animalType="mammals"
           />
         </Grid>
       </Container>
@@ -401,4 +469,4 @@ function AvesIdentificationPage() {
   );
 }
 
-export default AvesIdentificationPage;
+export default MammalsIdentificationPage;
