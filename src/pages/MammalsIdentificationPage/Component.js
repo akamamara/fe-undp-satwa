@@ -16,6 +16,7 @@ import GetMammalsDetail from "../../utils/apis/GetMammalsDetail";
 import translateRaw from "../../utils/translateRaw";
 
 import DialogConfirmation from "../../sections/DialogConfirmation";
+import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
 
@@ -24,6 +25,8 @@ import useStyles from "./styles";
 function MammalsIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [openPhoto, setOpenPhoto] = React.useState(false);
+
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -32,6 +35,14 @@ function MammalsIdentificationPage() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenPhoto = () => {
+    setOpenPhoto(true);
+  };
+
+  const handleClosePhoto = () => {
+    setOpenPhoto(false);
   };
 
   const [mammalsResult, setMammalsResult] = React.useState([]);
@@ -49,10 +60,10 @@ function MammalsIdentificationPage() {
       value: "Alat Gerak",
     },
     {
-      ukuran_tubuh_mammals_ID: "0",
+      third_attribute_ID: "0",
       image: "/images/not_sure.png",
       id: "q3",
-      value: "Ukuran Tubuh",
+      value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
@@ -61,40 +72,40 @@ function MammalsIdentificationPage() {
       value: "Jenis Kulit",
     },
     {
-      jumlah_cula: "0",
+      ukuran_tubuh_mammals_ID: "0",
       image: "/images/not_sure.png",
       id: "q5",
-      value: "Jumlah Cula",
-    },
-    {
-      jumlah_kuku: "0",
-      image: "/images/not_sure.png",
-      id: "q6",
-      value: "Jumlah Kuku",
-    },
-    {
-      third_attribute_ID: "0",
-      image: "/images/not_sure.png",
-      id: "q7",
-      value: "Ciri Fisik Utama",
+      value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
       image: "/images/not_sure.png",
-      id: "q8",
+      id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
       image: "/images/not_sure.png",
-      id: "q9",
+      id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
       image: "/images/not_sure.png",
-      id: "q10",
+      id: "q8",
       value: "Mempunyai Ekor",
+    },
+    {
+      jumlah_kuku: "0",
+      image: "/images/not_sure.png",
+      id: "q9",
+      value: "Jumlah Kuku",
+    },
+    {
+      jumlah_cula: "0",
+      image: "/images/not_sure.png",
+      id: "q10",
+      value: "Jumlah Cula",
     },
   ];
   const [mammalsValue, setMammalsValue] = React.useState([
@@ -111,10 +122,10 @@ function MammalsIdentificationPage() {
       value: "Alat Gerak",
     },
     {
-      ukuran_tubuh_mammals_ID: "0",
+      third_attribute_ID: "0",
       image: "/images/not_sure.png",
       id: "q3",
-      value: "Ukuran Tubuh",
+      value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
@@ -123,40 +134,40 @@ function MammalsIdentificationPage() {
       value: "Jenis Kulit",
     },
     {
-      jumlah_cula: "0",
+      ukuran_tubuh_mammals_ID: "0",
       image: "/images/not_sure.png",
       id: "q5",
-      value: "Jumlah Cula",
-    },
-    {
-      jumlah_kuku: "0",
-      image: "/images/not_sure.png",
-      id: "q6",
-      value: "Jumlah Kuku",
-    },
-    {
-      third_attribute_ID: "0",
-      image: "/images/not_sure.png",
-      id: "q7",
-      value: "Ciri Fisik Utama",
+      value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
       image: "/images/not_sure.png",
-      id: "q8",
+      id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
       image: "/images/not_sure.png",
-      id: "q9",
+      id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
       image: "/images/not_sure.png",
-      id: "q10",
+      id: "q8",
       value: "Mempunyai Ekor",
+    },
+    {
+      jumlah_kuku: "0",
+      image: "/images/not_sure.png",
+      id: "q9",
+      value: "Jumlah Kuku",
+    },
+    {
+      jumlah_cula: "0",
+      image: "/images/not_sure.png",
+      id: "q10",
+      value: "Jumlah Cula",
     },
   ]);
 
@@ -226,10 +237,13 @@ function MammalsIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/html/Satwa/public/uploaded_images/mammals/" +
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
                       mammalsImages[0].images
                     }
                     alt="Mammals"
+                    onClick={() => {
+                      handleClickOpenPhoto();
+                    }}
                   />
                 )}
               </Grid>
@@ -247,14 +261,18 @@ function MammalsIdentificationPage() {
               <Grid container justify="center">
                 {mammalsCandidateDetail !== undefined && (
                   <Grid container>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Status (IUCN/CITES)
                       </Typography>
-                      <Typography>IUCN : {mammalsStatus[0].iucn}</Typography>
-                      <Typography>CITES : {mammalsStatus[1].cites}</Typography>
+                      <Grid item>
+                        <Typography>IUCN : {mammalsStatus[0].iucn}</Typography>
+                        <Typography>
+                          CITES : {mammalsStatus[1].cites}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Type
                       </Typography>
@@ -264,7 +282,7 @@ function MammalsIdentificationPage() {
                         );
                       })}
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Characteristics
                       </Typography>
@@ -274,7 +292,7 @@ function MammalsIdentificationPage() {
                         );
                       })}
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Location/Distribution
                       </Typography>
@@ -296,7 +314,7 @@ function MammalsIdentificationPage() {
             </>
           ) : mammalsResult.length > 0 ? (
             <>
-              <Grid container>
+              <Grid container justify="center">
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
                     Kandidat Mammals
@@ -315,6 +333,7 @@ function MammalsIdentificationPage() {
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
+                          console.log(value);
                           console.log(value.mammals_ID);
                           setMammalsCandidateId(value.mammals_ID);
                           // history.push("/identification/mammals/" + value.mammals_ID);
@@ -327,9 +346,7 @@ function MammalsIdentificationPage() {
                             alt="Mammals"
                           />
                           <Typography className={classes.subtitle}>
-                            {value.value !== ""
-                              ? value.value
-                              : translateRaw(value)}
+                            {value.scientific_name}
                           </Typography>
                         </CardContent>
                       </CardActionArea>
@@ -338,7 +355,7 @@ function MammalsIdentificationPage() {
                 );
               })}
 
-              <Grid>
+              <Grid container justify="center">
                 <Button
                   onClick={() => {
                     setMammalsResult([]);
@@ -408,20 +425,20 @@ function MammalsIdentificationPage() {
 
                     tmpQueryParams.forEach(
                       (object) =>
-                        (queryParams += Object.values(object)[0].toString())
+                        (queryParams +=
+                          Object.values(object)[0].toString() + ".")
                     );
-                    console.log(queryParams[0]);
-                    let debug = "21115";
-                    if (debug === "00000") alert("Berikan 1 ciri-ciri");
+                    if (queryParams === "0.0.0.0.0.0.0.0.0.0.")
+                      alert("Berikan 1 ciri-ciri");
                     else {
                       localStorage.setItem("query", queryParams);
-                      GetMammalsResult(queryParams)
-                        .then((result) => {
-                          if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
-                          } else setMammalsResult(result);
-                        })
-                        .finally(console.log(mammalsResult));
+                      GetMammalsResult(queryParams).then((result) => {
+                        if (result.length === 0) {
+                          alert("Kandidat tidak ditemukan");
+                        } else {
+                          setMammalsResult(result);
+                        }
+                      });
                     }
                   }}
                   variant="contained"
@@ -437,6 +454,14 @@ function MammalsIdentificationPage() {
             onClose={handleClose}
             onUpdateItem={onUpdateItem}
             questionProps={mammalsValue[questionIndex]}
+            animalType="mammals"
+          />
+
+          <DetailPhoto
+            isVisible={openPhoto}
+            onClose={handleClosePhoto}
+            photoProps={mammalsImages[0]}
+            animalType="mammals"
           />
         </Grid>
       </Container>

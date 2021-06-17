@@ -16,6 +16,7 @@ import GetHerpetoDetail from "../../utils/apis/GetHerpetoDetail";
 import translateRaw from "../../utils/translateRaw";
 
 import DialogConfirmation from "../../sections/DialogConfirmation";
+import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
 
@@ -24,6 +25,8 @@ import useStyles from "./styles";
 function HerpetoIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [openPhoto, setOpenPhoto] = React.useState(false);
+
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -32,6 +35,14 @@ function HerpetoIdentificationPage() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenPhoto = () => {
+    setOpenPhoto(true);
+  };
+
+  const handleClosePhoto = () => {
+    setOpenPhoto(false);
   };
 
   const [herpetoResult, setHerpetoResult] = React.useState([]);
@@ -55,10 +66,10 @@ function HerpetoIdentificationPage() {
       value: "Bentuk Kaki",
     },
     {
-      has_kaki_ID: "0",
+      ukuran_tubuh_herpeto_ID: "0",
       image: "/images/not_sure.png",
       id: "q4",
-      value: "Berkaki?",
+      value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
@@ -79,16 +90,16 @@ function HerpetoIdentificationPage() {
       value: "Jenis Ekor (Khusus Biawak)",
     },
     {
-      ukuran_tubuh_ID: "0",
+      warna_herpeto_ID: "0",
       image: "/images/not_sure.png",
       id: "q8",
-      value: "Ukuran Tubuh",
+      value: "Warna Dominan",
     },
     {
-      warna_ID: "0",
+      has_kaki_ID: "0",
       image: "/images/not_sure.png",
       id: "q9",
-      value: "Warna Kulit/Sisik Dominan",
+      value: "Berkaki?",
     },
   ];
   const [herpetoValue, setHerpetoValue] = React.useState([
@@ -111,10 +122,10 @@ function HerpetoIdentificationPage() {
       value: "Bentuk Kaki",
     },
     {
-      has_kaki_ID: "0",
+      ukuran_tubuh_herpeto_ID: "0",
       image: "/images/not_sure.png",
       id: "q4",
-      value: "Berkaki?",
+      value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
@@ -135,16 +146,16 @@ function HerpetoIdentificationPage() {
       value: "Jenis Ekor (Khusus Biawak)",
     },
     {
-      ukuran_tubuh_ID: "0",
+      warna_herpeto_ID: "0",
       image: "/images/not_sure.png",
       id: "q8",
-      value: "Ukuran Tubuh",
+      value: "Warna Dominan",
     },
     {
-      warna_ID: "0",
+      has_kaki_ID: "0",
       image: "/images/not_sure.png",
       id: "q9",
-      value: "Warna Kulit/Sisik Dominan",
+      value: "Berkaki?",
     },
   ]);
 
@@ -177,8 +188,9 @@ function HerpetoIdentificationPage() {
   useEffect(() => {
     if (herpetoCandidateId !== 0) {
       GetHerpetoDetail(herpetoCandidateId).then((result) => {
-        setHerpetoCandidateDetail(result.herpeto.animal);
-        setHerpetoStatus(result.status_herpeto);
+        console.log(result);
+        setHerpetoCandidateDetail(result.herpetofauna.animal);
+        setHerpetoStatus(result.status_herpetofauna);
         setHerpetoImages(result.images);
         setHerpetoPlaceOrigin(result.place_origin);
       });
@@ -214,10 +226,13 @@ function HerpetoIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/html/Satwa/public/uploaded_images/herpeto/" +
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/herpetofauna/" +
                       herpetoImages[0].images
                     }
                     alt="Herpetofauna"
+                    onClick={() => {
+                      handleClickOpenPhoto();
+                    }}
                   />
                 )}
               </Grid>
@@ -284,7 +299,7 @@ function HerpetoIdentificationPage() {
             </>
           ) : herpetoResult.length > 0 ? (
             <>
-              <Grid container>
+              <Grid container justify="center">
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
                     Kandidat Herpetofauna
@@ -303,8 +318,8 @@ function HerpetoIdentificationPage() {
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
-                          console.log(value.herpeto_ID);
-                          setHerpetoCandidateId(value.herpeto_ID);
+                          console.log(value);
+                          setHerpetoCandidateId(value.herpetofauna_ID);
                           // history.push("/identification/herpeto/" + value.herpeto_ID);
                         }}
                       >
@@ -315,9 +330,7 @@ function HerpetoIdentificationPage() {
                             alt="Herpetofauna"
                           />
                           <Typography className={classes.subtitle}>
-                            {value.value !== ""
-                              ? value.value
-                              : translateRaw(value)}
+                            {value.scientific_name}
                           </Typography>
                         </CardContent>
                       </CardActionArea>
@@ -326,7 +339,7 @@ function HerpetoIdentificationPage() {
                 );
               })}
 
-              <Grid>
+              <Grid container justify="center">
                 <Button
                   onClick={() => {
                     setHerpetoResult([]);
@@ -396,13 +409,14 @@ function HerpetoIdentificationPage() {
 
                     tmpQueryParams.forEach(
                       (object) =>
-                        (queryParams += Object.values(object)[0].toString())
+                        (queryParams +=
+                          Object.values(object)[0].toString() + ".")
                     );
-                    console.log(queryParams[0]);
-                    let debug = "21115";
-                    if (debug === "00000") alert("Berikan 1 ciri-ciri");
+                    if (queryParams === "0.0.0.0.0.0.0.0.0.")
+                      alert("Berikan 1 ciri-ciri");
                     else {
                       localStorage.setItem("query", queryParams);
+                      console.log(queryParams);
                       GetHerpetoResult(queryParams)
                         .then((result) => {
                           if (result.length === 0) {
@@ -425,6 +439,13 @@ function HerpetoIdentificationPage() {
             onClose={handleClose}
             onUpdateItem={onUpdateItem}
             questionProps={herpetoValue[questionIndex]}
+            animalType="herpetofauna"
+          />
+          <DetailPhoto
+            isVisible={openPhoto}
+            onClose={handleClosePhoto}
+            photoProps={herpetoImages[0]}
+            animalType="herpetofauna"
           />
         </Grid>
       </Container>

@@ -6,6 +6,8 @@ import {
   Grid,
   Typography,
   Dialog,
+  // Select,
+  // MenuItem,
   // DialogActions,
   // DialogContent,
   // DialogContentText,
@@ -16,6 +18,8 @@ import {
 } from "@material-ui/core";
 
 import fetchAvesQuestion from "../../utils/apis/fetchAvesQuestion";
+import fetchHerpetoQuestion from "../../utils/apis/fetchHerpetoQuestion";
+import fetchMammalsQuestion from "../../utils/apis/fetchMammalsQuestion";
 
 import translateRaw from "../../utils/translateRaw";
 
@@ -34,6 +38,7 @@ function DialogConfirmation({
   const [questionFields, setQuestionFields] = React.useState([]);
   useEffect(() => {
     if (questionProps !== undefined) {
+      setQuestionFields([]);
       if (isVisible === true) {
         if (animalType === "aves") {
           fetchAvesQuestion(questionProps.id).then((result) => {
@@ -45,19 +50,49 @@ function DialogConfirmation({
               setQuestionGrid(12);
             } else if (result.length <= 8) {
               setQuestionGrid(6);
-            } else setQuestionGrid(4);
+            } else setQuestionGrid(12);
 
             setQuestionFields(result);
+            console.log("question fields");
+            console.log(result);
           });
         } else if (animalType === "herpetofauna") {
-          console.log("herpetofauna");
+          fetchHerpetoQuestion(questionProps.id).then((result) => {
+            // console.log(result);
+            if (result.length === undefined) {
+              console.log(result);
+            }
+            if (result.length <= 3) {
+              setQuestionGrid(12);
+            } else if (result.length <= 8) {
+              setQuestionGrid(6);
+            } else setQuestionGrid(12);
+
+            setQuestionFields(result);
+            console.log("question fields");
+            console.log(result);
+          });
         } else if (animalType === "mammals") {
-          console.log("mammals");
+          fetchMammalsQuestion(questionProps.id).then((result) => {
+            // console.log(result);
+            if (result.length === undefined) {
+              console.log(result);
+            }
+            if (result.length <= 3) {
+              setQuestionGrid(12);
+            } else if (result.length <= 8) {
+              setQuestionGrid(6);
+            } else setQuestionGrid(12);
+
+            setQuestionFields(result);
+            console.log("question fields");
+            console.log(result);
+          });
         }
       }
     }
     // eslint-disable-next-line
-  }, [questionProps]);
+  }, [questionProps, isVisible]);
   return (
     <Container className={classes.root}>
       <Dialog open={isVisible} onClose={onClose} fullWidth>
@@ -66,13 +101,13 @@ function DialogConfirmation({
             Identifikasi {translateRaw(Object.keys(questionProps))}
           </DialogTitle>
         )}
+
         <Grid
           container
           justify="center"
           alignItems="center"
           // spacing={1}
         >
-          {/* ,index */}
           {questionFields.map((value) => {
             // console.log(value);
             if (value.length < 4) {
@@ -89,7 +124,40 @@ function DialogConfirmation({
                   paddingRight: "10px",
                 }}
               >
-                {value.warna_ID === undefined && (
+                {/* {value.warna_ID === undefined ||
+                  (value.warna_herpeto_ID === undefined && (
+                    <Card style={{}}>
+                      <CardActionArea
+                        onClick={() => {
+                          console.log(questionProps);
+                          value.id = questionProps.id;
+                          console.log(value);
+                          onUpdateItem(value);
+                          setQuestionFields([]);
+                          onClose();
+                        }}
+                      >
+                        <CardContent>
+                          <img
+                            className={classes.placeholder}
+                            // src={process.env.PUBLIC_URL + value.image}
+                            src={
+                              process.env.PUBLIC_URL + "/images/placeholder.png"
+                            }
+                            alt="Aves"
+                          />
+
+                          <Typography className={classes.subtitle}>
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(Object.keys(value))}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  ))} */}
+
+                {value.warna_ID !== undefined ? (
                   <Card style={{}}>
                     <CardActionArea
                       onClick={() => {
@@ -97,6 +165,49 @@ function DialogConfirmation({
                         value.id = questionProps.id;
                         console.log(value);
                         onUpdateItem(value);
+                        setQuestionFields([]);
+                        onClose();
+                      }}
+                    >
+                      <CardContent>
+                        <Typography className={classes.subtitle}>
+                          {value.value !== ""
+                            ? value.value
+                            : translateRaw(Object.keys(value))}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                ) : value.warna_herpeto_ID !== undefined ? (
+                  <Card style={{}}>
+                    <CardActionArea
+                      onClick={() => {
+                        console.log(questionProps);
+                        value.id = questionProps.id;
+                        console.log(value);
+                        onUpdateItem(value);
+                        setQuestionFields([]);
+                        onClose();
+                      }}
+                    >
+                      <CardContent>
+                        <Typography className={classes.subtitle}>
+                          {value.value !== ""
+                            ? value.value
+                            : translateRaw(Object.keys(value))}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
+                ) : (
+                  <Card style={{}}>
+                    <CardActionArea
+                      onClick={() => {
+                        console.log(questionProps);
+                        value.id = questionProps.id;
+                        console.log(value);
+                        onUpdateItem(value);
+                        setQuestionFields([]);
                         onClose();
                       }}
                     >
@@ -119,19 +230,29 @@ function DialogConfirmation({
                     </CardActionArea>
                   </Card>
                 )}
-                {value.warna_ID !== undefined && (
-                  <Card style={{ backgroundColor: value.kode_warna }}>
-                    <CardActionArea
-                      onClick={() => {
-                        value.id = questionProps.id;
-                        onUpdateItem(value);
-                        onClose();
-                      }}
-                    >
-                      <CardContent></CardContent>
-                    </CardActionArea>
-                  </Card>
-                )}
+                {/* {value.warna_ID !== undefined ||
+                  (value.warna_herpeto_ID !== undefined && (
+                    <Card style={{}}>
+                      <CardActionArea
+                        onClick={() => {
+                          console.log(questionProps);
+                          value.id = questionProps.id;
+                          console.log(value);
+                          onUpdateItem(value);
+                          setQuestionFields([]);
+                          onClose();
+                        }}
+                      >
+                        <CardContent>
+                          <Typography className={classes.subtitle}>
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(Object.keys(value))}
+                          </Typography>
+                        </CardContent>
+                      </CardActionArea>
+                    </Card>
+                  ))} */}
               </Grid>
             );
           })}

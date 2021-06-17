@@ -16,6 +16,7 @@ import GetAvesDetail from "../../utils/apis/GetAvesDetail";
 import translateRaw from "../../utils/translateRaw";
 
 import DialogConfirmation from "../../sections/DialogConfirmation";
+import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
 
@@ -24,6 +25,8 @@ import useStyles from "./styles";
 function AvesIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [openPhoto, setOpenPhoto] = React.useState(false);
+
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -32,6 +35,14 @@ function AvesIdentificationPage() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleClickOpenPhoto = () => {
+    setOpenPhoto(true);
+  };
+
+  const handleClosePhoto = () => {
+    setOpenPhoto(false);
   };
 
   const [avesResult, setAvesResult] = React.useState([]);
@@ -161,10 +172,13 @@ function AvesIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/html/Satwa/public/uploaded_images/aves/" +
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
                       avesImages[0].images
                     }
                     alt="Aves"
+                    onClick={() => {
+                      handleClickOpenPhoto();
+                    }}
                   />
                 )}
               </Grid>
@@ -231,7 +245,7 @@ function AvesIdentificationPage() {
             </>
           ) : avesResult.length > 0 ? (
             <>
-              <Grid container>
+              <Grid container justify="center">
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
                     Kandidat Aves
@@ -262,9 +276,7 @@ function AvesIdentificationPage() {
                             alt="Aves"
                           />
                           <Typography className={classes.subtitle}>
-                            {value.value !== ""
-                              ? value.value
-                              : translateRaw(value)}
+                            {value.scientific_name}
                           </Typography>
                         </CardContent>
                       </CardActionArea>
@@ -273,7 +285,7 @@ function AvesIdentificationPage() {
                 );
               })}
 
-              <Grid>
+              <Grid container justify="center">
                 <Button
                   onClick={() => {
                     setAvesResult([]);
@@ -286,6 +298,7 @@ function AvesIdentificationPage() {
             </>
           ) : (
             <>
+              {/* first page */}
               <Grid container>
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
@@ -343,15 +356,17 @@ function AvesIdentificationPage() {
 
                     tmpQueryParams.forEach(
                       (object) =>
-                        (queryParams += Object.values(object)[0].toString())
+                        (queryParams +=
+                          Object.values(object)[0].toString() + ".")
                     );
-                    console.log(queryParams[0]);
-                    let debug = "21115";
-                    if (debug === "00000") alert("Berikan 1 ciri-ciri");
+                    if (queryParams === "0.0.0.0.0.")
+                      alert("Berikan 1 ciri-ciri");
                     else {
                       localStorage.setItem("query", queryParams);
+                      console.log(queryParams);
                       GetAvesResult(queryParams)
                         .then((result) => {
+                          console.log(result);
                           if (result.length === 0) {
                             alert("Kandidat tidak ditemukan");
                           } else setAvesResult(result);
@@ -372,6 +387,12 @@ function AvesIdentificationPage() {
             onClose={handleClose}
             onUpdateItem={onUpdateItem}
             questionProps={avesValue[questionIndex]}
+            animalType="aves"
+          />
+          <DetailPhoto
+            isVisible={openPhoto}
+            onClose={handleClosePhoto}
+            photoProps={avesImages[0]}
             animalType="aves"
           />
         </Grid>

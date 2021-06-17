@@ -3,12 +3,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(() => ({
   root: {
     display: "flex",
-    flexDirection: "column",
     "justify-content": "start",
     "align-items": "center",
-    height: "100%",
-    marginTop: "100px",
-    overflow: "visible",
+    flexDirection: "column",
   },
   main: {
     width: "190px",

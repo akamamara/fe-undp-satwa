@@ -7,7 +7,6 @@ const useStyles = makeStyles(() => ({
     "justify-content": "start",
     "align-items": "center",
     height: "100%",
-    marginTop: "100px",
     overflow: "visible",
   },
   main: {
