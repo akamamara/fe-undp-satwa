@@ -171,8 +171,9 @@ function AvesIdentificationPage() {
                 ) : (
                   <img
                     className={classes.bannerImage}
+                    //"http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/"
                     src={
-                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
+                      "https://117.53.47.76/storage/uploaded_images/aves/" +
                       avesImages[0].images
                     }
                     alt="Aves"
