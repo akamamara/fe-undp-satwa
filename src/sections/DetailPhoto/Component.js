@@ -23,21 +23,21 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
         {animalType === "aves" ? (
           <Image
             src={
-              "https://117.53.47.76/storage/uploaded_images/aves/" +
+              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
               photoProps.images
             }
           />
         ) : animalType === "herpetofauna" ? (
           <Image
             src={
-              "https://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/herpetofauna/" +
               photoProps.images
             }
           />
         ) : (
           <Image
             src={
-              "https://117.53.47.76/storage/uploaded_images/mammals/" +
+              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
               photoProps.images
             }
           />

@@ -226,7 +226,7 @@ function HerpetoIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "https://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/herpetofauna/" +
                       herpetoImages[0].images
                     }
                     alt="Herpetofauna"

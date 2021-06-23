@@ -4,7 +4,7 @@ import { getActions as getSWActions } from "store/sw";
 
 import "./global.css";
 
-axios.defaults.baseURL = "https://117.53.47.76/api";
+axios.defaults.baseURL = "http://117.53.47.76/html/Satwa/public/api/";
 
 if (!document.ie) {
   // check for ie

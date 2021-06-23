@@ -237,7 +237,7 @@ function MammalsIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "https://117.53.47.76/storage/uploaded_images/mammals/" +
+                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
                       mammalsImages[0].images
                     }
                     alt="Mammals"
