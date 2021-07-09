@@ -525,7 +525,7 @@ function MammalsIdentificationPage() {
                       localStorage.setItem("query", queryParams);
                       GetMammalsResult(queryParams).then((result) => {
                         if (result.length === 0) {
-                          alert("Kandidat tidak ditemukan");
+                          alert("Kandidat tidak dilindungi");
                         } else {
                           setMammalsResult(result);
                         }
