@@ -9,7 +9,6 @@ import {
   Card,
   CardMedia,
   CardActionArea,
-  CardContent,
 } from "@material-ui/core";
 
 import GetMammalsResult from "../../utils/apis/GetMammalsResult";
@@ -181,10 +180,11 @@ function MammalsIdentificationPage() {
   const [mammalsStatus, setMammalsStatus] = React.useState([{}, {}]);
 
   const [mammalsImages, setMammalsImages] = React.useState([{}]);
-
+  // eslint-disable-next-line no-unused-vars
   const [mammalsPlaceOrigin, setMammalsPlaceOrigin] = React.useState([]);
 
   const [mammalsIndonesianName, setMammalsIndonesianName] = React.useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [mammalsEnglishName, setMammalsEnglishName] = React.useState([]);
   const [mammalsArea, setMammalsArea] = React.useState([{}]);
 
@@ -237,15 +237,21 @@ function MammalsIdentificationPage() {
                 </Grid>
                 {mammalsImages.length === 0 ? (
                   <img
-                    className={classes.banner}
-                    src={process.env.PUBLIC_URL + "/images/placeholder.png"}
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
                     alt="Mammals"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
+                    }}
                   />
                 ) : (
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/storage/uploaded_images/mammals/" +
+                      "https://the-next-project.my.id/storage/uploaded_images/mammals/" +
                       mammalsImages[0].images
                     }
                     alt="Mammals"
@@ -276,9 +282,12 @@ function MammalsIdentificationPage() {
                 {mammalsCandidateDetail !== undefined && (
                   <Grid container>
                     <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Status (IUCN/CITES)
-                      </Typography>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" className={classes.yellow}>
+                          Status (IUCN/CITES)
+                        </Typography>
+                      </Grid>
+
                       <Grid item>
                         <Typography>IUCN : {mammalsStatus[0].iucn}</Typography>
                         <Typography>
@@ -342,20 +351,33 @@ function MammalsIdentificationPage() {
                           console.log(value);
                           console.log(value.mammals_ID);
                           setMammalsCandidateId(value.mammals_ID);
-                          // history.push("/identification/mammals/" + value.mammals_ID);
                         }}
                       >
-                        <CardMedia
-                          style={{
-                            height: "120px",
-                            // paddingTop: "56.25%",
-                            borderLeft: "10px solid #FFC000",
-                          }}
-                          image={
-                            "http://117.53.47.76/storage/uploaded_images/mammals/" +
-                            value.images.images
-                          }
-                        />
+                        {value.images === null ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              process.env.PUBLIC_URL +
+                              "/images/not_sure_100.png"
+                            }
+                          />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "https://the-next-project.my.id/storage/uploaded_images/mammals/" +
+                              value.images.images
+                            }
+                          />
+                        )}
                         {value.scientific_name.length > 18 ? (
                           <Typography
                             style={{

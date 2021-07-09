@@ -168,10 +168,11 @@ function HerpetoIdentificationPage() {
   const [herpetoStatus, setHerpetoStatus] = React.useState([{}, {}]);
 
   const [herpetoImages, setHerpetoImages] = React.useState([{}]);
-
+  // eslint-disable-next-line no-unused-vars
   const [herpetoPlaceOrigin, setHerpetoPlaceOrigin] = React.useState([]);
 
   const [herpetoIndonesianName, setHerpetoIndonesianName] = React.useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [herpetoEnglishName, setHerpetoEnglishName] = React.useState([]);
   const [herpetoArea, setHerpetoArea] = React.useState([]);
 
@@ -225,18 +226,24 @@ function HerpetoIdentificationPage() {
                 </Grid>
                 {herpetoImages.length === 0 ? (
                   <img
-                    className={classes.banner}
-                    src={process.env.PUBLIC_URL + "/images/placeholder.png"}
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
                     alt="Herpetofauna"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
+                    }}
                   />
                 ) : (
                   <img
                     className={classes.bannerImage}
+                    alt="Herpetofauna"
                     src={
-                      "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+                      "https://the-next-project.my.id/storage/uploaded_images/herpetofauna/" +
                       herpetoImages[0].images
                     }
-                    alt="Herpetofauna"
                     onClick={() => {
                       handleClickOpenPhoto();
                     }}
@@ -264,9 +271,12 @@ function HerpetoIdentificationPage() {
                 {herpetoCandidateDetail !== undefined && (
                   <Grid container>
                     <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Status (IUCN/CITES)
-                      </Typography>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" className={classes.yellow}>
+                          Status (IUCN/CITES)
+                        </Typography>
+                      </Grid>
+
                       <Grid item>
                         <Typography>IUCN : {herpetoStatus[0].iucn}</Typography>
                         <Typography>
@@ -331,17 +341,31 @@ function HerpetoIdentificationPage() {
                           // history.push("/identification/herpeto/" + value.herpeto_ID);
                         }}
                       >
-                        <CardMedia
-                          style={{
-                            height: "120px",
-                            // paddingTop: "56.25%",
-                            borderLeft: "10px solid #FFC000",
-                          }}
-                          image={
-                            "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
-                            value.images.images
-                          }
-                        />
+                        {value.images === null ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              process.env.PUBLIC_URL +
+                              "/images/not_sure_100.png"
+                            }
+                          />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "https://the-next-project.my.id/storage/uploaded_images/herpetofauna/" +
+                              value.images.images
+                            }
+                          />
+                        )}
                         {value.scientific_name > 18 ? (
                           <Typography
                             style={{

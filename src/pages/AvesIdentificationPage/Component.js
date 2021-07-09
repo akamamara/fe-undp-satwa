@@ -119,9 +119,11 @@ function AvesIdentificationPage() {
 
   const [avesImages, setAvesImages] = React.useState([{}]);
 
+// eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
 
   const [avesIndonesianName, setAvesIndonesianName] = React.useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [avesEnglishName, setAvesEnglishName] = React.useState([]);
   const [avesArea, setAvesArea] = React.useState([]);
 
@@ -169,13 +171,13 @@ function AvesIdentificationPage() {
                     alt="Aves"
                   />
                 </Grid>
-                {
-                  avesImages.length === 0 ? (
+                {avesImages.length === 0 ? (
                     <img
                       style={{
                         backgroundColor: "green",
                         borderLeft: "10px solid #FFC000",
                       }}
+                      alt="Aves"
                       src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
                       onClick={() => {
                         console.log("im empty");
@@ -184,28 +186,16 @@ function AvesIdentificationPage() {
                   ) : (
                     <img
                       className={classes.bannerImage}
+                      alt="Aves"
                       src={
-                        "http://117.53.47.76/storage/uploaded_images/aves/" +
+                        "https://the-next-project.my.id/storage/uploaded_images/aves/" +
                         avesImages[0].images
                       }
                       onClick={() => {
                         handleClickOpenPhoto();
                       }}
                     />
-                  )
-                  // loader image
-                  // <img
-                  //   className={classes.bannerImage}
-                  //   src={
-                  //     "http://117.53.47.76/storage/uploaded_images/aves/" +
-                  //     avesImages[0].images
-                  //   }
-                  //   alt="Aves"
-                  //   onClick={() => {
-                  //     handleClickOpenPhoto();
-                  //   }}
-                  // />
-                }
+                  )}
               </Grid>
 
               <Grid container justify="center">
@@ -310,7 +300,7 @@ function AvesIdentificationPage() {
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
-                              "http://117.53.47.76/storage/uploaded_images/aves/" +
+                              "https://the-next-project.my.id/storage/uploaded_images/aves/" +
                               value.images.images
                             }
                           />
@@ -347,11 +337,6 @@ function AvesIdentificationPage() {
                             {value.scientific_name}
                           </Typography>
                         )}
-                        {/* <CardContent>
-                          <Typography className={classes.subtitle}>
-                            {value.scientific_name}
-                          </Typography>
-                        </CardContent> */}
                       </CardActionArea>
                     </Card>
                   </Grid>
