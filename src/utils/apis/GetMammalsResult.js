@@ -40,7 +40,7 @@ const GetMammalsResult = async (identificationValue) => {
   }
 
   try {
-    const resp = await axios.post("identifikasi/mammals/result", formData);
+    const resp = await axios.post("api/identifikasi/mammals/result", formData);
     await console.log(resp);
     // await alert(resp.data.message);
     return resp.data.result;

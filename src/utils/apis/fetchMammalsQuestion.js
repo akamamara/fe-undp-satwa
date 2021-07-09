@@ -2,7 +2,7 @@ import axios from "axios";
 
 const fetchAvesQuestion = async (id) => {
   try {
-    const resp = await axios.get("identifikasi/mammals/" + id);
+    const resp = await axios.get("api/identifikasi/mammals/" + id);
     // await console.log(resp);
     // await alert(resp.data.message);
     console.log(resp);

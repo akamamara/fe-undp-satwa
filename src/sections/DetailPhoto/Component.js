@@ -12,6 +12,8 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
   // const history = useHistory();
   const classes = useStyles();
   useEffect(() => {}, []);
+  console.log(photoProps);
+
   return (
     <Container className={classes.root}>
       <Dialog open={isVisible} onClose={onClose} fullWidth>
@@ -23,21 +25,21 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
         {animalType === "aves" ? (
           <Image
             src={
-              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
+              "http://117.53.47.76/storage/uploaded_images/aves/" +
               photoProps.images
             }
           />
         ) : animalType === "herpetofauna" ? (
           <Image
             src={
-              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/herpetofauna/" +
+              "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
               photoProps.images
             }
           />
         ) : (
           <Image
             src={
-              "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
+              "http://117.53.47.76/storage/uploaded_images/mammals/" +
               photoProps.images
             }
           />

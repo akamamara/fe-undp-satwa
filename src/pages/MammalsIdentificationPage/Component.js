@@ -7,6 +7,7 @@ import {
   Typography,
   Container,
   Card,
+  CardMedia,
   CardActionArea,
   CardContent,
 } from "@material-ui/core";
@@ -49,61 +50,61 @@ function MammalsIdentificationPage() {
   const initialState = [
     {
       tipe_mammals_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       alat_gerak_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Alat Gerak",
     },
     {
       third_attribute_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Jenis Kulit",
     },
     {
       ukuran_tubuh_mammals_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q8",
       value: "Mempunyai Ekor",
     },
     {
       jumlah_kuku: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q9",
       value: "Jumlah Kuku",
     },
     {
       jumlah_cula: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q10",
       value: "Jumlah Cula",
     },
@@ -111,61 +112,61 @@ function MammalsIdentificationPage() {
   const [mammalsValue, setMammalsValue] = React.useState([
     {
       tipe_mammals_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       alat_gerak_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Alat Gerak",
     },
     {
       third_attribute_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Jenis Kulit",
     },
     {
       ukuran_tubuh_mammals_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q8",
       value: "Mempunyai Ekor",
     },
     {
       jumlah_kuku: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q9",
       value: "Jumlah Kuku",
     },
     {
       jumlah_cula: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q10",
       value: "Jumlah Cula",
     },
@@ -182,6 +183,10 @@ function MammalsIdentificationPage() {
   const [mammalsImages, setMammalsImages] = React.useState([{}]);
 
   const [mammalsPlaceOrigin, setMammalsPlaceOrigin] = React.useState([]);
+
+  const [mammalsIndonesianName, setMammalsIndonesianName] = React.useState([]);
+  const [mammalsEnglishName, setMammalsEnglishName] = React.useState([]);
+  const [mammalsArea, setMammalsArea] = React.useState([{}]);
 
   function onUpdateItem(props) {
     console.log(props);
@@ -204,6 +209,9 @@ function MammalsIdentificationPage() {
         setMammalsStatus(result.status_mammals);
         setMammalsImages(result.images);
         setMammalsPlaceOrigin(result.place_origin);
+        setMammalsIndonesianName(result.indonesian_name[0].indonesian_name);
+        setMammalsEnglishName(result.english_name[0].english_name);
+        setMammalsArea(result.area[0]);
       });
     }
   }, [mammalsValue, mammalsCandidateId]);
@@ -237,7 +245,7 @@ function MammalsIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/mammals/" +
+                      "http://117.53.47.76/storage/uploaded_images/mammals/" +
                       mammalsImages[0].images
                     }
                     alt="Mammals"
@@ -251,11 +259,17 @@ function MammalsIdentificationPage() {
               <Grid container justify="center">
                 {mammalsCandidateDetail !== undefined && (
                   // <ReactJson src={mammalsCandidateId} />
-                  <Typography>
-                    <Box fontStyle="italic">
-                      {mammalsCandidateDetail.scientific_name}
-                    </Box>
-                  </Typography>
+                  <Box>
+                    <Typography align="center">
+                      {mammalsIndonesianName}
+                    </Typography>
+
+                    <Typography>
+                      <Box fontStyle="italic">
+                        {mammalsCandidateDetail.scientific_name}
+                      </Box>
+                    </Typography>
+                  </Box>
                 )}
               </Grid>
               <Grid container justify="center">
@@ -272,31 +286,23 @@ function MammalsIdentificationPage() {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Type
-                      </Typography>
-                      {mammalsPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_name}</Typography>
-                        );
-                      })}
-                    </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Characteristics
-                      </Typography>
-                      {mammalsPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_character}</Typography>
-                        );
-                      })}
-                    </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Location/Distribution
-                      </Typography>
-                    </Grid>
+                    {mammalsArea !== undefined && (
+                      <>
+                        <Grid container>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Habitat Type
+                          </Typography>
+                          <Typography>{mammalsArea.habitat_type}</Typography>
+                        </Grid>
+                        <Grid container>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Location/Distribution
+                          </Typography>
+                          <Typography>{mammalsArea.area}</Typography>
+                        </Grid>
+                      </>
+                    )}
+
                     {/* <ReactJson src={mammalsPlaceOrigin} /> */}
                   </Grid>
                 )}
@@ -339,16 +345,48 @@ function MammalsIdentificationPage() {
                           // history.push("/identification/mammals/" + value.mammals_ID);
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Mammals"
-                          />
-                          <Typography className={classes.subtitle}>
+                        <CardMedia
+                          style={{
+                            height: "120px",
+                            // paddingTop: "56.25%",
+                            borderLeft: "10px solid #FFC000",
+                          }}
+                          image={
+                            "http://117.53.47.76/storage/uploaded_images/mammals/" +
+                            value.images.images
+                          }
+                        />
+                        {value.scientific_name.length > 18 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
                             {value.scientific_name}
                           </Typography>
-                        </CardContent>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.scientific_name}
+                          </Typography>
+                        )}
                       </CardActionArea>
                     </Card>
                   </Grid>
@@ -392,18 +430,49 @@ function MammalsIdentificationPage() {
                           handleClickOpen();
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Mammals"
-                          />
-                          <Typography className={classes.subtitle}>
+                        <CardMedia
+                          style={{
+                            height: "120px",
+                            // paddingTop: "56.25%",
+                            borderLeft: "10px solid #FFC000",
+                          }}
+                          image={process.env.PUBLIC_URL + value.image}
+                        />
+                        {value.value.length > 19 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
                             {value.value !== ""
                               ? value.value
                               : translateRaw(value)}
                           </Typography>
-                        </CardContent>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(value)}
+                          </Typography>
+                        )}
                       </CardActionArea>
                     </Card>
                   </Grid>

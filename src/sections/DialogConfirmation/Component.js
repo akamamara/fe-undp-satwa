@@ -124,39 +124,6 @@ function DialogConfirmation({
                   paddingRight: "10px",
                 }}
               >
-                {/* {value.warna_ID === undefined ||
-                  (value.warna_herpeto_ID === undefined && (
-                    <Card style={{}}>
-                      <CardActionArea
-                        onClick={() => {
-                          console.log(questionProps);
-                          value.id = questionProps.id;
-                          console.log(value);
-                          onUpdateItem(value);
-                          setQuestionFields([]);
-                          onClose();
-                        }}
-                      >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            // src={process.env.PUBLIC_URL + value.image}
-                            src={
-                              process.env.PUBLIC_URL + "/images/placeholder.png"
-                            }
-                            alt="Aves"
-                          />
-
-                          <Typography className={classes.subtitle}>
-                            {value.value !== ""
-                              ? value.value
-                              : translateRaw(Object.keys(value))}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  ))} */}
-
                 {value.warna_ID !== undefined ? (
                   <Card style={{}}>
                     <CardActionArea
@@ -182,6 +149,7 @@ function DialogConfirmation({
                   <Card style={{}}>
                     <CardActionArea
                       onClick={() => {
+                        console.log("herpeto_id");
                         console.log(questionProps);
                         value.id = questionProps.id;
                         console.log(value);

@@ -7,8 +7,8 @@ import {
   Typography,
   Container,
   Card,
+  CardMedia,
   CardActionArea,
-  CardContent,
 } from "@material-ui/core";
 
 import GetAvesResult from "../../utils/apis/GetAvesResult";
@@ -49,31 +49,31 @@ function AvesIdentificationPage() {
   const initialState = [
     {
       jenis_burung_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Burung",
     },
     {
       bentuk_paruh_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Bentuk Paruh",
     },
     {
       warna_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Warna Dominan",
     },
     {
       ukuran_tubuh_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -81,31 +81,31 @@ function AvesIdentificationPage() {
   const [avesValue, setAvesValue] = React.useState([
     {
       jenis_burung_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Burung",
     },
     {
       bentuk_paruh_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Bentuk Paruh",
     },
     {
       warna_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Warna Dominan",
     },
     {
       ukuran_tubuh_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -120,6 +120,10 @@ function AvesIdentificationPage() {
   const [avesImages, setAvesImages] = React.useState([{}]);
 
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
+
+  const [avesIndonesianName, setAvesIndonesianName] = React.useState([]);
+  const [avesEnglishName, setAvesEnglishName] = React.useState([]);
+  const [avesArea, setAvesArea] = React.useState([]);
 
   function onUpdateItem(props) {
     console.log(props);
@@ -142,6 +146,9 @@ function AvesIdentificationPage() {
         setAvesStatus(result.status_aves);
         setAvesImages(result.images);
         setAvesPlaceOrigin(result.place_origin);
+        setAvesIndonesianName(result.indonesian_name[0].indonesian_name);
+        setAvesEnglishName(result.english_name[0].english_name);
+        setAvesArea(result.area[0]);
       });
     }
   }, [avesValue, avesCandidateId]);
@@ -162,72 +169,84 @@ function AvesIdentificationPage() {
                     alt="Aves"
                   />
                 </Grid>
-                {avesImages.length === 0 ? (
-                  <img
-                    className={classes.banner}
-                    src={process.env.PUBLIC_URL + "/images/placeholder.png"}
-                    alt="Aves"
-                  />
-                ) : (
-                  <img
-                    className={classes.bannerImage}
-                    //"http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/"
-                    src={
-                      "http://117.53.47.76/html/Satwa/public/storage/uploaded_images/aves/" +
-                      avesImages[0].images
-                    }
-                    alt="Aves"
-                    onClick={() => {
-                      handleClickOpenPhoto();
-                    }}
-                  />
-                )}
+                {
+                  avesImages.length === 0 ? (
+                    <img
+                      style={{
+                        backgroundColor: "green",
+                        borderLeft: "10px solid #FFC000",
+                      }}
+                      src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                      onClick={() => {
+                        console.log("im empty");
+                      }}
+                    />
+                  ) : (
+                    <img
+                      className={classes.bannerImage}
+                      src={
+                        "http://117.53.47.76/storage/uploaded_images/aves/" +
+                        avesImages[0].images
+                      }
+                      onClick={() => {
+                        handleClickOpenPhoto();
+                      }}
+                    />
+                  )
+                  // loader image
+                  // <img
+                  //   className={classes.bannerImage}
+                  //   src={
+                  //     "http://117.53.47.76/storage/uploaded_images/aves/" +
+                  //     avesImages[0].images
+                  //   }
+                  //   alt="Aves"
+                  //   onClick={() => {
+                  //     handleClickOpenPhoto();
+                  //   }}
+                  // />
+                }
               </Grid>
 
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
                   // <ReactJson src={avesCandidateId} />
-                  <Typography>
-                    <Box fontStyle="italic">
-                      {avesCandidateDetail.scientific_name}
-                    </Box>
-                  </Typography>
+                  <Box>
+                    <Typography align="center">{avesIndonesianName}</Typography>
+                    <Typography>
+                      <Box fontStyle="italic">
+                        {avesCandidateDetail.scientific_name}
+                      </Box>
+                    </Typography>
+                  </Box>
                 )}
               </Grid>
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
                   <Grid container>
-                    <Grid item>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Status (IUCN/CITES)
-                      </Typography>
-                      <Typography>IUCN : {avesStatus[0].iucn}</Typography>
-                      <Typography>CITES : {avesStatus[1].cites}</Typography>
+                    <Grid container>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" className={classes.yellow}>
+                          Status (IUCN/CITES)
+                        </Typography>
+                      </Grid>
+
+                      <Grid item>
+                        <Typography>IUCN : {avesStatus[0].iucn}</Typography>
+                        <Typography>CITES : {avesStatus[1].cites}</Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Type
                       </Typography>
-                      {avesPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_name}</Typography>
-                        );
-                      })}
+                      <Typography>{avesArea.habitat_type}</Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Characteristics
-                      </Typography>
-                      {avesPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_character}</Typography>
-                        );
-                      })}
-                    </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Location/Distribution
                       </Typography>
+                      <Typography>{avesArea.area}</Typography>
                     </Grid>
                     {/* <ReactJson src={avesPlaceOrigin} /> */}
                   </Grid>
@@ -237,6 +256,7 @@ function AvesIdentificationPage() {
                 <Button
                   onClick={() => {
                     setAvesCandidateId(0);
+                    setAvesImages([{}]);
                   }}
                   variant="contained"
                 >
@@ -265,21 +285,73 @@ function AvesIdentificationPage() {
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
-                          console.log(value.aves_ID);
+                          console.log(value);
                           setAvesCandidateId(value.aves_ID);
                           // history.push("/identification/aves/" + value.aves_ID);
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Aves"
+                        {value.images === null ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              process.env.PUBLIC_URL +
+                              "/images/not_sure_100.png"
+                            }
                           />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "http://117.53.47.76/storage/uploaded_images/aves/" +
+                              value.images.images
+                            }
+                          />
+                        )}
+
+                        {value.scientific_name > 18 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
+                            {value.scientific_name}
+                          </Typography>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.scientific_name}
+                          </Typography>
+                        )}
+                        {/* <CardContent>
                           <Typography className={classes.subtitle}>
                             {value.scientific_name}
                           </Typography>
-                        </CardContent>
+                        </CardContent> */}
                       </CardActionArea>
                     </Card>
                   </Grid>
@@ -290,6 +362,7 @@ function AvesIdentificationPage() {
                 <Button
                   onClick={() => {
                     setAvesResult([]);
+                    // console.log(avesResult);
                   }}
                   variant="contained"
                 >
@@ -324,18 +397,57 @@ function AvesIdentificationPage() {
                           handleClickOpen();
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Aves"
-                          />
+                        <CardMedia
+                          style={{
+                            height: "120px",
+                            // paddingTop: "56.25%",
+                            borderLeft: "10px solid #FFC000",
+                          }}
+                          image={process.env.PUBLIC_URL + value.image}
+                        />
+                        {value.value.length > 25 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(value)}
+                          </Typography>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(value)}
+                          </Typography>
+                        )}
+
+                        {/* <CardContent style={{ backgroundColor: "black" }}>
                           <Typography className={classes.subtitle}>
                             {value.value !== ""
                               ? value.value
                               : translateRaw(value)}
                           </Typography>
-                        </CardContent>
+                        </CardContent> */}
                       </CardActionArea>
                     </Card>
                   </Grid>
@@ -369,7 +481,7 @@ function AvesIdentificationPage() {
                         .then((result) => {
                           console.log(result);
                           if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
+                            alert("Kandidat tidak dilindungi");
                           } else setAvesResult(result);
                         })
                         .finally(console.log(avesResult));
@@ -390,12 +502,14 @@ function AvesIdentificationPage() {
             questionProps={avesValue[questionIndex]}
             animalType="aves"
           />
-          <DetailPhoto
-            isVisible={openPhoto}
-            onClose={handleClosePhoto}
-            photoProps={avesImages[0]}
-            animalType="aves"
-          />
+          {avesImages[0] === undefined ? null : (
+            <DetailPhoto
+              isVisible={openPhoto}
+              onClose={handleClosePhoto}
+              photoProps={avesImages[0]}
+              animalType="aves"
+            />
+          )}
         </Grid>
       </Container>
     </>
