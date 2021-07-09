@@ -2,7 +2,9 @@ import axios from "axios";
 
 const GetHerpetoDetail = async (mammals_id) => {
   try {
-    const resp = await axios.get("identifikasi/mammals/result/" + mammals_id);
+    const resp = await axios.get(
+      "api/identifikasi/mammals/result/" + mammals_id
+    );
     await console.log(resp);
     // await alert(resp.data.message);
     return resp.data;

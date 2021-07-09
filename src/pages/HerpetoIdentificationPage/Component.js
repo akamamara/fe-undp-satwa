@@ -7,8 +7,8 @@ import {
   Typography,
   Container,
   Card,
+  CardMedia,
   CardActionArea,
-  CardContent,
 } from "@material-ui/core";
 
 import GetHerpetoResult from "../../utils/apis/GetHerpetoResult";
@@ -49,55 +49,55 @@ function HerpetoIdentificationPage() {
   const initialState = [
     {
       jenis_hewan_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       jenis_sisik_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Jenis Sisik",
     },
     {
       bentuk_kaki_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Bentuk Kaki",
     },
     {
       ukuran_tubuh_herpeto_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Jenis Moncong",
     },
     {
       jenis_tempurung_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q6",
       value: "Jenis Tempurung",
     },
     {
       jenis_ekor_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q7",
       value: "Jenis Ekor (Khusus Biawak)",
     },
     {
       warna_herpeto_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q8",
       value: "Warna Dominan",
     },
     {
       has_kaki_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q9",
       value: "Berkaki?",
     },
@@ -105,55 +105,55 @@ function HerpetoIdentificationPage() {
   const [herpetoValue, setHerpetoValue] = React.useState([
     {
       jenis_hewan_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       jenis_sisik_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q2",
       value: "Jenis Sisik",
     },
     {
       bentuk_kaki_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q3",
       value: "Bentuk Kaki",
     },
     {
       ukuran_tubuh_herpeto_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q5",
       value: "Jenis Moncong",
     },
     {
       jenis_tempurung_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q6",
       value: "Jenis Tempurung",
     },
     {
       jenis_ekor_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q7",
       value: "Jenis Ekor (Khusus Biawak)",
     },
     {
       warna_herpeto_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q8",
       value: "Warna Dominan",
     },
     {
       has_kaki_ID: "0",
-      image: "/images/not_sure.png",
+      image: "/images/not_sure_100.png",
       id: "q9",
       value: "Berkaki?",
     },
@@ -170,6 +170,10 @@ function HerpetoIdentificationPage() {
   const [herpetoImages, setHerpetoImages] = React.useState([{}]);
 
   const [herpetoPlaceOrigin, setHerpetoPlaceOrigin] = React.useState([]);
+
+  const [herpetoIndonesianName, setHerpetoIndonesianName] = React.useState([]);
+  const [herpetoEnglishName, setHerpetoEnglishName] = React.useState([]);
+  const [herpetoArea, setHerpetoArea] = React.useState([]);
 
   function onUpdateItem(props) {
     console.log(props);
@@ -193,6 +197,9 @@ function HerpetoIdentificationPage() {
         setHerpetoStatus(result.status_herpetofauna);
         setHerpetoImages(result.images);
         setHerpetoPlaceOrigin(result.place_origin);
+        setHerpetoIndonesianName(result.indonesian_name[0].indonesian_name);
+        setHerpetoEnglishName(result.english_name[0].english_name);
+        setHerpetoArea(result.area[0]);
       });
     }
   }, [herpetoValue, herpetoCandidateId]);
@@ -226,7 +233,7 @@ function HerpetoIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "https://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+                      "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
                       herpetoImages[0].images
                     }
                     alt="Herpetofauna"
@@ -239,48 +246,48 @@ function HerpetoIdentificationPage() {
 
               <Grid container justify="center">
                 {herpetoCandidateDetail !== undefined && (
-                  // <ReactJson src={herpetoCandidateId} />
-                  <Typography>
-                    <Box fontStyle="italic">
-                      {herpetoCandidateDetail.scientific_name}
-                    </Box>
-                  </Typography>
+                  // <ReactJson src={herpetoCandidateId} />\
+                  <Box>
+                    <Typography align="center">
+                      {herpetoIndonesianName}
+                    </Typography>
+
+                    <Typography>
+                      <Box fontStyle="italic">
+                        {herpetoCandidateDetail.scientific_name}
+                      </Box>
+                    </Typography>
+                  </Box>
                 )}
               </Grid>
               <Grid container justify="center">
                 {herpetoCandidateDetail !== undefined && (
                   <Grid container>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Status (IUCN/CITES)
                       </Typography>
-                      <Typography>IUCN : {herpetoStatus[0].iucn}</Typography>
-                      <Typography>CITES : {herpetoStatus[1].cites}</Typography>
+                      <Grid item>
+                        <Typography>IUCN : {herpetoStatus[0].iucn}</Typography>
+                        <Typography>
+                          CITES : {herpetoStatus[1].cites}
+                        </Typography>
+                      </Grid>
                     </Grid>
-                    <Grid item>
+                    <Grid container>
                       <Typography variant="h6" className={classes.yellow}>
                         Habitat Type
                       </Typography>
-                      {herpetoPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_name}</Typography>
-                        );
-                      })}
+                      <Typography>{herpetoArea.habitat_type}</Typography>
                     </Grid>
-                    <Grid item>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Characteristics
-                      </Typography>
-                      {herpetoPlaceOrigin.map((value) => {
-                        return (
-                          <Typography>{value.habitatType_character}</Typography>
-                        );
-                      })}
-                    </Grid>
-                    <Grid item>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Location/Distribution
-                      </Typography>
+
+                    <Grid container>
+                      <Grid item>
+                        <Typography variant="h6" className={classes.yellow}>
+                          Location/Distribution
+                        </Typography>
+                        <Typography>{herpetoArea.area}</Typography>
+                      </Grid>
                     </Grid>
                     {/* <ReactJson src={herpetoPlaceOrigin} /> */}
                   </Grid>
@@ -290,6 +297,7 @@ function HerpetoIdentificationPage() {
                 <Button
                   onClick={() => {
                     setHerpetoCandidateId(0);
+                    setHerpetoImages([{}]);
                   }}
                   variant="contained"
                 >
@@ -323,16 +331,48 @@ function HerpetoIdentificationPage() {
                           // history.push("/identification/herpeto/" + value.herpeto_ID);
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Herpetofauna"
-                          />
-                          <Typography className={classes.subtitle}>
+                        <CardMedia
+                          style={{
+                            height: "120px",
+                            // paddingTop: "56.25%",
+                            borderLeft: "10px solid #FFC000",
+                          }}
+                          image={
+                            "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+                            value.images.images
+                          }
+                        />
+                        {value.scientific_name > 18 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
                             {value.scientific_name}
                           </Typography>
-                        </CardContent>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.scientific_name}
+                          </Typography>
+                        )}
                       </CardActionArea>
                     </Card>
                   </Grid>
@@ -376,18 +416,49 @@ function HerpetoIdentificationPage() {
                           handleClickOpen();
                         }}
                       >
-                        <CardContent>
-                          <img
-                            className={classes.placeholder}
-                            src={process.env.PUBLIC_URL + value.image}
-                            alt="Herpetofauna"
-                          />
-                          <Typography className={classes.subtitle}>
+                        <CardMedia
+                          style={{
+                            height: "120px",
+                            // paddingTop: "56.25%",
+                            borderLeft: "10px solid #FFC000",
+                          }}
+                          image={process.env.PUBLIC_URL + value.image}
+                        />
+                        {value.value.length > 18 ? (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "65%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 20px 10px",
+                            }}
+                          >
                             {value.value !== ""
                               ? value.value
                               : translateRaw(value)}
                           </Typography>
-                        </CardContent>
+                        ) : (
+                          <Typography
+                            style={{
+                              position: "absolute",
+                              top: "75%",
+                              width: "100%",
+                              textAlign: "left",
+                              color: "white",
+                              backgroundColor: "rgba(0, 0, 0, 0.6)",
+                              fontSize: "0.75rem",
+                              padding: "5px 0px 10px 10px",
+                            }}
+                          >
+                            {value.value !== ""
+                              ? value.value
+                              : translateRaw(value)}
+                          </Typography>
+                        )}
                       </CardActionArea>
                     </Card>
                   </Grid>

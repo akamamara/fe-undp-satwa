@@ -2,7 +2,7 @@ import axios from "axios";
 
 const handleLogin = async (user) => {
   try {
-    const resp = await axios.post("login", user);
+    const resp = await axios.post("api/login", user);
     await console.log(resp);
     await alert(resp.data.message);
     await localStorage.setItem("token", resp.data.access_token);

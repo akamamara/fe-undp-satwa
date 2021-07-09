@@ -38,7 +38,10 @@ const GetHerpetoResult = async (identificationValue) => {
   }
 
   try {
-    const resp = await axios.post("identifikasi/herpetofauna/result", formData);
+    const resp = await axios.post(
+      "api/identifikasi/herpetofauna/result",
+      formData
+    );
     await console.log(resp);
     // await alert(resp.data.message);
     return resp.data.result;

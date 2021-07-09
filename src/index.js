@@ -4,7 +4,7 @@ import { getActions as getSWActions } from "store/sw";
 
 import "./global.css";
 
-axios.defaults.baseURL = "https://117.53.47.76/api";
+axios.defaults.baseURL = "https://the-next-project.my.id/";
 
 if (!document.ie) {
   // check for ie
