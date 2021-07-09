@@ -298,15 +298,19 @@ function MammalsIdentificationPage() {
                     {mammalsArea !== undefined && (
                       <>
                         <Grid container>
-                          <Typography variant="h6" className={classes.yellow}>
-                            Habitat Type
-                          </Typography>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                          </Grid>
                           <Typography>{mammalsArea.habitat_type}</Typography>
                         </Grid>
                         <Grid container>
-                          <Typography variant="h6" className={classes.yellow}>
-                            Location/Distribution
-                          </Typography>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                          </Grid>
                           <Typography>{mammalsArea.area}</Typography>
                         </Grid>
                       </>
@@ -378,7 +382,7 @@ function MammalsIdentificationPage() {
                             }
                           />
                         )}
-                        {value.scientific_name.length > 18 ? (
+                        {value.scientific_name.length > 25 ? (
                           <Typography
                             style={{
                               position: "absolute",
@@ -547,13 +551,14 @@ function MammalsIdentificationPage() {
             questionProps={mammalsValue[questionIndex]}
             animalType="mammals"
           />
-
-          <DetailPhoto
-            isVisible={openPhoto}
-            onClose={handleClosePhoto}
-            photoProps={mammalsImages[0]}
-            animalType="mammals"
-          />
+          {mammalsImages[0] === undefined ? null : (
+            <DetailPhoto
+              isVisible={openPhoto}
+              onClose={handleClosePhoto}
+              photoProps={mammalsImages[0]}
+              animalType="mammals"
+            />
+          )}
         </Grid>
       </Container>
     </>

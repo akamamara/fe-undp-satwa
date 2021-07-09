@@ -277,28 +277,35 @@ function HerpetoIdentificationPage() {
                         </Typography>
                       </Grid>
 
-                      <Grid item>
+                      <Grid item xs={12}>
                         <Typography>IUCN : {herpetoStatus[0].iucn}</Typography>
                         <Typography>
                           CITES : {herpetoStatus[1].cites}
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Type
-                      </Typography>
-                      <Typography>{herpetoArea.habitat_type}</Typography>
-                    </Grid>
+                    {herpetoArea === undefined ? null : (
+                      <>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                          </Grid>
 
-                    <Grid container>
-                      <Grid item>
-                        <Typography variant="h6" className={classes.yellow}>
-                          Location/Distribution
-                        </Typography>
-                        <Typography>{herpetoArea.area}</Typography>
-                      </Grid>
-                    </Grid>
+                          <Typography>{herpetoArea.habitat_type}</Typography>
+                        </Grid>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                          </Grid>
+                          <Typography>{herpetoArea.area}</Typography>
+                        </Grid>
+                      </>
+                    )}
+
                     {/* <ReactJson src={herpetoPlaceOrigin} /> */}
                   </Grid>
                 )}
@@ -536,12 +543,14 @@ function HerpetoIdentificationPage() {
             questionProps={herpetoValue[questionIndex]}
             animalType="herpetofauna"
           />
-          <DetailPhoto
-            isVisible={openPhoto}
-            onClose={handleClosePhoto}
-            photoProps={herpetoImages[0]}
-            animalType="herpetofauna"
-          />
+          {herpetoImages[0] === undefined ? null : (
+            <DetailPhoto
+              isVisible={openPhoto}
+              onClose={handleClosePhoto}
+              photoProps={herpetoImages[0]}
+              animalType="herpetofauna"
+            />
+          )}
         </Grid>
       </Container>
     </>

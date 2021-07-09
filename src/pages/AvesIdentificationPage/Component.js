@@ -119,7 +119,7 @@ function AvesIdentificationPage() {
 
   const [avesImages, setAvesImages] = React.useState([{}]);
 
-// eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
 
   const [avesIndonesianName, setAvesIndonesianName] = React.useState([]);
@@ -172,30 +172,30 @@ function AvesIdentificationPage() {
                   />
                 </Grid>
                 {avesImages.length === 0 ? (
-                    <img
-                      style={{
-                        backgroundColor: "green",
-                        borderLeft: "10px solid #FFC000",
-                      }}
-                      alt="Aves"
-                      src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
-                      onClick={() => {
-                        console.log("im empty");
-                      }}
-                    />
-                  ) : (
-                    <img
-                      className={classes.bannerImage}
-                      alt="Aves"
-                      src={
-                        "https://the-next-project.my.id/storage/uploaded_images/aves/" +
-                        avesImages[0].images
-                      }
-                      onClick={() => {
-                        handleClickOpenPhoto();
-                      }}
-                    />
-                  )}
+                  <img
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
+                    alt="Aves"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
+                    }}
+                  />
+                ) : (
+                  <img
+                    className={classes.bannerImage}
+                    alt="Aves"
+                    src={
+                      "https://the-next-project.my.id/storage/uploaded_images/aves/" +
+                      avesImages[0].images
+                    }
+                    onClick={() => {
+                      handleClickOpenPhoto();
+                    }}
+                  />
+                )}
               </Grid>
 
               <Grid container justify="center">
@@ -226,18 +226,27 @@ function AvesIdentificationPage() {
                         <Typography>CITES : {avesStatus[1].cites}</Typography>
                       </Grid>
                     </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Type
-                      </Typography>
-                      <Typography>{avesArea.habitat_type}</Typography>
-                    </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Location/Distribution
-                      </Typography>
-                      <Typography>{avesArea.area}</Typography>
-                    </Grid>
+                    {avesArea !== undefined && (
+                      <>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                          </Grid>
+                          <Typography>{avesArea.habitat_type}</Typography>
+                        </Grid>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                          </Grid>
+                          <Typography>{avesArea.area}</Typography>
+                        </Grid>
+                      </>
+                    )}
+
                     {/* <ReactJson src={avesPlaceOrigin} /> */}
                   </Grid>
                 )}
