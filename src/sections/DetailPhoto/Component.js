@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import useStyles from "./styles";
 import moment from "moment";
 
+import { Grid } from "@material-ui/core";
+
 import Image from "material-ui-image";
 
 import { Container, Button, Typography, Dialog } from "@material-ui/core";
@@ -25,34 +27,43 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
         {animalType === "aves" ? (
           <Image
             src={
-              "http://117.53.47.76/storage/uploaded_images/aves/" +
+              "https://the-next-project.my.id/storage/uploaded_images/aves/" +
               photoProps.images
             }
           />
         ) : animalType === "herpetofauna" ? (
           <Image
             src={
-              "http://117.53.47.76/storage/uploaded_images/herpetofauna/" +
+              "https://the-next-project.my.id/storage/uploaded_images/herpetofauna/" +
               photoProps.images
             }
           />
         ) : (
           <Image
             src={
-              "http://117.53.47.76/storage/uploaded_images/mammals/" +
+              "https://the-next-project.my.id/storage/uploaded_images/mammals/" +
               photoProps.images
             }
           />
         )}
-
-        <Typography>Image Title : {photoProps.image_title} </Typography>
-        <Typography>Description : {photoProps.description}</Typography>
-        <Typography>
-          Contributor Name : {photoProps.contributor_name}
-        </Typography>
-        <Typography>
-          Upload Date : {moment(photoProps.uploadDate).format("LLL")}
-        </Typography>
+        <Grid container style={{ marginLeft: "10px", overflow: "hidden" }}>
+          <Grid item xs={12}>
+            <Typography>Image Title : {photoProps.image_title} </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>Description : {photoProps.description}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>
+              Contributor Name : {photoProps.contributor_name}
+            </Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography>
+              Upload Date : {moment(photoProps.uploadDate).format("LLL")}
+            </Typography>
+          </Grid>
+        </Grid>
       </Dialog>
     </Container>
   );
