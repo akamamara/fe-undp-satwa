@@ -515,7 +515,7 @@ function HerpetoIdentificationPage() {
                       GetHerpetoResult(queryParams)
                         .then((result) => {
                           if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
+                            alert("Kandidat tidak dilindungi");
                           } else setHerpetoResult(result);
                         })
                         .finally(console.log(herpetoResult));
