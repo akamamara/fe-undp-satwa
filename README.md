@@ -28,6 +28,11 @@ image list pilihan salah satu kategori
 image identifikasi 10 kategori pilihan
 image list pilihan salah satu kategori
 
+
+## Dependencies
+nodejs
+npm
+
 ## Cara menjalankan Aplikasi pada localhost
 ```js
 git clone https://github.com/danimnh/fe-undp-satwa.git
