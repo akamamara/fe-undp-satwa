@@ -53,7 +53,6 @@ function DialogConfirmation({
             } else setQuestionGrid(12);
 
             setQuestionFields(result);
-            console.log("question fields");
             console.log(result);
           });
         } else if (animalType === "herpetofauna") {
@@ -69,7 +68,6 @@ function DialogConfirmation({
             } else setQuestionGrid(12);
 
             setQuestionFields(result);
-            console.log("question fields");
             console.log(result);
           });
         } else if (animalType === "mammals") {
@@ -85,7 +83,6 @@ function DialogConfirmation({
             } else setQuestionGrid(12);
 
             setQuestionFields(result);
-            console.log("question fields");
             console.log(result);
           });
         }

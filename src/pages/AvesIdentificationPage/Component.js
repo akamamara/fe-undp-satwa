@@ -14,7 +14,6 @@ import {
 import GetAvesResult from "../../utils/apis/GetAvesResult";
 import GetAvesDetail from "../../utils/apis/GetAvesDetail";
 import translateRaw from "../../utils/translateRaw";
-
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 
@@ -119,7 +118,7 @@ function AvesIdentificationPage() {
 
   const [avesImages, setAvesImages] = React.useState([{}]);
 
-// eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
 
   const [avesIndonesianName, setAvesIndonesianName] = React.useState([]);
@@ -128,8 +127,7 @@ function AvesIdentificationPage() {
   const [avesArea, setAvesArea] = React.useState([]);
 
   function onUpdateItem(props) {
-    console.log(props);
-    console.log("index to change :" + questionIndex);
+    console.log("index to change : " + questionIndex);
     let tmpArrayDefault = avesValue.map((item, j) => {
       if (questionIndex === j) {
         return props;
@@ -172,42 +170,54 @@ function AvesIdentificationPage() {
                   />
                 </Grid>
                 {avesImages.length === 0 ? (
-                    <img
-                      style={{
-                        backgroundColor: "green",
-                        borderLeft: "10px solid #FFC000",
-                      }}
-                      alt="Aves"
-                      src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
-                      onClick={() => {
-                        console.log("im empty");
-                      }}
-                    />
-                  ) : (
-                    <img
-                      className={classes.bannerImage}
-                      alt="Aves"
-                      src={
-                        "https://the-next-project.my.id/storage/uploaded_images/aves/" +
-                        avesImages[0].images
-                      }
-                      onClick={() => {
-                        handleClickOpenPhoto();
-                      }}
-                    />
-                  )}
+                  <img
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
+                    alt="Aves"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
+                    }}
+                  />
+                ) : avesImages[0].images !== undefined ? (
+                  <img
+                    className={classes.bannerImage}
+                    alt="Aves"
+                    src={
+                      "https://the-next-project.my.id/storage/uploaded_images/aves/" +
+                      avesImages[0].images
+                    }
+                    onClick={() => {
+                      handleClickOpenPhoto();
+                    }}
+                  />
+                ) : (
+                  <img
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
+                    alt="Aves"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
+                    }}
+                  />
+                )}
               </Grid>
 
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
-                  // <ReactJson src={avesCandidateId} />
                   <Box>
                     <Typography align="center">{avesIndonesianName}</Typography>
-                    <Typography>
-                      <Box fontStyle="italic">
+
+                    <Box fontStyle="italic">
+                      <Typography>
                         {avesCandidateDetail.scientific_name}
-                      </Box>
-                    </Typography>
+                      </Typography>
+                    </Box>
                   </Box>
                 )}
               </Grid>
@@ -220,7 +230,6 @@ function AvesIdentificationPage() {
                           Status (IUCN/CITES)
                         </Typography>
                       </Grid>
-
                       <Grid item>
                         <Typography>IUCN : {avesStatus[0].iucn}</Typography>
                         <Typography>CITES : {avesStatus[1].cites}</Typography>
@@ -238,11 +247,10 @@ function AvesIdentificationPage() {
                       </Typography>
                       <Typography>{avesArea.area}</Typography>
                     </Grid>
-                    {/* <ReactJson src={avesPlaceOrigin} /> */}
                   </Grid>
                 )}
               </Grid>
-              <Grid>
+              <Grid className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setAvesCandidateId(0);
@@ -277,14 +285,12 @@ function AvesIdentificationPage() {
                         onClick={() => {
                           console.log(value);
                           setAvesCandidateId(value.aves_ID);
-                          // history.push("/identification/aves/" + value.aves_ID);
                         }}
                       >
                         {value.images === null ? (
                           <CardMedia
                             style={{
                               height: "120px",
-                              // paddingTop: "56.25%",
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
@@ -296,7 +302,6 @@ function AvesIdentificationPage() {
                           <CardMedia
                             style={{
                               height: "120px",
-                              // paddingTop: "56.25%",
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
@@ -343,11 +348,10 @@ function AvesIdentificationPage() {
                 );
               })}
 
-              <Grid container justify="center">
+              <Grid container justify="center" className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setAvesResult([]);
-                    // console.log(avesResult);
                   }}
                   variant="contained"
                 >
@@ -377,7 +381,6 @@ function AvesIdentificationPage() {
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
-                          // console.log(Object.values(value));
                           setQuestionIndex(index);
                           handleClickOpen();
                         }}
@@ -385,7 +388,6 @@ function AvesIdentificationPage() {
                         <CardMedia
                           style={{
                             height: "120px",
-                            // paddingTop: "56.25%",
                             borderLeft: "10px solid #FFC000",
                           }}
                           image={process.env.PUBLIC_URL + value.image}
@@ -425,57 +427,53 @@ function AvesIdentificationPage() {
                               : translateRaw(value)}
                           </Typography>
                         )}
-
-                        {/* <CardContent style={{ backgroundColor: "black" }}>
-                          <Typography className={classes.subtitle}>
-                            {value.value !== ""
-                              ? value.value
-                              : translateRaw(value)}
-                          </Typography>
-                        </CardContent> */}
                       </CardActionArea>
                     </Card>
                   </Grid>
                 );
               })}
-              <Grid>
-                <Button
-                  onClick={() => {
-                    setAvesValue(initialState);
-                  }}
-                  variant="contained"
-                >
-                  Reset
-                </Button>
-                <Button
-                  onClick={() => {
-                    let queryParams = "";
-                    let tmpQueryParams = avesValue;
+              <Grid container justify="space-evenly">
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      setAvesValue(initialState);
+                    }}
+                    variant="contained"
+                  >
+                    Ulangi
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      let queryParams = "";
+                      let tmpQueryParams = avesValue;
 
-                    tmpQueryParams.forEach(
-                      (object) =>
-                        (queryParams +=
-                          Object.values(object)[0].toString() + ".")
-                    );
-                    if (queryParams === "0.0.0.0.0.")
-                      alert("Berikan 1 ciri-ciri");
-                    else {
-                      localStorage.setItem("query", queryParams);
-                      console.log(queryParams);
-                      GetAvesResult(queryParams)
-                        .then((result) => {
-                          console.log(result);
-                          if (result.length === 0) {
-                            alert("Kandidat tidak dilindungi");
-                          } else setAvesResult(result);
-                        })
-                        .finally(console.log(avesResult));
-                    }
-                  }}
-                  variant="contained"
-                >
-                  Telusuri
-                </Button>
+                      tmpQueryParams.forEach(
+                        (object) =>
+                          (queryParams +=
+                            Object.values(object)[0].toString() + ".")
+                      );
+                      if (queryParams === "0.0.0.0.0.")
+                        alert("Berikan minimal 1 ciri-ciri identifikasi");
+                      else {
+                        localStorage.setItem("query", queryParams);
+                        console.log(queryParams);
+                        GetAvesResult(queryParams)
+                          .then((result) => {
+                            console.log(result);
+                            if (result.length === 0) {
+                              alert("Kandidat tidak dilindungi");
+                            } else setAvesResult(result);
+                          })
+                          .finally(console.log(avesResult));
+                      }
+                    }}
+                    variant="contained"
+                  >
+                    Telusuri
+                  </Button>
+                </Grid>
               </Grid>
             </>
           )}

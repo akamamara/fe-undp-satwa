@@ -190,7 +190,7 @@ function MammalsIdentificationPage() {
 
   function onUpdateItem(props) {
     console.log(props);
-    console.log("index to change :" + questionIndex);
+    console.log("index to change : " + questionIndex);
     let tmpArrayDefault = mammalsValue.map((item, j) => {
       if (questionIndex === j) {
         return props;

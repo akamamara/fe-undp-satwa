@@ -26,7 +26,6 @@ const GetAvesResult = async (identificationValue) => {
   try {
     const resp = await axios.post("api/identifikasi/aves/result", formData);
     await console.log(resp);
-    await console.log(formData);
 
     // await alert(resp.data.message);
     return resp.data.result;

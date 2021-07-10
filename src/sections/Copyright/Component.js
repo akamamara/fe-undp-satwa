@@ -12,14 +12,14 @@ function Copyright() {
   const classes = useStyles();
 
   return (
-    <Fb justifyCenter pt={2} pb={2}>
+    <Fb justifyCenter pt={4} pb={2}>
       <Typography
         className={classes.copyright}
         variant="body2"
         color="textSecondary"
       >
         {copyright.title}
-        <Link color="inherit">{copyright.link}</Link> {new Date().getFullYear()}
+        <Link color="inherit">{copyright.link}</Link>
       </Typography>
     </Fb>
   );

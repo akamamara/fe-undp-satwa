@@ -178,7 +178,7 @@ function HerpetoIdentificationPage() {
 
   function onUpdateItem(props) {
     console.log(props);
-    console.log("index to change :" + questionIndex);
+    console.log("index to change : " + questionIndex);
     let tmpArrayDefault = herpetoValue.map((item, j) => {
       if (questionIndex === j) {
         return props;

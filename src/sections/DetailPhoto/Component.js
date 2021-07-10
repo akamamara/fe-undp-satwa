@@ -14,7 +14,7 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
   // const history = useHistory();
   const classes = useStyles();
   useEffect(() => {}, []);
-  console.log(photoProps);
+  // console.log(photoProps);
 
   return (
     <Container className={classes.root}>

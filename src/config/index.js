@@ -2,7 +2,7 @@ import isMobile from "utils/isMobile";
 
 /* set your data here */
 const email = "danimnh4@gmail.com";
-const domain = "UNDP Identifikasi Satwa";
+const domain = "Direktorat Jenderal Penegakan Hukum LHK";
 /* ***************** */
 
 const repository = "https://github.com/suren-atoyan/react-pwa";
