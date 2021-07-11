@@ -14,19 +14,16 @@ import {
 import GetHerpetoResult from "../../utils/apis/GetHerpetoResult";
 import GetHerpetoDetail from "../../utils/apis/GetHerpetoDetail";
 import translateRaw from "../../utils/translateRaw";
-
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
-
 import useStyles from "./styles";
 
 function HerpetoIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
-
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -177,7 +174,6 @@ function HerpetoIdentificationPage() {
   const [herpetoArea, setHerpetoArea] = React.useState([]);
 
   function onUpdateItem(props) {
-    console.log(props);
     console.log("index to change : " + questionIndex);
     let tmpArrayDefault = herpetoValue.map((item, j) => {
       if (questionIndex === j) {
@@ -207,8 +203,8 @@ function HerpetoIdentificationPage() {
   return (
     <>
       <Meta
-        title="Herpetofauna Identification"
-        description="Herpetofauna Identification"
+        title="Identifikasi Herpetofauna"
+        description="Identifikasi Herpetofauna"
       />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container style={{ width: "340px" }} justify="center" spacing={2}>
@@ -236,7 +232,7 @@ function HerpetoIdentificationPage() {
                       console.log("im empty");
                     }}
                   />
-                ) : (
+                ) : herpetoImages[0].images !== undefined ? (
                   <img
                     className={classes.bannerImage}
                     alt="Herpetofauna"
@@ -246,6 +242,18 @@ function HerpetoIdentificationPage() {
                     }
                     onClick={() => {
                       handleClickOpenPhoto();
+                    }}
+                  />
+                ) : (
+                  <img
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
+                    alt="Aves"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
                     }}
                   />
                 )}
@@ -259,11 +267,11 @@ function HerpetoIdentificationPage() {
                       {herpetoIndonesianName}
                     </Typography>
 
-                    <Typography>
-                      <Box fontStyle="italic">
+                    <Box fontStyle="italic">
+                      <Typography>
                         {herpetoCandidateDetail.scientific_name}
-                      </Box>
-                    </Typography>
+                      </Typography>
+                    </Box>
                   </Box>
                 )}
               </Grid>
@@ -290,7 +298,6 @@ function HerpetoIdentificationPage() {
                       </Typography>
                       <Typography>{herpetoArea.habitat_type}</Typography>
                     </Grid>
-
                     <Grid container>
                       <Grid item>
                         <Typography variant="h6" className={classes.yellow}>
@@ -299,11 +306,10 @@ function HerpetoIdentificationPage() {
                         <Typography>{herpetoArea.area}</Typography>
                       </Grid>
                     </Grid>
-                    {/* <ReactJson src={herpetoPlaceOrigin} /> */}
                   </Grid>
                 )}
               </Grid>
-              <Grid>
+              <Grid className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setHerpetoCandidateId(0);
@@ -332,13 +338,12 @@ function HerpetoIdentificationPage() {
               </Grid>
               {herpetoResult.map((value) => {
                 return (
-                  <Grid item xs={6} key={value.herpeto_ID}>
+                  <Grid item xs={6} key={value.herpetofauna_ID}>
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
                           console.log(value);
                           setHerpetoCandidateId(value.herpetofauna_ID);
-                          // history.push("/identification/herpeto/" + value.herpeto_ID);
                         }}
                       >
                         {value.images === null ? (
@@ -403,7 +408,7 @@ function HerpetoIdentificationPage() {
                 );
               })}
 
-              <Grid container justify="center">
+              <Grid container justify="center" className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setHerpetoResult([]);
@@ -488,43 +493,47 @@ function HerpetoIdentificationPage() {
                   </Grid>
                 );
               })}
-              <Grid>
-                <Button
-                  onClick={() => {
-                    setHerpetoValue(initialState);
-                  }}
-                  variant="contained"
-                >
-                  Reset
-                </Button>
-                <Button
-                  onClick={() => {
-                    let queryParams = "";
-                    let tmpQueryParams = herpetoValue;
+              <Grid container justify="space-evenly">
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      setHerpetoValue(initialState);
+                    }}
+                    variant="contained"
+                  >
+                    Ulangi
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      let queryParams = "";
+                      let tmpQueryParams = herpetoValue;
 
-                    tmpQueryParams.forEach(
-                      (object) =>
-                        (queryParams +=
-                          Object.values(object)[0].toString() + ".")
-                    );
-                    if (queryParams === "0.0.0.0.0.0.0.0.0.")
-                      alert("Berikan 1 ciri-ciri");
-                    else {
-                      localStorage.setItem("query", queryParams);
-                      console.log(queryParams);
-                      GetHerpetoResult(queryParams)
-                        .then((result) => {
-                          if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
-                          } else setHerpetoResult(result);
-                        })
-                        .finally(console.log(herpetoResult));
-                    }
-                  }}
-                  variant="contained"
-                >
-                  Telusuri
-                </Button>
+                      tmpQueryParams.forEach(
+                        (object) =>
+                          (queryParams +=
+                            Object.values(object)[0].toString() + ".")
+                      );
+                      if (queryParams === "0.0.0.0.0.0.0.0.0.")
+                        alert("Berikan 1 ciri-ciri");
+                      else {
+                        localStorage.setItem("query", queryParams);
+                        console.log(queryParams);
+                        GetHerpetoResult(queryParams)
+                          .then((result) => {
+                            if (result.length === 0) {
+                              alert("Kandidat tidak ditemukan");
+                            } else setHerpetoResult(result);
+                          })
+                          .finally(console.log(herpetoResult));
+                      }
+                    }}
+                    variant="contained"
+                  >
+                    Telusuri
+                  </Button>
+                </Grid>
               </Grid>
             </>
           )}
@@ -536,12 +545,14 @@ function HerpetoIdentificationPage() {
             questionProps={herpetoValue[questionIndex]}
             animalType="herpetofauna"
           />
-          <DetailPhoto
-            isVisible={openPhoto}
-            onClose={handleClosePhoto}
-            photoProps={herpetoImages[0]}
-            animalType="herpetofauna"
-          />
+          {herpetoImages[0] === undefined ? null : (
+            <DetailPhoto
+              isVisible={openPhoto}
+              onClose={handleClosePhoto}
+              photoProps={herpetoImages[0]}
+              animalType="herpetofauna"
+            />
+          )}
         </Grid>
       </Container>
     </>

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-
 import {
   Grid,
   Button,
@@ -18,14 +17,12 @@ import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
-
 import useStyles from "./styles";
 
 function AvesIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
-
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -48,7 +45,7 @@ function AvesIdentificationPage() {
   const initialState = [
     {
       jenis_burung_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_jenisburung.jpeg",
       id: "q1",
       value: "Jenis Burung",
     },
@@ -60,7 +57,7 @@ function AvesIdentificationPage() {
     },
     {
       warna_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_warnadominan.jpeg",
       id: "q3",
       value: "Warna Dominan",
     },
@@ -72,7 +69,7 @@ function AvesIdentificationPage() {
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_tipecakar.jpeg",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -80,7 +77,7 @@ function AvesIdentificationPage() {
   const [avesValue, setAvesValue] = React.useState([
     {
       jenis_burung_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_jenisburung.jpeg",
       id: "q1",
       value: "Jenis Burung",
     },
@@ -92,7 +89,7 @@ function AvesIdentificationPage() {
     },
     {
       warna_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_warnadominan.jpeg",
       id: "q3",
       value: "Warna Dominan",
     },
@@ -104,7 +101,7 @@ function AvesIdentificationPage() {
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_tipecakar.jpeg",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -154,7 +151,7 @@ function AvesIdentificationPage() {
   }, [avesValue, avesCandidateId]);
   return (
     <>
-      <Meta title="Aves Identification" description="Aves Identification" />
+      <Meta title="Identifikasi Aves" description="Identifikasi Aves" />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container style={{ width: "340px" }} justify="center" spacing={2}>
           {avesCandidateId !== 0 ? (
@@ -236,9 +233,11 @@ function AvesIdentificationPage() {
                       </Grid>
                     </Grid>
                     <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Type
-                      </Typography>
+                      <Grid item xs={12}>
+                        <Typography variant="h6" className={classes.yellow}>
+                          Habitat Type
+                        </Typography>
+                      </Grid>
                       <Typography>{avesArea.habitat_type}</Typography>
                     </Grid>
                     <Grid container>

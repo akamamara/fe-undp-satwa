@@ -14,8 +14,6 @@ function Layout() {
 
   return (
     <>
-      {/* <Notifications /> */}
-      {/* <Navigation /> */}
       <Box component="main" className={classes.wrapper}>
         <Box className={classes.spacer} />
         <Box className={classes.content}>

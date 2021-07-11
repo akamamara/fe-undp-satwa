@@ -14,19 +14,16 @@ import {
 import GetMammalsResult from "../../utils/apis/GetMammalsResult";
 import GetMammalsDetail from "../../utils/apis/GetMammalsDetail";
 import translateRaw from "../../utils/translateRaw";
-
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 
 import Meta from "components/Meta";
-
 import useStyles from "./styles";
 
 function MammalsIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
-
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -170,9 +167,7 @@ function MammalsIdentificationPage() {
       value: "Jumlah Cula",
     },
   ]);
-
   const [mammalsCandidateId, setMammalsCandidateId] = React.useState(0);
-
   const [mammalsCandidateDetail, setMammalsCandidateDetail] = React.useState(
     []
   );
@@ -189,7 +184,6 @@ function MammalsIdentificationPage() {
   const [mammalsArea, setMammalsArea] = React.useState([{}]);
 
   function onUpdateItem(props) {
-    console.log(props);
     console.log("index to change : " + questionIndex);
     let tmpArrayDefault = mammalsValue.map((item, j) => {
       if (questionIndex === j) {
@@ -217,10 +211,7 @@ function MammalsIdentificationPage() {
   }, [mammalsValue, mammalsCandidateId]);
   return (
     <>
-      <Meta
-        title="Mammals Identification"
-        description="Mammals Identification"
-      />
+      <Meta title="Identifikasi Mamalia" description="Identifikasi Mamalia" />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container style={{ width: "340px" }} justify="center" spacing={2}>
           {mammalsCandidateId !== 0 ? (
@@ -247,7 +238,7 @@ function MammalsIdentificationPage() {
                       console.log("im empty");
                     }}
                   />
-                ) : (
+                ) : mammalsImages[0].images !== undefined ? (
                   <img
                     className={classes.bannerImage}
                     src={
@@ -257,6 +248,18 @@ function MammalsIdentificationPage() {
                     alt="Mammals"
                     onClick={() => {
                       handleClickOpenPhoto();
+                    }}
+                  />
+                ) : (
+                  <img
+                    style={{
+                      backgroundColor: "green",
+                      borderLeft: "10px solid #FFC000",
+                    }}
+                    alt="Mammals"
+                    src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
+                    onClick={() => {
+                      console.log("im empty");
                     }}
                   />
                 )}
@@ -270,11 +273,11 @@ function MammalsIdentificationPage() {
                       {mammalsIndonesianName}
                     </Typography>
 
-                    <Typography>
-                      <Box fontStyle="italic">
+                    <Box fontStyle="italic">
+                      <Typography>
                         {mammalsCandidateDetail.scientific_name}
-                      </Box>
-                    </Typography>
+                      </Typography>
+                    </Box>
                   </Box>
                 )}
               </Grid>
@@ -298,9 +301,12 @@ function MammalsIdentificationPage() {
                     {mammalsArea !== undefined && (
                       <>
                         <Grid container>
-                          <Typography variant="h6" className={classes.yellow}>
-                            Habitat Type
-                          </Typography>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                          </Grid>
+
                           <Typography>{mammalsArea.habitat_type}</Typography>
                         </Grid>
                         <Grid container>
@@ -311,12 +317,10 @@ function MammalsIdentificationPage() {
                         </Grid>
                       </>
                     )}
-
-                    {/* <ReactJson src={mammalsPlaceOrigin} /> */}
                   </Grid>
                 )}
               </Grid>
-              <Grid>
+              <Grid className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setMammalsCandidateId(0);
@@ -332,14 +336,14 @@ function MammalsIdentificationPage() {
               <Grid container justify="center">
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
-                    Kandidat Mammals
+                    Kandidat Mamalia
                   </Typography>
                 </Grid>
 
                 <img
                   className={classes.titleImage}
                   src={process.env.PUBLIC_URL + "/images/mammals-light.png"}
-                  alt="Mammals"
+                  alt="Mamalia"
                 />
               </Grid>
               {mammalsResult.map((value) => {
@@ -349,7 +353,6 @@ function MammalsIdentificationPage() {
                       <CardActionArea
                         onClick={() => {
                           console.log(value);
-                          console.log(value.mammals_ID);
                           setMammalsCandidateId(value.mammals_ID);
                         }}
                       >
@@ -357,7 +360,6 @@ function MammalsIdentificationPage() {
                           <CardMedia
                             style={{
                               height: "120px",
-                              // paddingTop: "56.25%",
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
@@ -369,7 +371,6 @@ function MammalsIdentificationPage() {
                           <CardMedia
                             style={{
                               height: "120px",
-                              // paddingTop: "56.25%",
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
@@ -378,7 +379,7 @@ function MammalsIdentificationPage() {
                             }
                           />
                         )}
-                        {value.scientific_name.length > 18 ? (
+                        {value.scientific_name.length > 24 ? (
                           <Typography
                             style={{
                               position: "absolute",
@@ -415,7 +416,7 @@ function MammalsIdentificationPage() {
                 );
               })}
 
-              <Grid container justify="center">
+              <Grid container justify="center" className={classes.backButton}>
                 <Button
                   onClick={() => {
                     setMammalsResult([]);
@@ -431,7 +432,7 @@ function MammalsIdentificationPage() {
               <Grid container>
                 <Grid item>
                   <Typography variant="h5" className={classes.main}>
-                    Identifikasi Mammals
+                    Identifikasi Mamalia
                   </Typography>
                 </Grid>
                 <img
@@ -500,42 +501,46 @@ function MammalsIdentificationPage() {
                   </Grid>
                 );
               })}
-              <Grid>
-                <Button
-                  onClick={() => {
-                    setMammalsValue(initialState);
-                  }}
-                  variant="contained"
-                >
-                  Reset
-                </Button>
-                <Button
-                  onClick={() => {
-                    let queryParams = "";
-                    let tmpQueryParams = mammalsValue;
+              <Grid container justify="space-evenly">
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      setMammalsValue(initialState);
+                    }}
+                    variant="contained"
+                  >
+                    Ulangi
+                  </Button>
+                </Grid>
+                <Grid item>
+                  <Button
+                    onClick={() => {
+                      let queryParams = "";
+                      let tmpQueryParams = mammalsValue;
 
-                    tmpQueryParams.forEach(
-                      (object) =>
-                        (queryParams +=
-                          Object.values(object)[0].toString() + ".")
-                    );
-                    if (queryParams === "0.0.0.0.0.0.0.0.0.0.")
-                      alert("Berikan 1 ciri-ciri");
-                    else {
-                      localStorage.setItem("query", queryParams);
-                      GetMammalsResult(queryParams).then((result) => {
-                        if (result.length === 0) {
-                          alert("Kandidat tidak ditemukan");
-                        } else {
-                          setMammalsResult(result);
-                        }
-                      });
-                    }
-                  }}
-                  variant="contained"
-                >
-                  Telusuri
-                </Button>
+                      tmpQueryParams.forEach(
+                        (object) =>
+                          (queryParams +=
+                            Object.values(object)[0].toString() + ".")
+                      );
+                      if (queryParams === "0.0.0.0.0.0.0.0.0.0.")
+                        alert("Berikan 1 ciri-ciri");
+                      else {
+                        localStorage.setItem("query", queryParams);
+                        GetMammalsResult(queryParams).then((result) => {
+                          if (result.length === 0) {
+                            alert("Kandidat tidak ditemukan");
+                          } else {
+                            setMammalsResult(result);
+                          }
+                        });
+                      }
+                    }}
+                    variant="contained"
+                  >
+                    Telusuri
+                  </Button>
+                </Grid>
               </Grid>
             </>
           )}
@@ -547,13 +552,14 @@ function MammalsIdentificationPage() {
             questionProps={mammalsValue[questionIndex]}
             animalType="mammals"
           />
-
-          <DetailPhoto
-            isVisible={openPhoto}
-            onClose={handleClosePhoto}
-            photoProps={mammalsImages[0]}
-            animalType="mammals"
-          />
+          {mammalsImages[0] === undefined ? null : (
+            <DetailPhoto
+              isVisible={openPhoto}
+              onClose={handleClosePhoto}
+              photoProps={mammalsImages[0]}
+              animalType="mammals"
+            />
+          )}
         </Grid>
       </Container>
     </>

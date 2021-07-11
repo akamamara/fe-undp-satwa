@@ -39,7 +39,10 @@ function Welcome() {
   }, []);
   return (
     <>
-      <Meta title="Welcome" description="Welcome to React PWA" />
+      <Meta
+        title="Identifikasi Satwa"
+        description="Halaman identifikasi satwa dilindugi"
+      />
       <Container maxWidth="sm" className="full-height">
         <Fb justifyCenter alignCenter className={classes.wrapper}>
           <Typography

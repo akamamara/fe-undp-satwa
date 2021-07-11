@@ -79,28 +79,13 @@ const themes = {
       },
     },
   },
-  // yellow: {
-  //   palette: {
-  //     type: "yellow",
-  //     background: {
-  //       default: "#FFC000",
-  //       paper: "#fff",
-  //     },
-  //     primary: {
-  //       light: "#7986cb",
-  //       main: "#333",
-  //       dark: "#303f9f",
-  //       contrastText: "#fff",
-  //     },
-  //   },
-  // },
 };
 
 const cancelationMessage = "operation is manually canceled";
 
 const dateFormat = "MMMM DD, YYYY";
 
-const title = "UNDP Identifikasi Satwa";
+const title = "Aplikasi Identifikasi Satwa Dilindungi";
 
 const themePair = ["dark", "light", "yellow"];
 
