@@ -46,61 +46,61 @@ function MammalsIdentificationPage() {
   const initialState = [
     {
       tipe_mammals_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JENIS SATWA.jpg",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       alat_gerak_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_ALAT GERAK.jpg",
       id: "q2",
       value: "Alat Gerak",
     },
     {
       third_attribute_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_CIRI FISIK UTAMA.jpg",
       id: "q3",
       value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JENIS KULIT.jpg",
       id: "q4",
       value: "Jenis Kulit",
     },
     {
       ukuran_tubuh_mammals_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_UKURAN TUBUH.jpg",
       id: "q5",
       value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_BERANGGAH ATAU BERTARING.jpg",
       id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_MEMPUNYAI MONCONG.jpg",
       id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_MEMPUNYAI EKOR.jpg",
       id: "q8",
       value: "Mempunyai Ekor",
     },
     {
       jumlah_kuku: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JUMLAH KUKU.jpg",
       id: "q9",
       value: "Jumlah Kuku",
     },
     {
       jumlah_cula: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JUMLAH CULA.jpg",
       id: "q10",
       value: "Jumlah Cula",
     },
@@ -108,61 +108,61 @@ function MammalsIdentificationPage() {
   const [mammalsValue, setMammalsValue] = React.useState([
     {
       tipe_mammals_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JENIS SATWA.jpg",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       alat_gerak_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_ALAT GERAK.jpg",
       id: "q2",
       value: "Alat Gerak",
     },
     {
       third_attribute_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_CIRI FISIK UTAMA.jpg",
       id: "q3",
       value: "Ciri Fisik Utama",
     },
     {
       jenis_kulit_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JENIS KULIT.jpg",
       id: "q4",
       value: "Jenis Kulit",
     },
     {
       ukuran_tubuh_mammals_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_UKURAN TUBUH.jpg",
       id: "q5",
       value: "Ukuran Tubuh",
     },
     {
       bertanduk_bertaring_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_BERANGGAH ATAU BERTARING.jpg",
       id: "q6",
       value: "Bertanduk/Bertaring",
     },
     {
       has_moncong: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_MEMPUNYAI MONCONG.jpg",
       id: "q7",
       value: "Mempunyai Moncong",
     },
     {
       has_ekor: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_MEMPUNYAI EKOR.jpg",
       id: "q8",
       value: "Mempunyai Ekor",
     },
     {
       jumlah_kuku: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JUMLAH KUKU.jpg",
       id: "q9",
       value: "Jumlah Kuku",
     },
     {
       jumlah_cula: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/mammals_icon/ICON_JUMLAH CULA.jpg",
       id: "q10",
       value: "Jumlah Cula",
     },
@@ -379,7 +379,7 @@ function MammalsIdentificationPage() {
                             }
                           />
                         )}
-                        {value.scientific_name.length > 24 ? (
+                        {value.scientific_name.length > 23 ? (
                           <Typography
                             style={{
                               position: "absolute",

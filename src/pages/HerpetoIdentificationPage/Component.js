@@ -453,7 +453,7 @@ function HerpetoIdentificationPage() {
                           }}
                           image={process.env.PUBLIC_URL + value.image}
                         />
-                        {value.value.length > 18 ? (
+                        {value.value.length > 20 ? (
                           <Typography
                             style={{
                               position: "absolute",

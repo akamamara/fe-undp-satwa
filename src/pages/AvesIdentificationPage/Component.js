@@ -310,7 +310,7 @@ function AvesIdentificationPage() {
                           />
                         )}
 
-                        {value.scientific_name > 18 ? (
+                        {value.scientific_name > 20 ? (
                           <Typography
                             style={{
                               position: "absolute",
