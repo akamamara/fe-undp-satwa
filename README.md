@@ -1,4 +1,4 @@
-image landing page
+<img src="./public/images/readme/landing_page.jpg" width="300" title="Landing Page">
 
 # Identifikasi Satwa Progressive Web App
 
