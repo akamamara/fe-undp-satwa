@@ -1,0 +1,5 @@
+[{
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target" : { "namespace": "android_app", "package_name": "app.netlify.goofy_mestorf_ad355e.twa",
+                 "sha256_cert_fingerprints": ["72:D5:66:AA:2D:AF:8C:10:11:5C:1C:A9:AF:C2:0F:65:68:83:D6:1E:0D:B8:59:3C:15:C3:5D:B6:28:2F:17:FC"] }
+  }]
