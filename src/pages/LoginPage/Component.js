@@ -80,12 +80,6 @@ function LoginPage() {
                   <Grid>
                     <Grid item xs={12}>
                       <InputField
-                        // InputProps={{
-                        //   className: classes.input,
-                        // }}
-                        // InputLabelProps={{
-                        //   className: classes.input,
-                        // }}
                         className={classes.input}
                         fullWidth
                         name="username"

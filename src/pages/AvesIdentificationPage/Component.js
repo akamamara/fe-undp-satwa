@@ -221,31 +221,40 @@ function AvesIdentificationPage() {
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
                   <Grid container>
-                    <Grid container>
-                      <Grid item xs={12}>
-                        <Typography variant="h6" className={classes.yellow}>
-                          Status (IUCN/CITES)
-                        </Typography>
+                    {avesStatus !== undefined && (
+                      <Grid container>
+                        <Grid item xs={12}>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Status (IUCN/CITES)
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography>IUCN : {avesStatus[0].iucn}</Typography>
+                          <Typography>CITES : {avesStatus[1].cites}</Typography>
+                        </Grid>
                       </Grid>
-                      <Grid item>
-                        <Typography>IUCN : {avesStatus[0].iucn}</Typography>
-                        <Typography>CITES : {avesStatus[1].cites}</Typography>
-                      </Grid>
-                    </Grid>
-                    <Grid container>
-                      <Grid item xs={12}>
-                        <Typography variant="h6" className={classes.yellow}>
-                          Habitat Type
-                        </Typography>
-                      </Grid>
-                      <Typography>{avesArea.habitat_type}</Typography>
-                    </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Location/Distribution
-                      </Typography>
-                      <Typography>{avesArea.area}</Typography>
-                    </Grid>
+                    )}
+
+                    {avesArea !== undefined && (
+                      <>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                          </Grid>
+                          <Typography>{avesArea.habitat_type}</Typography>
+                        </Grid>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                            <Typography>{avesArea.area}</Typography>
+                          </Grid>
+                        </Grid>
+                      </>
+                    )}
                   </Grid>
                 )}
               </Grid>
@@ -310,7 +319,7 @@ function AvesIdentificationPage() {
                           />
                         )}
 
-                        {value.scientific_name > 20 ? (
+                        {value.scientific_name.length > 26 ? (
                           <Typography
                             style={{
                               position: "absolute",
@@ -384,14 +393,28 @@ function AvesIdentificationPage() {
                           handleClickOpen();
                         }}
                       >
-                        <CardMedia
-                          style={{
-                            height: "120px",
-                            borderLeft: "10px solid #FFC000",
-                          }}
-                          image={process.env.PUBLIC_URL + value.image}
-                        />
-                        {value.value.length > 25 ? (
+                        {value.icon !== undefined ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "https://the-next-project.my.id/" + value.icon
+                            }
+                          />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                              filter: "brightness(60%)",
+                            }}
+                            image={process.env.PUBLIC_URL + value.image}
+                          />
+                        )}
+                        {value.value.length >= 24 ? (
                           <Typography
                             style={{
                               position: "absolute",
@@ -462,7 +485,9 @@ function AvesIdentificationPage() {
                           .then((result) => {
                             console.log(result);
                             if (result.length === 0) {
-                              alert("Kandidat tidak dilindungi");
+                              alert(
+                                "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
+                              );
                             } else setAvesResult(result);
                           })
                           .finally(console.log(avesResult));

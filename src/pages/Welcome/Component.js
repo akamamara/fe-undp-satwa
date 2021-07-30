@@ -3,18 +3,14 @@ import { Link as RouterLink } from "react-router-dom";
 
 import {
   Typography,
+  Button,
   Container,
   Card,
-  // CardContent,
   CardActionArea,
-  // Backdrop,
-  // CircularProgress,
 } from "@material-ui/core";
 import useTheme from "store/theme";
 
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
-// import { FaReact as ReactIcon } from "react-icons/fa";
 
 import Fb from "components/Fb";
 import Meta from "components/Meta";
@@ -92,6 +88,20 @@ function Welcome() {
               />
             </CardActionArea>
           </Card>
+          <Button
+            variant="contained"
+            style={{
+              marginTop: "30px",
+              width: "290px",
+            }}
+            component={RouterLink}
+            to="/"
+            onClick={() => {
+              localStorage.removeItem("token");
+            }}
+          >
+            Logout
+          </Button>
         </Fb>
       </Container>
     </>

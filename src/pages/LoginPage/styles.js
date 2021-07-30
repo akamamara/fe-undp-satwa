@@ -18,10 +18,6 @@ const useStyles = makeStyles(() => ({
   button: { backgroundColor: "green", marginTop: "10px" },
   input: {
     marginBottom: "10px",
-    color: "green",
-    borderColor: "green",
-    // borderWidth: "1px",
-    // backgroundColor: "green",
   },
 }));
 

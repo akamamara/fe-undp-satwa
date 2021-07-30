@@ -445,22 +445,35 @@ function MammalsIdentificationPage() {
               {mammalsValue.map((value, index) => {
                 return (
                   <Grid item xs={6} key={Object.keys(value)}>
-                    <Card style={{ backgroundColor: "green" }}>
+                    <Card style={{}}>
                       <CardActionArea
                         onClick={() => {
-                          // console.log(Object.values(value));
                           setQuestionIndex(index);
                           handleClickOpen();
                         }}
                       >
-                        <CardMedia
-                          style={{
-                            height: "120px",
-                            // paddingTop: "56.25%",
-                            borderLeft: "10px solid #FFC000",
-                          }}
-                          image={process.env.PUBLIC_URL + value.image}
-                        />
+                        {value.icon !== undefined ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "https://the-next-project.my.id/" + value.icon
+                            }
+                          />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                              filter: "brightness(60%)",
+                            }}
+                            image={process.env.PUBLIC_URL + value.image}
+                          />
+                        )}
+
                         {value.value.length > 19 ? (
                           <Typography
                             style={{
@@ -529,7 +542,9 @@ function MammalsIdentificationPage() {
                         localStorage.setItem("query", queryParams);
                         GetMammalsResult(queryParams).then((result) => {
                           if (result.length === 0) {
-                            alert("Kandidat tidak ditemukan");
+                            alert(
+                              "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
+                            );
                           } else {
                             setMammalsResult(result);
                           }

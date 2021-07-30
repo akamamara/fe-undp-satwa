@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import useStyles from "./styles";
 import moment from "moment";
 
@@ -8,13 +8,8 @@ import Image from "material-ui-image";
 
 import { Container, Typography, Dialog } from "@material-ui/core";
 
-// import { useHistory } from "react-router-dom";
-
 function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
-  // const history = useHistory();
   const classes = useStyles();
-  useEffect(() => {}, []);
-  // console.log(photoProps);
 
   return (
     <Container className={classes.root}>
@@ -28,7 +23,7 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
           }
           cover
         />
-        <Grid container style={{ marginLeft: "10px", overflow: "hidden" }}>
+        <Grid container style={{ padding: "10px" }}>
           <Grid item xs={12}>
             <Typography>Image Title : {photoProps.image_title} </Typography>
           </Grid>

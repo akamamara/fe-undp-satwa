@@ -5,7 +5,6 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-
     "align-items": "center",
     height: "100%",
   },

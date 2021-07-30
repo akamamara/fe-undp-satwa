@@ -46,43 +46,43 @@ function HerpetoIdentificationPage() {
   const initialState = [
     {
       jenis_hewan_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS HEWAN.jpg",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       jenis_sisik_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS SISIK.jpg",
       id: "q2",
       value: "Jenis Sisik",
     },
     {
       bentuk_kaki_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_BENTUK KAKI.jpg",
       id: "q3",
       value: "Bentuk Kaki",
     },
     {
       ukuran_tubuh_herpeto_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_UKURAN TUBUH.jpg",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS MONCONG.jpg",
       id: "q5",
       value: "Jenis Moncong",
     },
     {
       jenis_tempurung_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS TEMPURUNG.jpg",
       id: "q6",
       value: "Jenis Tempurung",
     },
     {
       jenis_ekor_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS EKOR.jpg",
       id: "q7",
       value: "Jenis Ekor (Khusus Biawak)",
     },
@@ -102,43 +102,43 @@ function HerpetoIdentificationPage() {
   const [herpetoValue, setHerpetoValue] = React.useState([
     {
       jenis_hewan_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS HEWAN.jpg",
       id: "q1",
       value: "Jenis Hewan",
     },
     {
       jenis_sisik_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS SISIK.jpg",
       id: "q2",
       value: "Jenis Sisik",
     },
     {
       bentuk_kaki_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_BENTUK KAKI.jpg",
       id: "q3",
       value: "Bentuk Kaki",
     },
     {
       ukuran_tubuh_herpeto_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_UKURAN TUBUH.jpg",
       id: "q4",
       value: "Ukuran Tubuh",
     },
     {
       jenis_moncong_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS MONCONG.jpg",
       id: "q5",
       value: "Jenis Moncong",
     },
     {
       jenis_tempurung_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS TEMPURUNG.jpg",
       id: "q6",
       value: "Jenis Tempurung",
     },
     {
       jenis_ekor_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/herpetofauna_icon/ICON_JENIS EKOR.jpg",
       id: "q7",
       value: "Jenis Ekor (Khusus Biawak)",
     },
@@ -175,6 +175,10 @@ function HerpetoIdentificationPage() {
 
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
+    console.log(herpetoValue[questionIndex].value);
+    if (props.icon === undefined) {
+      props.icon = "no icon";
+    }
     let tmpArrayDefault = herpetoValue.map((item, j) => {
       if (questionIndex === j) {
         return props;
@@ -292,20 +296,26 @@ function HerpetoIdentificationPage() {
                         </Typography>
                       </Grid>
                     </Grid>
-                    <Grid container>
-                      <Typography variant="h6" className={classes.yellow}>
-                        Habitat Type
-                      </Typography>
-                      <Typography>{herpetoArea.habitat_type}</Typography>
-                    </Grid>
-                    <Grid container>
-                      <Grid item>
-                        <Typography variant="h6" className={classes.yellow}>
-                          Location/Distribution
-                        </Typography>
-                        <Typography>{herpetoArea.area}</Typography>
-                      </Grid>
-                    </Grid>
+                    {herpetoArea !== undefined && (
+                      <>
+                        <Grid container>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Habitat Type
+                            </Typography>
+                            <Typography>{herpetoArea.habitat_type}</Typography>
+                          </Grid>
+                        </Grid>
+                        <Grid container>
+                          <Grid item>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                            <Typography>{herpetoArea.area}</Typography>
+                          </Grid>
+                        </Grid>
+                      </>
+                    )}
                   </Grid>
                 )}
               </Grid>
@@ -440,20 +450,33 @@ function HerpetoIdentificationPage() {
                     <Card style={{ backgroundColor: "green" }}>
                       <CardActionArea
                         onClick={() => {
-                          // console.log(Object.values(value));
                           setQuestionIndex(index);
                           handleClickOpen();
                         }}
                       >
-                        <CardMedia
-                          style={{
-                            height: "120px",
-                            // paddingTop: "56.25%",
-                            borderLeft: "10px solid #FFC000",
-                          }}
-                          image={process.env.PUBLIC_URL + value.image}
-                        />
-                        {value.value.length > 20 ? (
+                        {value.icon !== undefined ? (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              borderLeft: "10px solid #FFC000",
+                            }}
+                            image={
+                              "https://the-next-project.my.id/" + value.icon
+                            }
+                          />
+                        ) : (
+                          <CardMedia
+                            style={{
+                              height: "120px",
+                              // paddingTop: "56.25%",
+                              borderLeft: "10px solid #FFC000",
+                              filter: "brightness(50%)",
+                            }}
+                            image={process.env.PUBLIC_URL + value.image}
+                          />
+                        )}
+
+                        {value.value.length > 25 ? (
                           <Typography
                             style={{
                               position: "absolute",
@@ -523,7 +546,9 @@ function HerpetoIdentificationPage() {
                         GetHerpetoResult(queryParams)
                           .then((result) => {
                             if (result.length === 0) {
-                              alert("Kandidat tidak ditemukan");
+                              alert(
+                                "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
+                              );
                             } else setHerpetoResult(result);
                           })
                           .finally(console.log(herpetoResult));
