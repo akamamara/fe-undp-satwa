@@ -310,10 +310,12 @@ function MammalsIdentificationPage() {
                           <Typography>{mammalsArea.habitat_type}</Typography>
                         </Grid>
                         <Grid container>
-                          <Typography variant="h6" className={classes.yellow}>
-                            Location/Distribution
-                          </Typography>
-                          <Typography>{mammalsArea.area}</Typography>
+                          <Grid item xs={12}>
+                            <Typography variant="h6" className={classes.yellow}>
+                              Location/Distribution
+                            </Typography>
+                            <Typography>{mammalsArea.area}</Typography>
+                          </Grid>
                         </Grid>
                       </>
                     )}
