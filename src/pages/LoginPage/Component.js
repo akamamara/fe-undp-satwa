@@ -44,7 +44,7 @@ function LoginPage() {
   }, []);
   return (
     <>
-      <Meta title="Page 3" description="Page 3" />
+      <Meta title="Login Page" description="Login Page" />
       <Container maxWidth="sm" className={classes.root}>
         <Grid container direction="column" justify="center" alignItems="center">
           <img
