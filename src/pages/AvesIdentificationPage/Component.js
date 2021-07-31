@@ -45,7 +45,7 @@ function AvesIdentificationPage() {
   const initialState = [
     {
       jenis_burung_ID: "0",
-      image: "/images/aves_icon/aves_icon_jenisburung.jpeg",
+      image: "/images/aves_icon/aves_icon_jenisburung.jpg",
       id: "q1",
       value: "Jenis Burung",
     },
@@ -57,7 +57,7 @@ function AvesIdentificationPage() {
     },
     {
       warna_ID: "0",
-      image: "/images/aves_icon/aves_icon_warnadominan.jpeg",
+      image: "/images/aves_icon/aves_icon_warnadominan.jpg",
       id: "q3",
       value: "Warna Dominan",
     },
@@ -69,7 +69,7 @@ function AvesIdentificationPage() {
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/aves_icon/aves_icon_tipecakar.jpeg",
+      image: "/images/aves_icon/aves_icon_tipecakar.pg",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -77,7 +77,7 @@ function AvesIdentificationPage() {
   const [avesValue, setAvesValue] = React.useState([
     {
       jenis_burung_ID: "0",
-      image: "/images/aves_icon/aves_icon_jenisburung.jpeg",
+      image: "/images/aves_icon/aves_icon_jenisburung.jpg",
       id: "q1",
       value: "Jenis Burung",
     },
@@ -89,7 +89,7 @@ function AvesIdentificationPage() {
     },
     {
       warna_ID: "0",
-      image: "/images/aves_icon/aves_icon_warnadominan.jpeg",
+      image: "/images/aves_icon/aves_icon_warnadominan.jpg",
       id: "q3",
       value: "Warna Dominan",
     },
@@ -101,7 +101,7 @@ function AvesIdentificationPage() {
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/aves_icon/aves_icon_tipecakar.jpeg",
+      image: "/images/aves_icon/aves_icon_tipecakar.jpg",
       id: "q5",
       value: "Tipe Cakar",
     },
