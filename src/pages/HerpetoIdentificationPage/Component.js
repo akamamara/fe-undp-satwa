@@ -16,6 +16,7 @@ import GetHerpetoDetail from "../../utils/apis/GetHerpetoDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
+import AlertPopup from "../../sections/Alert";
 
 import Meta from "components/Meta";
 import useStyles from "./styles";
@@ -24,6 +25,8 @@ function HerpetoIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [alertString, setAlertString] = React.useState("");
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -40,6 +43,10 @@ function HerpetoIdentificationPage() {
 
   const handleClosePhoto = () => {
     setOpenPhoto(false);
+  };
+
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
   };
 
   const [herpetoResult, setHerpetoResult] = React.useState([]);
@@ -538,17 +545,19 @@ function HerpetoIdentificationPage() {
                           (queryParams +=
                             Object.values(object)[0].toString() + ".")
                       );
-                      if (queryParams === "0.0.0.0.0.0.0.0.0.")
-                        alert("Berikan 1 ciri-ciri");
-                      else {
+                      if (queryParams === "0.0.0.0.0.0.0.0.0.") {
+                        setAlertString("Berikan 1 ciri-ciri!");
+                        setAlertOpen(true);
+                      } else {
                         localStorage.setItem("query", queryParams);
                         console.log(queryParams);
                         GetHerpetoResult(queryParams)
                           .then((result) => {
                             if (result.length === 0) {
-                              alert(
+                              setAlertString(
                                 "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
                               );
+                              setAlertOpen(true);
                             } else setHerpetoResult(result);
                           })
                           .finally(console.log(herpetoResult));
@@ -569,6 +578,11 @@ function HerpetoIdentificationPage() {
             onUpdateItem={onUpdateItem}
             questionProps={herpetoValue[questionIndex]}
             animalType="herpetofauna"
+          />
+          <AlertPopup
+            string={alertString}
+            open={alertOpen}
+            onClose={handleCloseAlert}
           />
           {herpetoImages[0] === undefined ? null : (
             <DetailPhoto

@@ -15,6 +15,7 @@ import GetAvesDetail from "../../utils/apis/GetAvesDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
+import AlertPopup from "../../sections/Alert";
 
 import Meta from "components/Meta";
 import useStyles from "./styles";
@@ -23,6 +24,8 @@ function AvesIdentificationPage() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [alertString, setAlertString] = React.useState("");
+  const [alertOpen, setAlertOpen] = React.useState(false);
   const [questionIndex, setQuestionIndex] = React.useState("");
 
   const handleClickOpen = () => {
@@ -39,6 +42,10 @@ function AvesIdentificationPage() {
 
   const handleClosePhoto = () => {
     setOpenPhoto(false);
+  };
+
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
   };
 
   const [avesResult, setAvesResult] = React.useState([]);
@@ -476,18 +483,20 @@ function AvesIdentificationPage() {
                           (queryParams +=
                             Object.values(object)[0].toString() + ".")
                       );
-                      if (queryParams === "0.0.0.0.0.")
-                        alert("Berikan minimal 1 ciri-ciri identifikasi");
-                      else {
+                      if (queryParams === "0.0.0.0.0.") {
+                        setAlertString("Berikan 1 ciri-ciri!");
+                        setAlertOpen(true);
+                      } else {
                         localStorage.setItem("query", queryParams);
                         console.log(queryParams);
                         GetAvesResult(queryParams)
                           .then((result) => {
                             console.log(result);
                             if (result.length === 0) {
-                              alert(
+                              setAlertString(
                                 "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
                               );
+                              setAlertOpen(true);
                             } else setAvesResult(result);
                           })
                           .finally(console.log(avesResult));
@@ -508,6 +517,11 @@ function AvesIdentificationPage() {
             onUpdateItem={onUpdateItem}
             questionProps={avesValue[questionIndex]}
             animalType="aves"
+          />
+          <AlertPopup
+            string={alertString}
+            open={alertOpen}
+            onClose={handleCloseAlert}
           />
           {avesImages[0] === undefined ? null : (
             <DetailPhoto

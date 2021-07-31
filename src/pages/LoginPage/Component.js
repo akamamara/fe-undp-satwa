@@ -17,6 +17,7 @@ import {
 import Meta from "components/Meta";
 import InputField from "components/FormFields/InputFields";
 import InputPasswordField from "components/FormFields/InputPasswordField";
+import AlertPopup from "../../sections/Alert";
 
 import useTheme from "store/theme";
 
@@ -27,6 +28,12 @@ import handleLogin from "../../utils/apis/Login";
 function LoginPage() {
   const classes = useStyles();
   const history = useHistory();
+  const [alertString, setAlertString] = React.useState("");
+  const [alertOpen, setAlertOpen] = React.useState(false);
+
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
+  };
 
   const [, themeActions] = useTheme();
   function themeGoYellow() {
@@ -68,8 +75,13 @@ function LoginPage() {
                 setTimeout(() => {
                   console.log(values);
                   handleLogin(values).then((result) => {
-                    if (result.data.success === true) {
+                    console.log(result);
+                    if (result !== undefined) {
+                      console.log(result.data);
                       history.push("/identification");
+                    } else {
+                      setAlertOpen(true);
+                      setAlertString("Username atau Password salah.");
                     }
                   });
                 }, 500);
@@ -117,6 +129,11 @@ function LoginPage() {
               )}
             </Formik>
           </Grid>
+          <AlertPopup
+            string={alertString}
+            open={alertOpen}
+            onClose={handleCloseAlert}
+          />
         </Grid>
       </Container>
     </>

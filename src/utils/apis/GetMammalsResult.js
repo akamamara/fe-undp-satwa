@@ -42,11 +42,9 @@ const GetMammalsResult = async (identificationValue) => {
   try {
     const resp = await axios.post("api/identifikasi/mammals/result", formData);
     await console.log(resp);
-    // await alert(resp.data.message);
     return resp.data.result;
   } catch (err) {
-    alert(err.response.data.message);
-    //goBack
+    return err.response.data.message;
   }
 };
 

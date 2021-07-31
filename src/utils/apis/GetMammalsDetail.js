@@ -6,11 +6,9 @@ const GetHerpetoDetail = async (mammals_id) => {
       "api/identifikasi/mammals/result/" + mammals_id
     );
     await console.log(resp);
-    // await alert(resp.data.message);
     return resp.data;
   } catch (err) {
-    alert(err.response.data.message);
-    //goBack
+    return err.response.data.message;
   }
 };
 

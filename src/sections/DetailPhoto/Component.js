@@ -2,11 +2,9 @@ import React from "react";
 import useStyles from "./styles";
 import moment from "moment";
 
-import { Grid } from "@material-ui/core";
-
 import Image from "material-ui-image";
 
-import { Container, Typography, Dialog } from "@material-ui/core";
+import { Grid, Container, Typography, Dialog } from "@material-ui/core";
 
 function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
   const classes = useStyles();
