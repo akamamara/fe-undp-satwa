@@ -76,7 +76,7 @@ function AvesIdentificationPage() {
     },
     {
       tipe_cakar_ID: "0",
-      image: "/images/aves_icon/aves_icon_tipecakar.pg",
+      image: "/images/aves_icon/aves_icon_tipecakar.jpg",
       id: "q5",
       value: "Tipe Cakar",
     },
@@ -132,8 +132,16 @@ function AvesIdentificationPage() {
 
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
+    console.log(props);
     let tmpArrayDefault = avesValue.map((item, j) => {
       if (questionIndex === j) {
+        if (props.warna_ID === "0") {
+          delete props.icon;
+          props.value = "Warna Dominan";
+        } else if (props.icon === undefined) {
+          props.icon = "";
+        }
+        props.id = item.id;
         return props;
       } else {
         return item;

@@ -9,7 +9,6 @@ import {
 
 function AlertPopup(props) {
   const { string, open, onClose } = props;
-  console.log(props);
   return (
     <Dialog open={open} onClose={onClose}>
       <DialogTitle> </DialogTitle>

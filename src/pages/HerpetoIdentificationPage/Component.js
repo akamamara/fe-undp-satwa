@@ -182,12 +182,16 @@ function HerpetoIdentificationPage() {
 
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
-    console.log(herpetoValue[questionIndex].value);
-    if (props.icon === undefined) {
-      props.icon = "no icon";
-    }
+    console.log(props);
     let tmpArrayDefault = herpetoValue.map((item, j) => {
       if (questionIndex === j) {
+        if (props.warna_herpeto_ID === "0") {
+          delete props.icon;
+          props.value = "Warna Dominan";
+        } else if (props.icon === undefined) {
+          props.icon = "";
+        }
+        props.id = item.id;
         return props;
       } else {
         return item;
