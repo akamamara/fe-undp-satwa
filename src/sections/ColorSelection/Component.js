@@ -10,6 +10,7 @@ function ColorSelection({ questionFields, onClose, onUpdateItem, animalType }) {
   return (
     <>
       <Autocomplete
+        freeSolo
         options={questionFields}
         onChange={(event, newValue) => {
           onUpdateItem(newValue);

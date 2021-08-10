@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+
 import {
   Grid,
   Button,
@@ -22,6 +24,8 @@ import useStyles from "./styles";
 
 function AvesIdentificationPage() {
   const classes = useStyles();
+  const history = useHistory();
+
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
   const [alertString, setAlertString] = React.useState("");
@@ -151,6 +155,24 @@ function AvesIdentificationPage() {
     console.log(tmpArrayDefault);
     setAvesValue(tmpArrayDefault);
   }
+
+  const onBackButtonEvent = (e) => {
+    e.preventDefault();
+    if (avesCandidateId !== 0) {
+      console.log("balik ke kandidat");
+      setAvesCandidateId(0);
+    } else if (avesResult.length > 0) {
+      console.log("balik ke identifikasi ciri");
+      setAvesResult([]);
+    } else if (avesResult.length === 0) {
+      console.log("balik ke spesies");
+      history.push("/identification");
+      setAvesResult([]);
+    } else {
+      console.log("null");
+    }
+  };
+
   useEffect(() => {
     if (avesCandidateId !== 0) {
       GetAvesDetail(avesCandidateId).then((result) => {
@@ -163,7 +185,14 @@ function AvesIdentificationPage() {
         setAvesArea(result.area[0]);
       });
     }
-  }, [avesValue, avesCandidateId]);
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener("popstate", onBackButtonEvent);
+    return () => {
+      window.removeEventListener("popstate", onBackButtonEvent);
+    };
+    // eslint-disable-next-line
+  }, [avesValue, avesCandidateId, avesResult]);
   return (
     <>
       <Meta title="Identifikasi Aves" description="Identifikasi Aves" />

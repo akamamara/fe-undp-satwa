@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   Grid,
@@ -23,6 +24,8 @@ import useStyles from "./styles";
 
 function HerpetoIdentificationPage() {
   const classes = useStyles();
+  const history = useHistory();
+
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
   const [alertString, setAlertString] = React.useState("");
@@ -201,6 +204,24 @@ function HerpetoIdentificationPage() {
     console.log(tmpArrayDefault);
     setHerpetoValue(tmpArrayDefault);
   }
+
+  const onBackButtonEvent = (e) => {
+    e.preventDefault();
+    if (herpetoCandidateId !== 0) {
+      console.log("balik ke kandidat");
+      setHerpetoCandidateId(0);
+    } else if (herpetoResult.length > 0) {
+      console.log("balik ke identifikasi ciri");
+      setHerpetoResult([]);
+    } else if (herpetoResult.length === 0) {
+      console.log("balik ke spesies");
+      history.push("/identification");
+      setHerpetoResult([]);
+    } else {
+      console.log("null");
+    }
+  };
+
   useEffect(() => {
     if (herpetoCandidateId !== 0) {
       GetHerpetoDetail(herpetoCandidateId).then((result) => {
@@ -214,7 +235,13 @@ function HerpetoIdentificationPage() {
         setHerpetoArea(result.area[0]);
       });
     }
-  }, [herpetoValue, herpetoCandidateId]);
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener("popstate", onBackButtonEvent);
+    return () => {
+      window.removeEventListener("popstate", onBackButtonEvent);
+    };
+    // eslint-disable-next-line
+  }, [herpetoValue, herpetoCandidateId, herpetoResult]);
   return (
     <>
       <Meta

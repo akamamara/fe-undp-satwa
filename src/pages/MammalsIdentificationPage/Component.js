@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 import {
   Grid,
@@ -23,6 +24,8 @@ import useStyles from "./styles";
 
 function MammalsIdentificationPage() {
   const classes = useStyles();
+  const history = useHistory();
+
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
   const [alertString, setAlertString] = React.useState("");
@@ -202,6 +205,23 @@ function MammalsIdentificationPage() {
     console.log(tmpArrayDefault);
     setMammalsValue(tmpArrayDefault);
   }
+
+  const onBackButtonEvent = (e) => {
+    e.preventDefault();
+    if (mammalsCandidateId !== 0) {
+      console.log("balik ke kandidat");
+      setMammalsCandidateId(0);
+    } else if (mammalsResult.length > 0) {
+      console.log("balik ke identifikasi ciri");
+      setMammalsResult([]);
+    } else if (mammalsResult.length === 0) {
+      console.log("balik ke spesies");
+      history.push("/identification");
+      setMammalsResult([]);
+    } else {
+      console.log("null");
+    }
+  };
   useEffect(() => {
     if (mammalsCandidateId !== 0) {
       GetMammalsDetail(mammalsCandidateId).then((result) => {
@@ -214,7 +234,14 @@ function MammalsIdentificationPage() {
         setMammalsArea(result.area[0]);
       });
     }
-  }, [mammalsValue, mammalsCandidateId]);
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener("popstate", onBackButtonEvent);
+    return () => {
+      window.removeEventListener("popstate", onBackButtonEvent);
+    };
+    // eslint-disable-next-line
+  }, [mammalsValue, mammalsCandidateId, mammalsResult]);
   return (
     <>
       <Meta title="Identifikasi Mamalia" description="Identifikasi Mamalia" />
