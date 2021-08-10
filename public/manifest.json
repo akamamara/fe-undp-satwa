@@ -19,7 +19,7 @@
     }
   ],
   "start_url": ".",
-  "display": "fullscreen",
+  "display": "standalone",
   "theme_color": "#056d3b",
   "background_color": "#056d3b",
   "screenshots": []
