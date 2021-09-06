@@ -257,7 +257,8 @@ function HerpetoIdentificationPage() {
                   <img
                     className={classes.banner}
                     src={
-                      process.env.PUBLIC_URL + "/images/protected_wildlife.png"
+                      process.env.PUBLIC_URL +
+                      "/images/satwa_dilindungi_red.png"
                     }
                     alt="Herpetofauna"
                   />
@@ -279,7 +280,7 @@ function HerpetoIdentificationPage() {
                     className={classes.bannerImage}
                     alt="Herpetofauna"
                     src={
-                      "https://the-next-project.my.id/storage/uploaded_images/herpetofauna/" +
+                      "https://satwa.menlhk.go.id/storage/uploaded_images/herpetofauna/" +
                       herpetoImages[0].images
                     }
                     onClick={() => {
@@ -414,7 +415,7 @@ function HerpetoIdentificationPage() {
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
-                              "https://the-next-project.my.id/storage/uploaded_images/herpetofauna/" +
+                              "https://satwa.menlhk.go.id/storage/uploaded_images/herpetofauna/" +
                               value.images.images
                             }
                           />
@@ -498,9 +499,7 @@ function HerpetoIdentificationPage() {
                               height: "120px",
                               borderLeft: "10px solid #FFC000",
                             }}
-                            image={
-                              "https://the-next-project.my.id/" + value.icon
-                            }
+                            image={"https://satwa.menlhk.go.id/" + value.icon}
                           />
                         ) : (
                           <CardMedia

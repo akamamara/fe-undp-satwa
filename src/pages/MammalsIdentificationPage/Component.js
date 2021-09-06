@@ -254,7 +254,8 @@ function MammalsIdentificationPage() {
                   <img
                     className={classes.banner}
                     src={
-                      process.env.PUBLIC_URL + "/images/protected_wildlife.png"
+                      process.env.PUBLIC_URL +
+                      "/images/satwa_dilindungi_red.png"
                     }
                     alt="Mammals"
                   />
@@ -275,7 +276,7 @@ function MammalsIdentificationPage() {
                   <img
                     className={classes.bannerImage}
                     src={
-                      "https://the-next-project.my.id/storage/uploaded_images/mammals/" +
+                      "https://satwa.menlhk.go.id/storage/uploaded_images/mammals/" +
                       mammalsImages[0].images
                     }
                     alt="Mammals"
@@ -409,7 +410,7 @@ function MammalsIdentificationPage() {
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
-                              "https://the-next-project.my.id/storage/uploaded_images/mammals/" +
+                              "https://satwa.menlhk.go.id/storage/uploaded_images/mammals/" +
                               value.images.images
                             }
                           />
@@ -493,9 +494,7 @@ function MammalsIdentificationPage() {
                               height: "120px",
                               borderLeft: "10px solid #FFC000",
                             }}
-                            image={
-                              "https://the-next-project.my.id/" + value.icon
-                            }
+                            image={"https://satwa.menlhk.go.id/" + value.icon}
                           />
                         ) : (
                           <CardMedia

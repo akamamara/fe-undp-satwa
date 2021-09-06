@@ -14,7 +14,7 @@ function DetailPhoto({ photoProps, isVisible, onClose, animalType }) {
       <Dialog open={isVisible} onClose={onClose} fullWidth>
         <Image
           src={
-            "https://the-next-project.my.id/storage/uploaded_images/" +
+            "https://satwa.menlhk.go.id/storage/uploaded_images/" +
             animalType +
             "/" +
             photoProps.images

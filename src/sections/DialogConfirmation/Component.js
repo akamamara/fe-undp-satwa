@@ -157,9 +157,7 @@ function DialogConfirmation({
                               marginTop: "30",
                               borderLeft: "10px solid #FFC000",
                             }}
-                            image={
-                              "https://the-next-project.my.id/" + value.icon
-                            }
+                            image={"https://satwa.menlhk.go.id/" + value.icon}
                           />
                         ) : (
                           <img
