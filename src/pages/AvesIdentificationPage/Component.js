@@ -62,7 +62,7 @@ function AvesIdentificationPage() {
     },
     {
       bentuk_paruh_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_bentukparuh.jpg",
       id: "q2",
       value: "Bentuk Paruh",
     },
@@ -74,7 +74,7 @@ function AvesIdentificationPage() {
     },
     {
       ukuran_tubuh_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_ukurantubuh.jpg",
       id: "q4",
       value: "Ukuran Tubuh",
     },
@@ -94,7 +94,7 @@ function AvesIdentificationPage() {
     },
     {
       bentuk_paruh_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_bentukparuh.jpg",
       id: "q2",
       value: "Bentuk Paruh",
     },
@@ -106,7 +106,7 @@ function AvesIdentificationPage() {
     },
     {
       ukuran_tubuh_ID: "0",
-      image: "/images/not_sure_100.png",
+      image: "/images/aves_icon/aves_icon_ukurantubuh.jpg",
       id: "q4",
       value: "Ukuran Tubuh",
     },
