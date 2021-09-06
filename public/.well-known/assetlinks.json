@@ -1,8 +1,6 @@
 [{
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target" : { "namespace": "android_app", "package_name": "app.netlify.identifikasi_satwa_ipb.twa",
-                 "sha256_cert_fingerprints": ["85:33:25:62:85:BC:1A:F8:D8:63:5D:0A:35:3F:EE:87:F4:46:FC:CC:24:7C:7B:88:B5:43:26:A2:7A:58:01:AD"] }
-  }]
-
-
-  
+                 "sha256_cert_fingerprints": ["19:46:D8:66:9A:4F:1A:A0:F2:DE:0B:55:3D:19:EF:CE:80:D1:5A:7A:FB:17:AD:CC:BF:20:8F:40:31:D3:26:EB"] }
+  }
+]
