@@ -11,7 +11,7 @@ import {
   CardMedia,
   CardActionArea,
 } from "@material-ui/core";
-
+import Carousel from "react-material-ui-carousel";
 import GetAvesResult from "../../utils/apis/GetAvesResult";
 import GetAvesSearch from "../../utils/apis/GetAvesSearch";
 import GetAvesDetail from "../../utils/apis/GetAvesDetail";
@@ -129,6 +129,7 @@ function AvesIdentificationPage() {
   const [avesStatus, setAvesStatus] = React.useState([{}, {}]);
 
   const [avesImages, setAvesImages] = React.useState([{}]);
+  const [imageIndex, setImageIndex] = React.useState(0);
 
   // eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
@@ -228,17 +229,23 @@ function AvesIdentificationPage() {
                     }}
                   />
                 ) : avesImages[0].images !== undefined ? (
-                  <img
-                    className={classes.bannerImage}
-                    alt="Aves"
-                    src={
-                      "https://satwa.menlhk.go.id/storage/uploaded_images/aves/" +
-                      avesImages[0].images
-                    }
-                    onClick={() => {
-                      handleClickOpenPhoto();
-                    }}
-                  />
+                  <Carousel autoPlay={false} navButtomAlwaysVisible>
+                    {avesImages.map((item, i) => (
+                      // <Item key={i} item={item} />
+                      <img
+                        className={classes.bannerImage}
+                        alt="Aves"
+                        src={
+                          "https://satwa.menlhk.go.id/storage/uploaded_images/aves/" +
+                          item.images
+                        }
+                        onClick={() => {
+                          setImageIndex(i);
+                          handleClickOpenPhoto();
+                        }}
+                      />
+                    ))}
+                  </Carousel>
                 ) : (
                   <img
                     style={{
@@ -312,6 +319,7 @@ function AvesIdentificationPage() {
                   onClick={() => {
                     setAvesCandidateId(0);
                     setAvesImages([{}]);
+                    setImageIndex(0);
                   }}
                   variant="contained"
                 >
@@ -598,11 +606,11 @@ function AvesIdentificationPage() {
             open={alertOpen}
             onClose={handleCloseAlert}
           />
-          {avesImages[0] === undefined ? null : (
+          {avesImages === undefined ? null : (
             <DetailPhoto
               isVisible={openPhoto}
               onClose={handleClosePhoto}
-              photoProps={avesImages[0]}
+              photoProps={avesImages[imageIndex]}
               animalType="aves"
             />
           )}
