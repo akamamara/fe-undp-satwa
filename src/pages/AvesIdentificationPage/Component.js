@@ -13,11 +13,13 @@ import {
 } from "@material-ui/core";
 
 import GetAvesResult from "../../utils/apis/GetAvesResult";
+import GetAvesSearch from "../../utils/apis/GetAvesSearch";
 import GetAvesDetail from "../../utils/apis/GetAvesDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 import AlertPopup from "../../sections/Alert";
+import SearchComponent from "../../sections/SearchComponent";
 
 import Meta from "components/Meta";
 import useStyles from "./styles";
@@ -28,6 +30,8 @@ function AvesIdentificationPage() {
 
   const [open, setOpen] = React.useState(false);
   const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [queryString, setQueryString] = React.useState("");
+  const [queryType, setQueryType] = React.useState("0");
   const [alertString, setAlertString] = React.useState("");
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [questionIndex, setQuestionIndex] = React.useState("");
@@ -329,7 +333,14 @@ function AvesIdentificationPage() {
                   src={process.env.PUBLIC_URL + "/images/aves-light.png"}
                   alt="Aves"
                 />
+                {queryString && (
+                  <Typography>
+                    Hasil pencarian "{queryString}" pada{" "}
+                    {queryType === "0" ? "Nama saintifik" : "Nama umum"}
+                  </Typography>
+                )}
               </Grid>
+
               {avesResult.map((value) => {
                 return (
                   <Grid item xs={6} key={value.aves_ID}>
@@ -427,6 +438,31 @@ function AvesIdentificationPage() {
                   alt="Aves"
                 />
               </Grid>
+              <SearchComponent
+                queryString={queryString}
+                queryType={queryType}
+                onQueryStringChanged={(newValue) => {
+                  setQueryString(newValue);
+                }}
+                onQueryTypeChanged={(newValue) => {
+                  setQueryType(newValue);
+                }}
+                onClickSearch={() => {
+                  console.log(queryString);
+                  console.log(queryType);
+                  GetAvesSearch(queryString, queryType).then((result) => {
+                    console.log(result);
+                    if (result.length === 0) {
+                      setAlertString(
+                        "Kandidat dengan nama tersebut, tidak termasuk satwa yang dilindungi"
+                      );
+                      setAlertOpen(true);
+                    } else {
+                      setAvesResult(result);
+                    }
+                  });
+                }}
+              />
 
               {avesValue.map((value, index) => {
                 return (
@@ -511,6 +547,9 @@ function AvesIdentificationPage() {
                 <Grid item>
                   <Button
                     onClick={() => {
+                      setQueryString("");
+                      setQueryType("0");
+
                       let queryParams = "";
                       let tmpQueryParams = avesValue;
 
