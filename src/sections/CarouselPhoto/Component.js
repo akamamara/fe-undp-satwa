@@ -1,17 +1,19 @@
 import React from "react";
-import { Paper } from "@material-ui/core";
 import useStyles from "./styles";
+import DetailPhoto from "../../sections/DetailPhoto";
 
 function CarouselPhoto(props) {
   const classes = useStyles();
 
-  const { item, i } = props;
+  const { item } = props;
+  const [openPhoto, setOpenPhoto] = React.useState(false);
+
+  const handleClosePhoto = () => {
+    setOpenPhoto(false);
+  };
+
   return (
-    <Paper
-      onClick={() => {
-        console.log(item);
-      }}
-    >
+    <>
       <img
         className={classes.bannerImage}
         alt="Aves"
@@ -20,12 +22,16 @@ function CarouselPhoto(props) {
           item.images
         }
         onClick={() => {
-          // setImageIndex(i);
-          // handleClickOpenPhoto();
+          setOpenPhoto(true);
         }}
       />
-      <p>{i}</p>
-    </Paper>
+      <DetailPhoto
+        isVisible={openPhoto}
+        onClose={handleClosePhoto}
+        photoProps={item}
+        animalType="aves"
+      />
+    </>
   );
 }
 

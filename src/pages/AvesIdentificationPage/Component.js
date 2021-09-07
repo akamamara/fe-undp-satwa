@@ -17,7 +17,6 @@ import GetAvesSearch from "../../utils/apis/GetAvesSearch";
 import GetAvesDetail from "../../utils/apis/GetAvesDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
-import DetailPhoto from "../../sections/DetailPhoto";
 import AlertPopup from "../../sections/Alert";
 import SearchComponent from "../../sections/SearchComponent";
 import CarouselPhoto from "../../sections/CarouselPhoto";
@@ -30,7 +29,6 @@ function AvesIdentificationPage() {
   const history = useHistory();
 
   const [open, setOpen] = React.useState(false);
-  const [openPhoto, setOpenPhoto] = React.useState(false);
   const [queryString, setQueryString] = React.useState("");
   const [queryType, setQueryType] = React.useState("0");
   const [alertString, setAlertString] = React.useState("");
@@ -43,15 +41,6 @@ function AvesIdentificationPage() {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  //eslint-disable-next-line
-  const handleClickOpenPhoto = () => {
-    setOpenPhoto(true);
-  };
-
-  const handleClosePhoto = () => {
-    setOpenPhoto(false);
   };
 
   const handleCloseAlert = () => {
@@ -131,7 +120,6 @@ function AvesIdentificationPage() {
   const [avesStatus, setAvesStatus] = React.useState([{}, {}]);
 
   const [avesImages, setAvesImages] = React.useState([{}]);
-  const [imageIndex, setImageIndex] = React.useState(0);
 
   // eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
@@ -309,7 +297,6 @@ function AvesIdentificationPage() {
                   onClick={() => {
                     setAvesCandidateId(0);
                     setAvesImages([{}]);
-                    setImageIndex(0);
                   }}
                   variant="contained"
                 >
@@ -596,14 +583,6 @@ function AvesIdentificationPage() {
             open={alertOpen}
             onClose={handleCloseAlert}
           />
-          {avesImages === undefined ? null : (
-            <DetailPhoto
-              isVisible={openPhoto}
-              onClose={handleClosePhoto}
-              photoProps={avesImages[imageIndex]}
-              animalType="aves"
-            />
-          )}
         </Grid>
       </Container>
     </>
