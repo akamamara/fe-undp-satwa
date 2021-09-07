@@ -10,7 +10,6 @@ import {
   Card,
   CardMedia,
   CardActionArea,
-  Paper,
 } from "@material-ui/core";
 import Carousel from "react-material-ui-carousel";
 import GetAvesResult from "../../utils/apis/GetAvesResult";
@@ -21,6 +20,7 @@ import DialogConfirmation from "../../sections/DialogConfirmation";
 import DetailPhoto from "../../sections/DetailPhoto";
 import AlertPopup from "../../sections/Alert";
 import SearchComponent from "../../sections/SearchComponent";
+import CarouselPhoto from "../../sections/CarouselPhoto";
 
 import Meta from "components/Meta";
 import useStyles from "./styles";
@@ -233,21 +233,7 @@ function AvesIdentificationPage() {
                 ) : avesImages[0].images !== undefined ? (
                   <Carousel autoPlay={false} navButtomAlwaysVisible>
                     {avesImages.map((item, i) => (
-                      // <img
-                      //   className={classes.bannerImage}
-                      //   alt="Aves"
-                      //   src={
-                      //     "https://satwa.menlhk.go.id/storage/uploaded_images/aves/" +
-                      //     item.images
-                      //   }
-                      //   onClick={() => {
-                      //     setImageIndex(i);
-                      //     handleClickOpenPhoto();
-                      //   }}
-                      // />
-                      <Paper>
-                        <p>{i}</p>
-                      </Paper>
+                      <CarouselPhoto key={i} item={item} />
                     ))}
                   </Carousel>
                 ) : (

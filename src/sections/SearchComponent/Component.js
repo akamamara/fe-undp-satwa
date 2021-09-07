@@ -48,13 +48,13 @@ function SearchComponent(props) {
             value="0"
             control={<Radio color="primary" size="small" />}
             label="Nama saintifik"
-            labelPlacement="right"
+            // labelPlacement="right"
           />
           <FormControlLabel
             value="1"
             control={<Radio color="primary" size="small" />}
             label="Nama umum"
-            labelPlacement="right"
+            // labelPlacement="right"
           />
         </RadioGroup>
       </FormControl>
