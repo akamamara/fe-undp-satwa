@@ -11,13 +11,15 @@ import {
   CardMedia,
   CardActionArea,
 } from "@material-ui/core";
-
+import Carousel from "react-material-ui-carousel";
 import GetMammalsResult from "../../utils/apis/GetMammalsResult";
+import GetMammalsSearch from "../../utils/apis/GetMammalsSearch";
 import GetMammalsDetail from "../../utils/apis/GetMammalsDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
-import DetailPhoto from "../../sections/DetailPhoto";
 import AlertPopup from "../../sections/Alert";
+import SearchComponent from "../../sections/SearchComponent";
+import CarouselPhoto from "../../sections/CarouselPhoto";
 
 import Meta from "components/Meta";
 import useStyles from "./styles";
@@ -27,7 +29,8 @@ function MammalsIdentificationPage() {
   const history = useHistory();
 
   const [open, setOpen] = React.useState(false);
-  const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [queryString, setQueryString] = React.useState("");
+  const [queryType, setQueryType] = React.useState("0");
   const [alertString, setAlertString] = React.useState("");
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [questionIndex, setQuestionIndex] = React.useState("");
@@ -40,13 +43,6 @@ function MammalsIdentificationPage() {
     setOpen(false);
   };
 
-  const handleClickOpenPhoto = () => {
-    setOpenPhoto(true);
-  };
-
-  const handleClosePhoto = () => {
-    setOpenPhoto(false);
-  };
   const handleCloseAlert = () => {
     setAlertOpen(false);
   };
@@ -273,17 +269,11 @@ function MammalsIdentificationPage() {
                     }}
                   />
                 ) : mammalsImages[0].images !== undefined ? (
-                  <img
-                    className={classes.bannerImage}
-                    src={
-                      "https://satwa.menlhk.go.id/storage/uploaded_images/mammals/" +
-                      mammalsImages[0].images
-                    }
-                    alt="Mammals"
-                    onClick={() => {
-                      handleClickOpenPhoto();
-                    }}
-                  />
+                  <Carousel autoPlay={false} navButtomAlwaysVisible>
+                    {mammalsImages.map((item, i) => (
+                      <CarouselPhoto key={i} item={item} animalType="mammals" />
+                    ))}
+                  </Carousel>
                 ) : (
                   <img
                     style={{
@@ -301,7 +291,6 @@ function MammalsIdentificationPage() {
 
               <Grid container justify="center">
                 {mammalsCandidateDetail !== undefined && (
-                  // <ReactJson src={mammalsCandidateId} />
                   <Box>
                     <Typography align="center">
                       {mammalsIndonesianName}
@@ -477,6 +466,32 @@ function MammalsIdentificationPage() {
                   alt="Mammals"
                 />
               </Grid>
+              <SearchComponent
+                queryString={queryString}
+                queryType={queryType}
+                animalType="mammals"
+                onQueryStringChanged={(newValue) => {
+                  setQueryString(newValue);
+                }}
+                onQueryTypeChanged={(newValue) => {
+                  setQueryType(newValue);
+                }}
+                onClickSearch={() => {
+                  console.log(queryString);
+                  console.log(queryType);
+                  GetMammalsSearch(queryString, queryType).then((result) => {
+                    console.log(result);
+                    if (result.length === 0) {
+                      setAlertString(
+                        "Kandidat dengan nama tersebut, tidak termasuk satwa yang dilindungi"
+                      );
+                      setAlertOpen(true);
+                    } else {
+                      setMammalsResult(result);
+                    }
+                  });
+                }}
+              />
 
               {mammalsValue.map((value, index) => {
                 return (
@@ -608,14 +623,6 @@ function MammalsIdentificationPage() {
             open={alertOpen}
             onClose={handleCloseAlert}
           />
-          {mammalsImages[0] === undefined ? null : (
-            <DetailPhoto
-              isVisible={openPhoto}
-              onClose={handleClosePhoto}
-              photoProps={mammalsImages[0]}
-              animalType="mammals"
-            />
-          )}
         </Grid>
       </Container>
     </>

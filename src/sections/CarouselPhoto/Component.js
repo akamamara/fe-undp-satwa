@@ -5,7 +5,7 @@ import DetailPhoto from "../../sections/DetailPhoto";
 function CarouselPhoto(props) {
   const classes = useStyles();
 
-  const { item } = props;
+  const { item, animalType } = props;
   const [openPhoto, setOpenPhoto] = React.useState(false);
 
   const handleClosePhoto = () => {
@@ -18,7 +18,9 @@ function CarouselPhoto(props) {
         className={classes.bannerImage}
         alt="Aves"
         src={
-          "https://satwa.menlhk.go.id/storage/uploaded_images/aves/" +
+          "https://satwa.menlhk.go.id/storage/uploaded_images/" +
+          animalType +
+          "/" +
           item.images
         }
         onClick={() => {
@@ -29,7 +31,7 @@ function CarouselPhoto(props) {
         isVisible={openPhoto}
         onClose={handleClosePhoto}
         photoProps={item}
-        animalType="aves"
+        animalType={animalType}
       />
     </>
   );

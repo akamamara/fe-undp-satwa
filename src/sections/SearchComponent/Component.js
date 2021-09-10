@@ -16,11 +16,14 @@ function SearchComponent(props) {
     onClickSearch,
     queryString,
     queryType,
+    animalType,
   } = props;
   return (
     <Grid container justify="space-evenly">
       <TextField
-        placeholder="Cari nama Aves"
+        placeholder={
+          "Cari nama " + (animalType === "mammals" ? "Mamalia" : animalType)
+        }
         variant="outlined"
         size="small"
         value={queryString}
@@ -48,13 +51,11 @@ function SearchComponent(props) {
             value="0"
             control={<Radio color="primary" size="small" />}
             label="Nama saintifik"
-            // labelPlacement="right"
           />
           <FormControlLabel
             value="1"
             control={<Radio color="primary" size="small" />}
             label="Nama umum"
-            // labelPlacement="right"
           />
         </RadioGroup>
       </FormControl>

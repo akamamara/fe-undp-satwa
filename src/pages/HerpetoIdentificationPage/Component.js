@@ -11,12 +11,14 @@ import {
   CardMedia,
   CardActionArea,
 } from "@material-ui/core";
-
+import Carousel from "react-material-ui-carousel";
 import GetHerpetoResult from "../../utils/apis/GetHerpetoResult";
+import GetHerpetoSearch from "../../utils/apis/GetHerpetoSearch";
 import GetHerpetoDetail from "../../utils/apis/GetHerpetoDetail";
 import translateRaw from "../../utils/translateRaw";
 import DialogConfirmation from "../../sections/DialogConfirmation";
-import DetailPhoto from "../../sections/DetailPhoto";
+import SearchComponent from "../../sections/SearchComponent";
+import CarouselPhoto from "../../sections/CarouselPhoto";
 import AlertPopup from "../../sections/Alert";
 
 import Meta from "components/Meta";
@@ -27,7 +29,8 @@ function HerpetoIdentificationPage() {
   const history = useHistory();
 
   const [open, setOpen] = React.useState(false);
-  const [openPhoto, setOpenPhoto] = React.useState(false);
+  const [queryString, setQueryString] = React.useState("");
+  const [queryType, setQueryType] = React.useState("0");
   const [alertString, setAlertString] = React.useState("");
   const [alertOpen, setAlertOpen] = React.useState(false);
   const [questionIndex, setQuestionIndex] = React.useState("");
@@ -38,14 +41,6 @@ function HerpetoIdentificationPage() {
 
   const handleClose = () => {
     setOpen(false);
-  };
-
-  const handleClickOpenPhoto = () => {
-    setOpenPhoto(true);
-  };
-
-  const handleClosePhoto = () => {
-    setOpenPhoto(false);
   };
 
   const handleCloseAlert = () => {
@@ -276,24 +271,22 @@ function HerpetoIdentificationPage() {
                     }}
                   />
                 ) : herpetoImages[0].images !== undefined ? (
-                  <img
-                    className={classes.bannerImage}
-                    alt="Herpetofauna"
-                    src={
-                      "https://satwa.menlhk.go.id/storage/uploaded_images/herpetofauna/" +
-                      herpetoImages[0].images
-                    }
-                    onClick={() => {
-                      handleClickOpenPhoto();
-                    }}
-                  />
+                  <Carousel autoPlay={false} navButtomAlwaysVisible>
+                    {herpetoImages.map((item, i) => (
+                      <CarouselPhoto
+                        key={i}
+                        item={item}
+                        animalType="herpetofauna"
+                      />
+                    ))}
+                  </Carousel>
                 ) : (
                   <img
                     style={{
                       backgroundColor: "green",
                       borderLeft: "10px solid #FFC000",
                     }}
-                    alt="Aves"
+                    alt="Herpetofauna"
                     src={process.env.PUBLIC_URL + "/images/not_sure_100.png"}
                     onClick={() => {
                       console.log("im empty");
@@ -384,6 +377,12 @@ function HerpetoIdentificationPage() {
                   src={process.env.PUBLIC_URL + "/images/hetero-light.png"}
                   alt="Herpetofauna"
                 />
+                {queryString && (
+                  <Typography>
+                    Hasil pencarian "{queryString}" pada{" "}
+                    {queryType === "0" ? "Nama saintifik" : "Nama umum"}
+                  </Typography>
+                )}
               </Grid>
               {herpetoResult.map((value) => {
                 return (
@@ -399,7 +398,6 @@ function HerpetoIdentificationPage() {
                           <CardMedia
                             style={{
                               height: "120px",
-                              // paddingTop: "56.25%",
                               borderLeft: "10px solid #FFC000",
                             }}
                             image={
@@ -482,7 +480,32 @@ function HerpetoIdentificationPage() {
                   alt="Herpetofauna"
                 />
               </Grid>
-
+              <SearchComponent
+                queryString={queryString}
+                queryType={queryType}
+                animalType="Herpetofauna"
+                onQueryStringChanged={(newValue) => {
+                  setQueryString(newValue);
+                }}
+                onQueryTypeChanged={(newValue) => {
+                  setQueryType(newValue);
+                }}
+                onClickSearch={() => {
+                  console.log(queryString);
+                  console.log(queryType);
+                  GetHerpetoSearch(queryString, queryType).then((result) => {
+                    console.log(result);
+                    if (result.length === 0) {
+                      setAlertString(
+                        "Kandidat dengan nama tersebut, tidak termasuk satwa yang dilindungi"
+                      );
+                      setAlertOpen(true);
+                    } else {
+                      setHerpetoResult(result);
+                    }
+                  });
+                }}
+              />
               {herpetoValue.map((value, index) => {
                 return (
                   <Grid item xs={6} key={Object.keys(value)}>
@@ -614,14 +637,6 @@ function HerpetoIdentificationPage() {
             open={alertOpen}
             onClose={handleCloseAlert}
           />
-          {herpetoImages[0] === undefined ? null : (
-            <DetailPhoto
-              isVisible={openPhoto}
-              onClose={handleClosePhoto}
-              photoProps={herpetoImages[0]}
-              animalType="herpetofauna"
-            />
-          )}
         </Grid>
       </Container>
     </>

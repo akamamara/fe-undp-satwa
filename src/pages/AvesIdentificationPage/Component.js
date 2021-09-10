@@ -426,6 +426,7 @@ function AvesIdentificationPage() {
               <SearchComponent
                 queryString={queryString}
                 queryType={queryType}
+                animalType="Aves"
                 onQueryStringChanged={(newValue) => {
                   setQueryString(newValue);
                 }}
