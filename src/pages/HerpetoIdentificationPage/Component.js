@@ -173,9 +173,11 @@ function HerpetoIdentificationPage() {
   // eslint-disable-next-line no-unused-vars
   const [herpetoPlaceOrigin, setHerpetoPlaceOrigin] = React.useState([]);
 
-  const [herpetoIndonesianName, setHerpetoIndonesianName] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [herpetoEnglishName, setHerpetoEnglishName] = React.useState([]);
+  const [herpetoIndonesianName, setHerpetoIndonesianName] = React.useState([
+    {},
+  ]);
+
+  const [herpetoEnglishName, setHerpetoEnglishName] = React.useState([{}]);
   const [herpetoArea, setHerpetoArea] = React.useState([]);
 
   function onUpdateItem(props) {
@@ -225,8 +227,8 @@ function HerpetoIdentificationPage() {
         setHerpetoStatus(result.status_herpetofauna);
         setHerpetoImages(result.images);
         setHerpetoPlaceOrigin(result.place_origin);
-        setHerpetoIndonesianName(result.indonesian_name[0].indonesian_name);
-        setHerpetoEnglishName(result.english_name[0].english_name);
+        setHerpetoIndonesianName(result.indonesian_name);
+        setHerpetoEnglishName(result.english_name);
         setHerpetoArea(result.area[0]);
       });
     }
@@ -297,14 +299,35 @@ function HerpetoIdentificationPage() {
 
               <Grid container justify="center">
                 {herpetoCandidateDetail !== undefined && (
-                  // <ReactJson src={herpetoCandidateId} />\
                   <Box>
-                    <Typography align="center">
-                      {herpetoIndonesianName}
-                    </Typography>
+                    {herpetoIndonesianName &&
+                      herpetoIndonesianName.map((value) => {
+                        return (
+                          <Typography
+                            align="center"
+                            key={value.indonesian_name}
+                          >
+                            {value.indonesian_name}
+                          </Typography>
+                        );
+                      })}
+                    <Box fontStyle="italic">
+                      {herpetoEnglishName &&
+                        herpetoEnglishName.map((value) => {
+                          return (
+                            <Typography
+                              align="center"
+                              fontStyle="italic"
+                              key={value.english_name}
+                            >
+                              {value.english_name}
+                            </Typography>
+                          );
+                        })}
+                    </Box>
 
                     <Box fontStyle="italic">
-                      <Typography>
+                      <Typography align="center">
                         {herpetoCandidateDetail.scientific_name}
                       </Typography>
                     </Box>

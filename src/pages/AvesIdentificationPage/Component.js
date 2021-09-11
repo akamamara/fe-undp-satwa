@@ -124,9 +124,9 @@ function AvesIdentificationPage() {
   // eslint-disable-next-line no-unused-vars
   const [avesPlaceOrigin, setAvesPlaceOrigin] = React.useState([]);
 
-  const [avesIndonesianName, setAvesIndonesianName] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
-  const [avesEnglishName, setAvesEnglishName] = React.useState([]);
+  const [avesIndonesianName, setAvesIndonesianName] = React.useState([{}]);
+
+  const [avesEnglishName, setAvesEnglishName] = React.useState([{}]);
   const [avesArea, setAvesArea] = React.useState([]);
 
   function onUpdateItem(props) {
@@ -175,8 +175,8 @@ function AvesIdentificationPage() {
         setAvesStatus(result.status_aves);
         setAvesImages(result.images);
         setAvesPlaceOrigin(result.place_origin);
-        setAvesIndonesianName(result.indonesian_name[0].indonesian_name);
-        setAvesEnglishName(result.english_name[0].english_name);
+        setAvesIndonesianName(result.indonesian_name);
+        setAvesEnglishName(result.english_name);
         setAvesArea(result.area[0]);
       });
     }
@@ -221,7 +221,7 @@ function AvesIdentificationPage() {
                 ) : avesImages[0].images !== undefined ? (
                   <Carousel autoPlay={false} navButtomAlwaysVisible>
                     {avesImages.map((item, i) => (
-                      <CarouselPhoto key={i} item={item} />
+                      <CarouselPhoto key={i} item={item} animalType="aves" />
                     ))}
                   </Carousel>
                 ) : (
@@ -242,8 +242,15 @@ function AvesIdentificationPage() {
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
                   <Box>
-                    <Typography align="center">{avesIndonesianName}</Typography>
-
+                    {avesIndonesianName &&
+                      avesIndonesianName.map((value) => {
+                        return <Typography>{value.indonesian_name}</Typography>;
+                      })}
+                    {avesEnglishName &&
+                      avesEnglishName.map((value) => {
+                        return <Typography>{value.english_name}</Typography>;
+                      })}
+                    {/* <Typography align="center">{avesIndonesianName}</Typography> */}
                     <Box fontStyle="italic">
                       <Typography>
                         {avesCandidateDetail.scientific_name}

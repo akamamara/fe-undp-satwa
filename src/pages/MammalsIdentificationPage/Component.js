@@ -184,7 +184,6 @@ function MammalsIdentificationPage() {
   const [mammalsPlaceOrigin, setMammalsPlaceOrigin] = React.useState([]);
 
   const [mammalsIndonesianName, setMammalsIndonesianName] = React.useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [mammalsEnglishName, setMammalsEnglishName] = React.useState([]);
   const [mammalsArea, setMammalsArea] = React.useState([{}]);
 
@@ -225,8 +224,8 @@ function MammalsIdentificationPage() {
         setMammalsStatus(result.status_mammals);
         setMammalsImages(result.images);
         setMammalsPlaceOrigin(result.place_origin);
-        setMammalsIndonesianName(result.indonesian_name[0].indonesian_name);
-        setMammalsEnglishName(result.english_name[0].english_name);
+        setMammalsIndonesianName(result.indonesian_name);
+        setMammalsEnglishName(result.english_name);
         setMammalsArea(result.area[0]);
       });
     }
@@ -292,12 +291,34 @@ function MammalsIdentificationPage() {
               <Grid container justify="center">
                 {mammalsCandidateDetail !== undefined && (
                   <Box>
-                    <Typography align="center">
-                      {mammalsIndonesianName}
-                    </Typography>
+                    {mammalsIndonesianName &&
+                      mammalsIndonesianName.map((value) => {
+                        return (
+                          <Typography
+                            align="center"
+                            key={value.indonesian_name}
+                          >
+                            {value.indonesian_name}
+                          </Typography>
+                        );
+                      })}
+                    <Box fontStyle="italic">
+                      {mammalsEnglishName &&
+                        mammalsEnglishName.map((value) => {
+                          return (
+                            <Typography
+                              align="center"
+                              fontStyle="italic"
+                              key={value.english_name}
+                            >
+                              {value.english_name}
+                            </Typography>
+                          );
+                        })}
+                    </Box>
 
                     <Box fontStyle="italic">
-                      <Typography>
+                      <Typography align="center">
                         {mammalsCandidateDetail.scientific_name}
                       </Typography>
                     </Box>
