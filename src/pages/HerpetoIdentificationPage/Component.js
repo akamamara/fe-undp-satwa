@@ -631,7 +631,7 @@ function HerpetoIdentificationPage() {
                           .then((result) => {
                             if (result.length === 0) {
                               setAlertString(
-                                "Kandidat dengan ciri-ciri tersebut, tidak termasuk satwa yang dilindungi"
+                                "Periksa kembali ciri-ciri yang Anda pilih. Apabila sudah benar, kandidat dengan ciri-ciri tersebut tidak termasuk satwa yang dilindungi menurut Permen LHK"
                               );
                               setAlertOpen(true);
                             } else setHerpetoResult(result);
