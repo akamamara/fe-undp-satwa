@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
+import { Linking } from 'react-native';
+
 
 import {
   // Typography,
