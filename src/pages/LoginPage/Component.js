@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Formik, Form } from "formik";
 import { useHistory } from "react-router-dom";
-import { Linking } from 'react-native';
-
 
 import {
   // Typography,
@@ -125,11 +123,10 @@ function LoginPage() {
                       >
                         LOGIN
                       </Button>
-                      <Text style={{color: 'blue'}}
-                            onPress={() => Linking.openURL('http://google.com')}>
-                        Google
-                      </Text>
                     </Grid>
+                    <div style={{display: "flex", justifyContent:"center", marginTop:"15px"}}>
+                      <a href="https://satwa.menlhk.go.id/register">Registrasi Disini</a>
+                    </div>
                   </Grid>
                 </Form>
               )}
