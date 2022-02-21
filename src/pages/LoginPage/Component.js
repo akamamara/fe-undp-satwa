@@ -123,6 +123,10 @@ function LoginPage() {
                       >
                         LOGIN
                       </Button>
+                      <Text style={{color: 'blue'}}
+                            onPress={() => Linking.openURL('http://google.com')}>
+                        Google
+                      </Text>
                     </Grid>
                   </Grid>
                 </Form>
