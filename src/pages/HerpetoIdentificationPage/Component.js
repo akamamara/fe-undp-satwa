@@ -179,6 +179,7 @@ function HerpetoIdentificationPage() {
 
   const [herpetoEnglishName, setHerpetoEnglishName] = React.useState([{}]);
   const [herpetoArea, setHerpetoArea] = React.useState([]);
+  const [herpetoIdNumber, setHerpetoIdNumber] = React.useState([]);
 
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
@@ -230,6 +231,7 @@ function HerpetoIdentificationPage() {
         setHerpetoIndonesianName(result.indonesian_name);
         setHerpetoEnglishName(result.english_name);
         setHerpetoArea(result.area[0]);
+        setHerpetoIdNumber(result.nomor_urut_p106);
       });
     }
     window.history.pushState(null, null, window.location.pathname);
@@ -337,6 +339,18 @@ function HerpetoIdentificationPage() {
               <Grid container justify="center">
                 {herpetoCandidateDetail !== undefined && (
                   <Grid container>
+                    {herpetoIdNumber !== undefined && (
+                      <Grid container style={{marginTop:"10%"}}>
+                        <Grid item xs={12}>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Nomor Urut P106
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography> {herpetoIdNumber != null ? herpetoIdNumber : "-"}</Typography>
+                        </Grid>
+                      </Grid>
+                    )}
                     <Grid container>
                       <Grid item xs={12}>
                         <Typography variant="h6" className={classes.yellow}>
