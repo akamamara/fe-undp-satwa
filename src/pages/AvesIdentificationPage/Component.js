@@ -129,6 +129,8 @@ function AvesIdentificationPage() {
   const [avesEnglishName, setAvesEnglishName] = React.useState([{}]);
   const [avesArea, setAvesArea] = React.useState([]);
 
+  const [avesIdNumber, setAvesIdNumber] = React.useState([]);
+
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
     console.log(props);
@@ -178,6 +180,7 @@ function AvesIdentificationPage() {
         setAvesIndonesianName(result.indonesian_name);
         setAvesEnglishName(result.english_name);
         setAvesArea(result.area[0]);
+        setAvesIdNumber(result.nomor_urut_p106);
       });
     }
 
@@ -262,6 +265,19 @@ function AvesIdentificationPage() {
               <Grid container justify="center">
                 {avesCandidateDetail !== undefined && (
                   <Grid container>
+                    {avesIdNumber !== undefined && (
+                      <Grid container style={{marginTop:"10%"}}>
+                        <Grid item xs={12}>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Nomor Urut P106
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography> {avesIdNumber != null ? avesIdNumber : "-"}</Typography>
+                        </Grid>
+                      </Grid>
+                    )}
+
                     {avesStatus !== undefined && (
                       <Grid container>
                         <Grid item xs={12}>

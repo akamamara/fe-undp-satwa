@@ -186,6 +186,8 @@ function MammalsIdentificationPage() {
   const [mammalsIndonesianName, setMammalsIndonesianName] = React.useState([]);
   const [mammalsEnglishName, setMammalsEnglishName] = React.useState([]);
   const [mammalsArea, setMammalsArea] = React.useState([{}]);
+  const [mammalsIdNumber, setMammalsIdNumber] = React.useState([]);
+
 
   function onUpdateItem(props) {
     console.log("index to change : " + questionIndex);
@@ -227,6 +229,7 @@ function MammalsIdentificationPage() {
         setMammalsIndonesianName(result.indonesian_name);
         setMammalsEnglishName(result.english_name);
         setMammalsArea(result.area[0]);
+        setMammalsIdNumber(result.nomor_urut_p106);
       });
     }
 
@@ -328,6 +331,18 @@ function MammalsIdentificationPage() {
               <Grid container justify="center">
                 {mammalsCandidateDetail !== undefined && (
                   <Grid container>
+                    {mammalsIdNumber !== undefined && (
+                      <Grid container style={{marginTop:"10%"}}>
+                        <Grid item xs={12}>
+                          <Typography variant="h6" className={classes.yellow}>
+                            Nomor Urut P106
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography> {mammalsIdNumber != null ? mammalsIdNumber : "-"}</Typography>
+                        </Grid>
+                      </Grid>
+                    )}
                     <Grid container>
                       <Grid item xs={12}>
                         <Typography variant="h6" className={classes.yellow}>
